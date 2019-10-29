@@ -3,6 +3,7 @@ import time
 
 import dash
 import dash_html_components as html
+import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
 
 external_stylesheets = ['//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic',
@@ -26,7 +27,7 @@ app.layout = html.Div(children=[
                 className='row',
                 children=[
                     last_day_master_build_status.graph,
-                    last_day_master_build_status.graph
+                    heatmap.graph
                 ])
         ])
 ])
