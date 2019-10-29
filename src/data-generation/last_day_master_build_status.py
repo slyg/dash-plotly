@@ -1,14 +1,14 @@
 import datetime
-import os
+from os import environ, path
 
 import azure.cosmos.cosmos_client as cosmos_client
 import pandas as pd
 
-client = cosmos_client.CosmosClient(url_connection=os.environ['endpoint'], auth={
-                                    'masterKey': os.environ['masterKey']})
+client = cosmos_client.CosmosClient(url_connection=environ['endpoint'], auth={
+                                    'masterKey': environ['masterKey']})
 
-database_link = 'dbs/' + os.environ['databaseId']
-collection_link = database_link + '/colls/{}'.format(os.environ['containerId'])
+database_link = 'dbs/' + environ['databaseId']
+collection_link = database_link + '/colls/{}'.format(environ['containerId'])
 
 oneDayAgo = (datetime.datetime.now() - datetime.timedelta(days=1)).isoformat()
 
@@ -31,4 +31,4 @@ last_builds = pd.DataFrame(
     .drop_duplicates('job_name', keep='last')
 )
 
-df.to_pickle('data/24h-master-build-status.pkl')
+df.to_pickle('data/{0}.pkl'.format(path.splitext(path.basename(__file__))[0]))
