@@ -5,7 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objects as go
-from views.colors import colors_map
+from views.theme import colors_map, graph_title_font
 
 data_set_file = 'data/last_day_master_build_status.pkl'
 
@@ -40,12 +40,16 @@ labels_with_amounts = list(
 
 colors = [colors_map[label] for label in labels]
 
+layout = dict(
+    title=go.layout.Title(text='Success Ratio for master builds initiated in the last 24h <br>(gen: {0})'.format(creation_time),
+                          font=graph_title_font
+                          )
+)
+
 graph = dcc.Graph(
-    className='column',
+    className='col col-md-6',
     figure={
         'data': [go.Pie(labels=labels_with_amounts, values=statuses)],
-        'layout': {
-            'title': 'Success Ratio for master builds initiated in the last 24h <br>(gen: {0})'.format(creation_time)
-        }
+        'layout': layout
     }
 )

@@ -6,21 +6,21 @@ import dash_html_components as html
 import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
 
-external_stylesheets = ['//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic',
-                        '//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css',
-                        '//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css']
+external_stylesheets = [
+    '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css']
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(children=[
 
-    html.H1(children='RSE Dash', style={
-        'textAlign': 'center'
+    html.H1(children='RSE Dashboard', style={
+        'textAlign': 'center',
+        'fontSize': 15
     }),
 
     html.Div(
-        className='container',
+        className='container-fluid',
         children=[
 
             html.Div(

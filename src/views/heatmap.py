@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from views.theme import graph_title_font
 
 # Load dataframe and contextual data
 
@@ -104,7 +105,7 @@ data = go.Heatmap(colorscale='Reds',
                   z=z_axis)
 
 layout = dict(
-    title=go.layout.Title(text=fig_title),
+    title=go.layout.Title(text=fig_title, font=graph_title_font),
     xaxis=dict(
         tickangle=-90,
         tickmode='array',
@@ -118,7 +119,7 @@ layout = dict(
 )
 
 graph = dcc.Graph(
-    className='column',
+    className='col col-md-6',
     figure={
         'data': [data],
         'layout': layout
