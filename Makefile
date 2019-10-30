@@ -1,6 +1,6 @@
 include .env
 
-.DEFAULT_GOAL := notebook
+.DEFAULT_GOAL := server
 .image_name = slyg/dash
 .container_name = dashy
 
