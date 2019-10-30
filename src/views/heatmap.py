@@ -86,7 +86,7 @@ days_of_the_week = ['Sunday', 'Saturday', 'Friday',
 pivot_stuff_df = pivot_stuff_df.reindex(days_of_the_week, axis=0)
 
 fig_title = "Heatmap of CI failures percentage average per hour per weekday over the last 28 days<br>(generated on {0})"\
-            .format(now.strftime('%Y-%m-%d %I:%M'))
+            .format(str(now.ctime()))
 
 x_axis = pivot_stuff_df.columns.tolist()
 y_axis = pivot_stuff_df.index.tolist()
