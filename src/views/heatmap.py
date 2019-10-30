@@ -111,9 +111,10 @@ layout = dict(
         ticktext=['{0}:00'.format(x) for x in x_axis]
     ),
     margin=dict(
-        pad=10
+        pad=0
     ),
-    plot_bgcolor='white'
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)'
 )
 
 

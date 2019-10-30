@@ -41,7 +41,9 @@ colors = [colors_map[label] for label in labels]
 layout = dict(
     title=go.layout.Title(text='Success Ratio for master builds initiated in the last 24h <br>(gen: {0})'.format(creation_time),
                           font=graph_title_font
-                          )
+                          ),
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)'
 )
 
 figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses)],
