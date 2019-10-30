@@ -5,6 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objects as go
+from views.colors import colors_map
 
 data_set_file = 'data/last_day_master_build_status.pkl'
 
@@ -20,13 +21,6 @@ aborted = len(
     last_builds.loc[last_builds['current_build_current_result'] == 'ABORTED'])
 unknows = total_rows - successes - failures - aborted
 success_ratio = round(successes/total_rows * 100)
-
-colors_map = {
-    'ABORTED': '#FF8C11',
-    'FAILURE': '#E55934',
-    'SUCCESS': '#7CCE77',
-    'UNKOWN':  '#CCCCCC'
-}
 
 statuses = [successes, failures, aborted, unknows]
 
