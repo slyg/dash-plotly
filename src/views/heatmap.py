@@ -1,5 +1,7 @@
+import json
 import os.path
 import time
+from datetime import datetime, timedelta
 
 import dash_core_components as dcc
 import dash_html_components as html
@@ -7,9 +9,20 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from datageneration.heatmap import df, hours_in_past, last_hours, now
+
+# Load dataframe and contextual data
 
 data_set_file = 'data/heatmap.pkl'
+df = pd.read_pickle(data_set_file)
+
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S.%f'
+DATE_FORMAT_UTC = '%Y-%m-%dT%H:%M:%S.%f'
+with open('data/heatmap.json') as json_file:
+    data = json.load(json_file)
+    last_hours = data['last_hours']
+    now = datetime.strptime(data['now'], DATE_FORMAT)
+
+# Generate hourly build reports from the dataframe
 
 
 def hour_builds(hour_df):
@@ -73,9 +86,8 @@ days_of_the_week = ['Sunday', 'Saturday', 'Friday',
                     'Thursday', 'Wednesday', 'Tuesday', 'Monday']
 pivot_stuff_df = pivot_stuff_df.reindex(days_of_the_week, axis=0)
 
-fig_title = "Heatmap of CI failures percentage average per hour per weekday over the last {0} days<br>(generated on {1})"\
-            .format(round(hours_in_past/24),
-                    now.strftime('%Y-%m-%d %I:%M'))
+fig_title = "Heatmap of CI failures percentage average per hour per weekday over the last 28 days<br>(generated on {0})"\
+            .format(now.strftime('%Y-%m-%d %I:%M'))
 
 x_axis = pivot_stuff_df.columns.tolist()
 y_axis = pivot_stuff_df.index.tolist()

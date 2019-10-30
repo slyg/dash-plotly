@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timedelta
 from os import environ, path
 
@@ -37,4 +38,11 @@ query_results = list(client.QueryItems(collection_link, query))
 
 df = pd.DataFrame(query_results)
 
-df.to_pickle('data/{0}.pkl'.format(path.splitext(path.basename(__file__))[0]))
+panda_record_filename = path.splitext(path.basename(__file__))[0]
+
+df.to_pickle('data/{0}.pkl'.format(panda_record_filename))
+with open('data/{0}.json'.format(panda_record_filename), 'w') as outfile:
+    json.dump({
+        'now': str(now),
+        'last_hours': [str(date) for date in last_hours]
+    }, outfile)
