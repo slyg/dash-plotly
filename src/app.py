@@ -2,6 +2,7 @@ import os.path
 import time
 
 import dash
+import dash_core_components as dcc
 import dash_html_components as html
 import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
@@ -22,12 +23,16 @@ app.layout = html.Div(children=[
     html.Div(
         className='container-fluid',
         children=[
-
             html.Div(
                 className='row',
                 children=[
-                    last_day_master_build_status.graph,
-                    heatmap.graph
+                    dcc.Graph(
+                        className='col col-md-6',
+                        figure=last_day_master_build_status.figure
+                    ), dcc.Graph(
+                        className='col col-md-6',
+                        figure=heatmap.figure
+                    )
                 ])
         ])
 ])

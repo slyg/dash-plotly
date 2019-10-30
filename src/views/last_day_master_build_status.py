@@ -1,8 +1,6 @@
 import os.path
 import time
 
-import dash_core_components as dcc
-import dash_html_components as html
 import pandas as pd
 import plotly.graph_objects as go
 from views.theme import colors_map, graph_title_font
@@ -46,10 +44,6 @@ layout = dict(
                           )
 )
 
-graph = dcc.Graph(
-    className='col col-md-6',
-    figure={
-        'data': [go.Pie(labels=labels_with_amounts, values=statuses)],
-        'layout': layout
-    }
-)
+figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses)],
+          'layout': layout
+          }

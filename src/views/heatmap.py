@@ -3,8 +3,6 @@ import os.path
 import time
 from datetime import datetime, timedelta
 
-import dash_core_components as dcc
-import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -118,10 +116,7 @@ layout = dict(
     plot_bgcolor='white'
 )
 
-graph = dcc.Graph(
-    className='col col-md-6',
-    figure={
-        'data': [data],
-        'layout': layout
-    }
-)
+
+figure = {'data': [data],
+          'layout': layout
+          }
