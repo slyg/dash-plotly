@@ -46,6 +46,6 @@ layout = dict(
     plot_bgcolor='rgba(0,0,0,0)'
 )
 
-figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses)],
+figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors))],
           'layout': layout
           }
