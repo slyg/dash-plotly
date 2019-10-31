@@ -6,7 +6,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
-import views.timeline_last_90_days as timeline_last_90_days
+import views.timeline as timeline
 
 external_stylesheets = [
     '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css']
@@ -20,20 +20,29 @@ app.layout = html.Div(children=[
     html.Div(
         className='container-fluid',
         children=[
-            html.Div(className='row my-3',
+            html.Div(className='row my-4',
                      children=[
                          html.Div(className='col col-xl-12',
                                   children=[
-                                      html.Div(className='navbar navbar-light bg-light',
+                                      html.Nav(className='navbar navbar-light bg-light',
                                                children=[
                                                    html.H1(className='navbar-brand',
-                                                           children='RSE Dashboard'
-                                                           )
+                                                           children=[
+                                                               html.Img(className='d-inline-block align-top',
+                                                                        src=app.get_asset_url(
+                                                                            'RSE-community-logo.svg'),
+                                                                        width='30',
+                                                                        height='30'
+                                                                        ),
+                                                               html.Span(className='pl-2',
+                                                                         children='RSE Dashboard'
+                                                                         )
+                                                           ])
                                                ]),
                                   ]),
                      ]),
             html.Div(
-                className='row mb-3',
+                className='row mb-4',
                 children=[
                     html.Div(className='col col-xl-4',
                              children=[
@@ -52,14 +61,14 @@ app.layout = html.Div(children=[
                              ])
                 ]),
             html.Div(
-                className='row mb-3',
+                className='row mb-4',
                 children=[
                     html.Div(className='col col-xl-12',
                              children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=timeline_last_90_days.figure)
+                                                  figure=timeline.figure)
                                           ])
                              ])
                 ])

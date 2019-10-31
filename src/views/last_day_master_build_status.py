@@ -39,7 +39,7 @@ labels_with_amounts = list(
 colors = [colors_map[label] for label in labels]
 
 layout = dict(
-    title=go.layout.Title(text='Success Ratio for master builds initiated in the last 24h <br>(generated on {0})'.format(creation_time),
+    title=go.layout.Title(text='Success Ratio for master CI pipelines initiated in the last 24h <br>(generated on {0})'.format(creation_time),
                           font=graph_title_font
                           ),
     paper_bgcolor='rgba(0,0,0,0)',
