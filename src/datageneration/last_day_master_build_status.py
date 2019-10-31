@@ -14,7 +14,7 @@ oneDayAgo = (datetime.datetime.now() - datetime.timedelta(days=1)).isoformat()
 
 query = {
     "query": """
-     SELECT c.job_name, c.build_id, c.current_build_current_result, c.stage_timestamp, c._ts
+     SELECT c.job_name, c.current_build_current_result, c.stage_timestamp
      FROM c
      WHERE c.current_build_scheduled_time > '{0}Z'
          and c.branch_name = 'master'
