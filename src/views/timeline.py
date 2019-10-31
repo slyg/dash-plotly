@@ -94,6 +94,7 @@ layout = dict(
                           font=graph_title_font
                           ),
     barmode='stack',
+    bargap=0,
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
     xaxis=dict(
@@ -111,7 +112,7 @@ layout = dict(
         rangeslider=dict(
             visible=True
         ),
-        type='date'
+        type='date',
     )
 )
 
