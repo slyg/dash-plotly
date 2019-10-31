@@ -6,6 +6,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
+import views.timeline_last_90_days as timeline_last_90_days
 
 external_stylesheets = [
     '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css']
@@ -32,7 +33,7 @@ app.layout = html.Div(children=[
                                   ]),
                      ]),
             html.Div(
-                className='row',
+                className='row mb-3',
                 children=[
                     html.Div(className='col col-xl-4',
                              children=[
@@ -47,6 +48,18 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(figure=heatmap.figure)
+                                          ])
+                             ])
+                ]),
+            html.Div(
+                className='row mb-3',
+                children=[
+                    html.Div(className='col col-xl-12',
+                             children=[
+                                 html.Div(className='p-3 bg-light',
+                                          children=[
+                                              dcc.Graph(
+                                                  figure=timeline_last_90_days.figure)
                                           ])
                              ])
                 ])
