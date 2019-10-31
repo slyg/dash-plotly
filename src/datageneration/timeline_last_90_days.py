@@ -1,15 +1,10 @@
 import datetime
 import json
-from os import environ, path
+from os import path
 
 import azure.cosmos.cosmos_client as cosmos_client
 import pandas as pd
-
-client = cosmos_client.CosmosClient(url_connection=environ['endpoint'], auth={
-                                    'masterKey': environ['masterKey']})
-
-database_link = 'dbs/' + environ['databaseId']
-collection_link = database_link + '/colls/{}'.format(environ['containerId'])
+from cosmos_client import client, collection_link
 
 today = datetime.date.today()
 one_day = datetime.timedelta(days=1)

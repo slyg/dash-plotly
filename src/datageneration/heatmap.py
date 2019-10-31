@@ -1,16 +1,11 @@
 import json
 from datetime import datetime, timedelta
-from os import environ, path
+from os import path
 
 import azure.cosmos.cosmos_client as cosmos_client
 import numpy as np
 import pandas as pd
-
-client = cosmos_client.CosmosClient(url_connection=environ['endpoint'], auth={
-                                    'masterKey': environ['masterKey']})
-
-database_link = 'dbs/' + environ['databaseId']
-collection_link = database_link + '/colls/{}'.format(environ['containerId'])
+from cosmos_client import client, collection_link
 
 now = datetime.now()
 one_hour = timedelta(hours=1)
