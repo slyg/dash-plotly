@@ -8,6 +8,7 @@ import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
 import views.most_failing as most_failing
 import views.timeline as timeline
+import views.timeline_short as timeline_short
 
 external_stylesheets = [
     '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css']
@@ -69,7 +70,7 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=timeline.figure)
+                                                  figure=timeline_short.figure)
                                           ])
                              ])
                 ]),
@@ -84,7 +85,19 @@ app.layout = html.Div(children=[
                                                   figure=most_failing.figure)
                                           ])
                              ])
-                ])
+                ]),
+            html.Div(
+                className='row mb-4',
+                children=[
+                    html.Div(className='col col-xl-12',
+                             children=[
+                                 html.Div(className='p-3 bg-light',
+                                          children=[
+                                              dcc.Graph(
+                                                  figure=timeline.figure)
+                                          ])
+                             ])
+                ]),
         ])
 ])
 

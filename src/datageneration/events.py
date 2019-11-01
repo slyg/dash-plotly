@@ -16,7 +16,7 @@ start_date = (today - (days_in_past * one_day)).isoformat()
 
 query = {
     "query": """
-     SELECT c.job_name, c.build_id, c.current_build_current_result, c.stage_timestamp, c._ts
+     SELECT c.job_name, c.build_id, c.current_build_current_result, c.stage_timestamp, c._ts, c.current_build_scheduled_time
      FROM c
      WHERE c.current_build_scheduled_time > '{0}00:01:00.000Z'
          and c.branch_name = '{1}'
