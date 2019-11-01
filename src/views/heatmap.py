@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from views.theme import graph_title_font
+from views.theme import colorscale, graph_title_font
 
 # Load dataframe and contextual data
 
@@ -94,7 +94,7 @@ z_axis = pivot_stuff_df.values.tolist()
 
 dummy_x_axis = [x + 0.5 for x in x_axis]
 
-data = go.Heatmap(colorscale='Reds',
+data = go.Heatmap(colorscale=colorscale['WhiteToRed'],
                   hoverinfo='text',
                   hovertext=z_axis,
                   zhoverformat='.',

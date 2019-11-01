@@ -6,6 +6,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import views.heatmap as heatmap
 import views.last_day_master_build_status as last_day_master_build_status
+import views.most_failing as most_failing
 import views.timeline as timeline
 
 external_stylesheets = [
@@ -69,6 +70,18 @@ app.layout = html.Div(children=[
                                           children=[
                                               dcc.Graph(
                                                   figure=timeline.figure)
+                                          ])
+                             ])
+                ]),
+            html.Div(
+                className='row mb-4',
+                children=[
+                    html.Div(className='col col-xl-12',
+                             children=[
+                                 html.Div(className='p-3 bg-light',
+                                          children=[
+                                              dcc.Graph(
+                                                  figure=most_failing.figure)
                                           ])
                              ])
                 ])
