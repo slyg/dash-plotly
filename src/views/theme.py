@@ -32,6 +32,11 @@ colorscale = {
         [0.83333333, 'rgb(109,210,175)'],
         [0.91666667, 'rgb(114,208,142)'],
         [1, GREEN]
+    ],
+    'NegativelyOriented': [
+        [0, GREEN],
+        [0.08333333, YELLOW],
+        [1, RED],
     ]
 }
 

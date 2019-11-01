@@ -94,7 +94,7 @@ z_axis = pivot_stuff_df.values.tolist()
 
 dummy_x_axis = [x + 0.5 for x in x_axis]
 
-data = go.Heatmap(colorscale=colorscale['WhiteToRed'],
+data = go.Heatmap(colorscale=colorscale['NegativelyOriented'],
                   hoverinfo='text',
                   hovertext=z_axis,
                   zhoverformat='.',
