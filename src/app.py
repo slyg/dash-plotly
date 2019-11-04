@@ -16,6 +16,7 @@ external_stylesheets = [
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
+app.title = "RSE Dashboard"
 app.layout = html.Div(children=[
 
 
