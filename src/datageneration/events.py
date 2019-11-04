@@ -10,7 +10,7 @@ today = datetime.date.today()
 one_day = datetime.timedelta(days=1)
 
 # Number of days we want to go back in
-days_in_past = 7
+days_in_past = 28
 branch = 'master'
 start_date = (today - (days_in_past * one_day)).isoformat()
 
