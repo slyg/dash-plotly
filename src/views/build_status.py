@@ -1,14 +1,22 @@
 import os.path
 import time
+from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
 from views.theme import colors_map, graph_title_font
 
-data_set_file = 'data/last_day_master_build_status.pkl'
+data_set_file = 'data/events.pkl'
 
-last_builds = pd.read_pickle(data_set_file)
+df = pd.read_pickle(data_set_file)
 creation_time = time.ctime(os.path.getctime(data_set_file))
+creation_time_iso = datetime.strptime(creation_time, "%a %b %d %H:%M:%S %Y")
+one_hour = timedelta(hours=1)
+max_past_date = (creation_time_iso - one_hour).isoformat()
+
+last_builds = df[df['stage_timestamp'] > max_past_date]
+last_builds = last_builds.sort_values(
+    by='stage_timestamp').drop_duplicates('job_name', keep='last')
 
 total_rows = len(last_builds)
 successes = len(
@@ -39,7 +47,7 @@ labels_with_amounts = list(
 colors = [colors_map[label] for label in labels]
 
 layout = dict(
-    title=go.layout.Title(text='Success Ratio for master CI pipelines initiated in the last 24h <br>(generated on {0})'.format(creation_time),
+    title=go.layout.Title(text='Success Ratio for master CI pipelines initiated in the last hour <br>(generated on {0})'.format(creation_time),
                           font=graph_title_font
                           ),
     paper_bgcolor='rgba(0,0,0,0)',

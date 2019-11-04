@@ -4,8 +4,8 @@ import time
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import views.build_status as build_status
 import views.heatmap as heatmap
-import views.last_day_master_build_status as last_day_master_build_status
 import views.most_failing as most_failing
 import views.timeline as timeline
 import views.timeline_short as timeline_short
@@ -51,7 +51,7 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=last_day_master_build_status.figure)
+                                                  figure=build_status.figure)
                                           ])
                              ]),
                     html.Div(className='col col-xl-8',

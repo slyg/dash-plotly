@@ -9,22 +9,33 @@ include .env
         -e masterKey=$(masterKey) \
         -e databaseId=$(databaseId) \
         -e containerId=$(containerId) \
-		--name $(.container_name) \
 		-v $(PWD)/src:/app \
 		-p 8050:8050 \
 		$(.image_name)
 
 build:
-	docker build -t $(.image_name) .
+	@docker build -t $(.image_name) .
 
 server: build
-	@docker run $(.docker_common_args)
+	@docker run \
+		--name $(.container_name) \
+		$(.docker_common_args)
 
 session: build
-	@docker run $(.docker_common_args) /bin/bash
+	@docker run \
+		--name $(.container_name) \
+		$(.docker_common_args) \
+		/bin/bash
 
 shell:
 	@docker exec \
 		-it \
+		--name $(.container_name) \
 		$(.container_name) \
 		/bin/bash
+
+data: build
+	@docker run \
+		--name $(.container_name) \
+		$(.docker_common_args) \
+		python datageneration/events.py
