@@ -18,10 +18,10 @@ creation_time_iso = datetime.strptime(creation_time, "%a %b %d %H:%M:%S %Y")
 
 with open('data/events_28d.json') as json_file:
     data = json.load(json_file)
-    days_in_past = data['days_in_past']
     branch = data['branch']
 
 # Number of hours we want to go back in
+days_in_past = 14
 hours_in_past = days_in_past * 24
 one_hour = timedelta(hours=1)
 

@@ -16,8 +16,9 @@ quantile = .75
 
 with open('data/events_28d.json') as json_file:
     data = json.load(json_file)
-    days_in_past = data['days_in_past']
     branch = data['branch']
+
+days_in_past = 14
 
 failers = df[
     (df['current_build_current_result'] == 'FAILURE')

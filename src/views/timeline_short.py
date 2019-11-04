@@ -16,13 +16,12 @@ creation_time_iso = datetime.strptime(creation_time, "%a %b %d %H:%M:%S %Y")
 
 with open('data/events_28d.json') as json_file:
     data = json.load(json_file)
-    days_in_past = data['days_in_past']
     branch = data['branch']
 
 time_interval = timedelta(minutes=5)
-number_of_days = 14
+days_in_past = 14
 number_of_intervals = round(
-    number_of_days * 24 * 12)  # 5 min slots over 24h
+    days_in_past * 24 * 12)  # 5 min slots over 24h
 max_past_date = (creation_time_iso - (number_of_intervals + 1) * time_interval)
 reversed_intervals = [(creation_time_iso - (i * time_interval)).isoformat()
                       for i in range(number_of_intervals + 1)]
@@ -74,7 +73,7 @@ def interval_stats(i, current_build):
 all_intervals_stats = [interval_stats(i, x) for i, x in enumerate(builds)]
 
 layout = dict(
-    title=go.layout.Title(text='CI {0} pipelines counts and failure rates over the last {1} days<br>(generated on {2})'.format(branch, number_of_days, creation_time),
+    title=go.layout.Title(text='CI {0} pipelines counts and failure rates over the last {1} days<br>(generated on {2})'.format(branch, days_in_past, creation_time),
                           font=graph_title_font
                           ),
     bargap=0,
