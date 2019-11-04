@@ -10,7 +10,6 @@ include .env
         -e databaseId=$(databaseId) \
         -e containerId=$(containerId) \
 		-v $(PWD)/src:/app \
-		-p 8050:8050 \
 		$(.image_name)
 
 build:
@@ -19,11 +18,13 @@ build:
 server: build
 	@docker run \
 		--name $(.container_name) \
+		-p 8050:8050 \
 		$(.docker_common_args)
 
 session: build
 	@docker run \
 		--name $(.container_name) \
+		-p 8050:8050 \
 		$(.docker_common_args) \
 		/bin/bash
 
@@ -36,6 +37,5 @@ shell:
 
 data: build
 	@docker run \
-		--name $(.container_name) \
 		$(.docker_common_args) \
 		python datageneration/events.py
