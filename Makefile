@@ -35,7 +35,12 @@ shell:
 		$(.container_name) \
 		/bin/bash
 
-data: build
+data-short: build
 	@docker run \
 		$(.docker_common_args) \
-		python datageneration/events.py
+		python datageneration/events_28d.py
+
+data-long: build
+	@docker run \
+		$(.docker_common_args) \
+		python datageneration/events_180d.py

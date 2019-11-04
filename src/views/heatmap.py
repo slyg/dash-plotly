@@ -11,12 +11,12 @@ from views.theme import colorscale, graph_title_font
 
 # Load dataframe and contextual data
 
-data_set_file = 'data/events.pkl'
+data_set_file = 'data/events_28d.pkl'
 df = pd.read_pickle(data_set_file)
 creation_time = time.ctime(os.path.getctime(data_set_file))
 creation_time_iso = datetime.strptime(creation_time, "%a %b %d %H:%M:%S %Y")
 
-with open('data/events.json') as json_file:
+with open('data/events_28d.json') as json_file:
     data = json.load(json_file)
     days_in_past = data['days_in_past']
     branch = data['branch']

@@ -7,12 +7,12 @@ import pandas as pd
 import plotly.graph_objects as go
 from views.theme import colors_map, graph_title_font
 
-data_set_file = 'data/timeline.pkl'
+data_set_file = 'data/events_180d.pkl'
 
 df = pd.read_pickle(data_set_file)
 creation_time = time.ctime(os.path.getctime(data_set_file))
 
-with open('data/timeline.json') as json_file:
+with open('data/events_180d.json') as json_file:
     data = json.load(json_file)
     days_in_past = int(data['days_in_past'])
     last_days = data['last_days']

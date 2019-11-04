@@ -7,14 +7,14 @@ import pandas as pd
 import plotly.graph_objects as go
 from views.theme import colors_map, colorscale, graph_title_font
 
-data_set_file = 'data/events.pkl'
+data_set_file = 'data/events_28d.pkl'
 
 df = pd.read_pickle(data_set_file)
 creation_time = time.ctime(os.path.getctime(data_set_file))
 
 quantile = .75
 
-with open('data/events.json') as json_file:
+with open('data/events_28d.json') as json_file:
     data = json.load(json_file)
     days_in_past = data['days_in_past']
     branch = data['branch']

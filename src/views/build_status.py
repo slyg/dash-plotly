@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from views.theme import colors_map, graph_title_font
 
-data_set_file = 'data/events.pkl'
+data_set_file = 'data/events_28d.pkl'
 
 df = pd.read_pickle(data_set_file)
 creation_time = time.ctime(os.path.getctime(data_set_file))
