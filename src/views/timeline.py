@@ -22,7 +22,7 @@ def day_builds(week_df):
     return pd.DataFrame(
         week_df
         .sort_values(by='stage_timestamp')
-        .drop_duplicates('id', keep='last')
+        .drop_duplicates('build_tag', keep='last')
     )
 
 

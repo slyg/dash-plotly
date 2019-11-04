@@ -42,7 +42,7 @@ def interval_builds(df):
     return pd.DataFrame(
         df
         .sort_values(by='stage_timestamp')
-        .drop_duplicates('id', keep='last')
+        .drop_duplicates('build_tag', keep='last')
     )
 
 

@@ -18,7 +18,7 @@ max_past_date = (creation_time_iso - (number_of_hours * one_hour)).isoformat()
 
 last_builds = df[df['stage_timestamp'] > max_past_date]
 last_builds = last_builds.sort_values(
-    by='stage_timestamp').drop_duplicates('id', keep='last')
+    by='stage_timestamp').drop_duplicates('build_tag', keep='last')
 
 total_rows = len(last_builds)
 successes = len(

@@ -39,7 +39,7 @@ def hour_builds(hour_df):
     return pd.DataFrame(
         hour_df
         .sort_values(by='stage_timestamp')
-        .drop_duplicates('id', keep='last')
+        .drop_duplicates('build_tag', keep='last')
     )
 
 
