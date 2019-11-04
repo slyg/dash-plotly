@@ -20,7 +20,7 @@ with open('data/events_28d.json') as json_file:
     branch = data['branch']
 
 time_interval = timedelta(minutes=5)
-number_of_days = 7
+number_of_days = 14
 number_of_intervals = round(
     number_of_days * 24 * 12)  # 5 min slots over 24h
 max_past_date = (creation_time_iso - (number_of_intervals + 1) * time_interval)
@@ -42,7 +42,7 @@ def interval_builds(df):
     return pd.DataFrame(
         df
         .sort_values(by='stage_timestamp')
-        .drop_duplicates('job_name', keep='last')
+        .drop_duplicates('id', keep='last')
     )
 
 
@@ -86,10 +86,13 @@ layout = dict(
         nticks=4),
     xaxis=dict(
         tickangle=-90,
-        nticks=round(number_of_intervals/48),
         rangeselector=dict(
             buttons=list([
                 dict(step='all'),
+                dict(count=7,
+                     label='7d',
+                     step='day',
+                     active=True),
                 dict(count=3,
                      label='3d',
                      step='day',
@@ -105,6 +108,8 @@ layout = dict(
         rangeslider=dict(
             visible=True
         ),
+        range=[(creation_time_iso - timedelta(days=7)
+                ).isoformat(), creation_time_iso.isoformat()],
         type='date'
     )
 )
