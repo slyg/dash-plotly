@@ -31,7 +31,6 @@ session: build
 shell:
 	@docker exec \
 		-it \
-		--name $(.container_name) \
 		$(.container_name) \
 		/bin/bash
 
