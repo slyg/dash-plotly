@@ -11,15 +11,26 @@ from views.theme import colorscale, graph_title_font
 
 # Load dataframe and contextual data
 
-data_set_file = 'data/heatmap.pkl'
+data_set_file = 'data/events.pkl'
 df = pd.read_pickle(data_set_file)
+creation_time = time.ctime(os.path.getctime(data_set_file))
+creation_time_iso = datetime.strptime(creation_time, "%a %b %d %H:%M:%S %Y")
 
-DATE_FORMAT = '%Y-%m-%d %H:%M:%S.%f'
-DATE_FORMAT_UTC = '%Y-%m-%dT%H:%M:%S.%f'
-with open('data/heatmap.json') as json_file:
+with open('data/events.json') as json_file:
     data = json.load(json_file)
-    last_hours = data['last_hours']
-    now = datetime.strptime(data['now'], DATE_FORMAT)
+    days_in_past = data['days_in_past']
+    branch = data['branch']
+
+# Number of hours we want to go back in
+hours_in_past = days_in_past * 24
+one_hour = timedelta(hours=1)
+
+reversed_last_hours = [(creation_time_iso - (i * one_hour)).isoformat()
+                       for i in range(hours_in_past + 1)]
+
+last_hours = reversed_last_hours[::-1]
+
+first_hour, *tail_hours = last_hours
 
 # Generate hourly build reports from the dataframe
 
@@ -85,8 +96,8 @@ days_of_the_week = ['Sunday', 'Saturday', 'Friday',
                     'Thursday', 'Wednesday', 'Tuesday', 'Monday']
 pivot_stuff_df = pivot_stuff_df.reindex(days_of_the_week, axis=0)
 
-fig_title = "Heatmap of CI failures percentage average per hour per weekday over the last 28 days<br>(generated on {0})"\
-            .format(str(now.ctime()))
+fig_title = "Heatmap of CI failures percentage average per hour per weekday over the last {0} days<br>(generated on {1})"\
+            .format(days_in_past, str(creation_time))
 
 x_axis = pivot_stuff_df.columns.tolist()
 y_axis = pivot_stuff_df.index.tolist()
