@@ -1,7 +1,8 @@
 include .env
 
 .DEFAULT_GOAL := server
-.image_name = slyg/dash
+.image_name = slyg/dash-local
+.image_name_production = hmcts/rse-dashboard
 .container_name = dashy
 .docker_common_args = --rm \
 		-it \
@@ -11,9 +12,13 @@ include .env
         -e containerId=$(containerId) \
 		-v $(PWD)/src:/app \
 		$(.image_name)
+.dev_docker_image = ./local.Dockerfile
 
 build:
-	@docker build -t $(.image_name) .
+	@docker build \
+		-f $(.dev_docker_image) \
+		-t $(.image_name) \
+		.
 
 server: build
 	@docker run \
@@ -43,3 +48,8 @@ data-long: build
 	@docker run \
 		$(.docker_common_args) \
 		python datageneration/events_180d.py
+
+production-image:
+	@docker build \
+	-t $(.image_name_production) \
+	.
