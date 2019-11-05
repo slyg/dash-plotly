@@ -52,14 +52,15 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=build_status.figure)
+                                                  figure=build_status.get_fig())
                                           ])
                              ]),
                     html.Div(className='col col-xl-8',
                              children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
-                                              dcc.Graph(figure=heatmap.figure)
+                                              dcc.Graph(
+                                                  figure=heatmap.get_fig())
                                           ])
                              ])
                 ]),
@@ -71,7 +72,7 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=timeline_short.figure)
+                                                  figure=timeline_short.get_fig())
                                           ])
                              ])
                 ]),
@@ -83,7 +84,7 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=most_failing.figure)
+                                                  figure=most_failing.get_fig())
                                           ])
                              ])
                 ]),
@@ -95,7 +96,7 @@ app.layout = html.Div(children=[
                                  html.Div(className='p-3 bg-light',
                                           children=[
                                               dcc.Graph(
-                                                  figure=timeline.figure)
+                                                  figure=timeline.get_fig())
                                           ])
                              ])
                 ]),
