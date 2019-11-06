@@ -60,11 +60,11 @@ data: data-short data-long
 
 .PHONY: production-image ## Creates docker image to be deployed
 production-image:
-	@docker build \
-		-e endpoint=$$endpoint \
-        -e masterKey=$$masterKey \
-        -e databaseId=$$databaseId \
-        -e containerId=$$containerId \
+	@. .env;docker build \
+		--build-arg endpoint=$$endpoint \
+        --build-arg masterKey=$$masterKey \
+        --build-arg databaseId=$$databaseId \
+        --build-arg containerId=$$containerId \
 		-t $(.image_name_production) \
 		.
 
