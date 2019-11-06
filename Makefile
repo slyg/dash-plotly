@@ -68,10 +68,6 @@ production-image:
 		-t $(.image_name_production) \
 		.
 
-.PHONY: deploy ## Deployment script used by CI
-deploy:
-	@echo Not implemented
-
 .PHONY: help ## Displays this help section (default target)
 help:
 	@echo ""
