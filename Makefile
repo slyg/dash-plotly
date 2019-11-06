@@ -60,7 +60,7 @@ data: data-short data-long
 
 .PHONY: production-image ## Creates docker image to be deployed
 production-image:
-	@. .env;docker build \
+	@. .env; docker build \
 		--build-arg endpoint=$$endpoint \
         --build-arg masterKey=$$masterKey \
         --build-arg databaseId=$$databaseId \

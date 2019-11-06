@@ -1,5 +1,7 @@
 # RSE dashboard
 
+[![Build Status](https://dev.azure.com/hmcts/CNP/_apis/build/status/Tools/RSE-dashboard?branchName=master)](https://dev.azure.com/hmcts/CNP/_build/latest?definitionId=249&branchName=master)
+
 This application displays a variety of data about CI and security
 
 ![Screenshot](https://user-images.githubusercontent.com/602143/68217085-e9fa6c80-ffd9-11e9-9218-5e63fb14f17f.png)
