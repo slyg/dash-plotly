@@ -1,0 +1,35 @@
+name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - README.md
+  
+jobs:
+  - job: Main
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    steps:
+      - task: Bash@3
+        displayName: Build production image
+        inputs:
+          targetType: inline
+          script: make production-image
+        env:
+          endpoint: $(endpoint)
+          masterKey: $(masterKey)
+          databaseId: $(databaseId)
+          containerId: $(containerId)
+      - task: Bash@3
+        displayName: Deploy
+        inputs:
+          targetType: inline
+          script: make deploy
+        env:
+          AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+          AZURE_TENANT_ID: $(AZURE_TENANT_ID)
+          AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)
+          AZURE_CLIENT_SECRET: $(AZURE_CLIENT_SECRET)

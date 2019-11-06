@@ -1,15 +1,14 @@
-include .env
-
+SHELL := /bin/bash
 .DEFAULT_GOAL := server
 .image_name = slyg/dash-local
 .image_name_production = hmcts/rse-dashboard
 .container_name = dashy
 .docker_common_args = --rm \
 		-it \
-		-e endpoint=$(endpoint) \
-        -e masterKey=$(masterKey) \
-        -e databaseId=$(databaseId) \
-        -e containerId=$(containerId) \
+		-e endpoint=$$endpoint \
+        -e masterKey=$$masterKey \
+        -e databaseId=$$databaseId \
+        -e containerId=$$containerId \
 		-v $(PWD)/src:/app \
 		$(.image_name)
 .dev_docker_image = ./local.Dockerfile
@@ -23,14 +22,14 @@ build:
 
 .PHONY: server ## Starts the development server (default)
 server: build
-	@docker run \
+	@. .env; docker run \
 		--name $(.container_name) \
 		-p 8050:8050 \
 		$(.docker_common_args)
 
 .PHONY: session ## Starts a new interactive development container
 session: build
-	@docker run \
+	@. .env; docker run \
 		--name $(.container_name) \
 		-p 8050:8050 \
 		$(.docker_common_args) \
@@ -45,13 +44,14 @@ shell:
 
 .PHONY: data-short ## (Re)generates short-term data sets
 data-short: build
+	@. .env
 	@docker run \
 		$(.docker_common_args) \
 		python datageneration/events_28d.py
 
 .PHONY: data-long ## (Re)generates long-term data sets (takes time)
 data-long: build
-	@docker run \
+	@. .env; docker run \
 		$(.docker_common_args) \
 		python datageneration/events_180d.py
 
@@ -61,8 +61,16 @@ data: data-short data-long
 .PHONY: production-image ## Creates docker image to be deployed
 production-image:
 	@docker build \
-	-t $(.image_name_production) \
-	.
+		-e endpoint=$$endpoint \
+        -e masterKey=$$masterKey \
+        -e databaseId=$$databaseId \
+        -e containerId=$$containerId \
+		-t $(.image_name_production) \
+		.
+
+.PHONY: deploy ## Deployment script used by CI
+deploy:
+	@echo Not implemented
 
 .PHONY: help ## Displays this help section (default target)
 help:
