@@ -24,7 +24,7 @@ def get_fig():
         return pd.DataFrame(
             week_df
             .sort_values(by='stage_timestamp')
-            .drop_duplicates('build_tag', keep='last')
+            .drop_duplicates('correlation_id', keep='last')
         )
 
     def day_df(frame, day_number):

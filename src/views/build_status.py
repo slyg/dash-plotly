@@ -23,7 +23,7 @@ def get_fig():
 
     last_builds = df[df['stage_timestamp'] > max_past_date]
     last_builds = last_builds.sort_values(
-        by='stage_timestamp').drop_duplicates('build_tag', keep='last')
+        by='stage_timestamp').drop_duplicates('correlation_id', keep='last')
 
     total_rows = len(last_builds)
     successes = len(

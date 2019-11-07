@@ -21,60 +21,52 @@ def get_fig():
         data = json.load(json_file)
         branch = data['branch']
 
-    time_interval = timedelta(minutes=5)
+    time_interval = timedelta(minutes=15)
     days_in_past = 14
     number_of_intervals = round(
-        days_in_past * 24 * 12)  # 5 min slots over 24h
+        days_in_past * 24 * 4)  # 15 min slots over 24h
     reversed_intervals = [(creation_time_iso - (i * time_interval)).isoformat()
                           for i in range(number_of_intervals + 1)]
     intervals = reversed_intervals[::-1]
 
-    sub_df = df[df['current_build_scheduled_time'] > str(intervals[0])]
+    builds_df = pd.DataFrame(
+        df
+        .sort_values(by='stage_timestamp')
+        .drop_duplicates('correlation_id', keep='last')
+    )
 
-    def interval_df(df, interval_number):
-        return df[
-            (df['stage_timestamp'] > intervals[interval_number])
-            & (df['stage_timestamp'] < intervals[interval_number + 1])
-        ]
+    def get_status_for(status, from_, to_):
+        return len(builds_df.loc[
+            (builds_df['current_build_current_result'] == status)
+            & (builds_df['current_build_scheduled_time'] > from_)
+            & (builds_df['current_build_scheduled_time'] < to_)
+        ])
 
-    def interval_builds(df):
-        return pd.DataFrame(
-            df
-            .sort_values(by='stage_timestamp')
-            .drop_duplicates('build_tag', keep='last')
-        )
+    def interval_stats(from_, to_):
 
-    builds = [interval_builds(interval_df(sub_df, n))
-              for n in list(range(len(intervals) - 1))]
-
-    def interval_stats(i, current_build):
-
-        success = len(
-            current_build.loc[df['current_build_current_result'] == 'SUCCESS'])
-        failure = len(
-            current_build.loc[
-                (df['current_build_current_result'] == 'FAILURE')
-                | (df['current_build_current_result'] == 'ABORTED')
-            ])
-        total_count = success + failure
+        success = get_status_for('SUCCESS', from_, to_)
+        failure = get_status_for('FAILURE', from_, to_)
+        aborted = get_status_for('ABORTED', from_, to_)
+        total_count = success + failure + aborted
 
         return ({
-            "failure_ratio": 1 if total_count == 0 else failure / total_count,
+            "failure_ratio": 1 if total_count == 0 else (failure + aborted) / total_count,
             "count": total_count,
             "date": {
-                "from": intervals[i],
-                "to": intervals[i+1]
+                "from": from_,
+                "to": to_
             }
         })
 
-    all_intervals_stats = [interval_stats(i, x) for i, x in enumerate(builds)]
+    all_intervals_stats = [interval_stats(
+        intervals[i-1], intervals[i]) for i, x in enumerate(intervals)]
 
     layout = dict(
-        title=go.layout.Title(text='CI {0} pipelines counts and failure rates over the last {1} days<br>(generated on {2})'.format(branch, days_in_past, creation_time),
+        title=go.layout.Title(text='CI {0} pipelines counts and failure percentage over the last {1} days<br>(generated on {2})'.format(branch, days_in_past, creation_time),
                               font=graph_title_font
                               ),
         bargap=0,
-        height=600,
+        height=500,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         yaxis=dict(

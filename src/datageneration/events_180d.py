@@ -22,7 +22,7 @@ first_day, *tail_days = last_days
 
 query = {
     "query": """
-     SELECT c.id, c.build_tag, c.job_name, c.build_id, c.current_build_current_result, c.stage_timestamp, c._ts, c.current_build_scheduled_time
+     SELECT c.id, c.build_tag, c.job_name, c.build_id, c.current_build_current_result, c.correlation_id, c.stage_timestamp, c._ts, c.current_build_scheduled_time
      FROM c
      WHERE c.current_build_scheduled_time > '{0}00:01:00.000Z'
          and c.branch_name = 'master'
