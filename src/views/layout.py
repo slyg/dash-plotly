@@ -1,6 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 import views.build_status as build_status
+import views.duration as duration
 import views.heatmap as heatmap
 import views.most_failing as most_failing
 import views.timeline as timeline
@@ -78,6 +79,15 @@ def set_layout(app):
                         html.Div(className='col col-xl-12',
                                  children=[
                                      html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='duration'))])
+                                 ])
+                    ]),
+                html.Div(
+                    className='row mb-4',
+                    children=[
+                        html.Div(className='col col-xl-12',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(
                                                   figure=timeline.get_fig()))]
                                               )
@@ -97,6 +107,10 @@ def set_layout(app):
     @app.callback(Output('heatmap', 'figure'), interval_inputs)
     def heatmap_update(n):
         return heatmap.get_fig()
+
+    @app.callback(Output('duration', 'figure'), interval_inputs)
+    def duration_update(n):
+        return duration.get_fig()
 
     @app.callback(Output('most-failing', 'figure'), interval_inputs)
     def most_failing_update(n):
