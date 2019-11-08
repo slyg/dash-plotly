@@ -13,7 +13,7 @@ def set_layout(app):
     app.layout = html.Div(children=[
         dcc.Interval(
             id='short-term-interval',
-            interval=5*60*1000,  # 5 min
+            interval=60*60*1000,  # 1 hour
             n_intervals=0
         ),
         html.Div(
