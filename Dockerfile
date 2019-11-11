@@ -16,8 +16,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src ./
-RUN python datageneration/events_28d.py
-RUN python datageneration/events_180d.py
+RUN sh scripts/fetch-events.sh
 
 
 FROM python:3.8.0

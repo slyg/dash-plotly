@@ -42,21 +42,11 @@ shell:
 		$(.container_name) \
 		/bin/bash
 
-.PHONY: data-short ## (Re)generates short-term data sets
-data-short: build
-	@. .env
-	@docker run \
-		$(.docker_common_args) \
-		python datageneration/events_28d.py
-
-.PHONY: data-long ## (Re)generates long-term data sets (takes time)
-data-long: build
+.PHONY: data ## (Re)generates all data sets
+data: build
 	@. .env; docker run \
 		$(.docker_common_args) \
-		python datageneration/events_180d.py
-
-.PHONY: data ## (Re)generates all data sets
-data: data-short data-long
+		sh scripts/fetch-events.sh
 
 .PHONY: production-image ## Creates docker image to be deployed
 production-image:

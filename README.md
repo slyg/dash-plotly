@@ -15,8 +15,6 @@ Available commands:
 
 	make build                 Creates the development container image
 	make data                  (Re)generates all data sets
-	make data-long             (Re)generates long-term data sets (takes time)
-	make data-short            (Re)generates short-term data sets
 	make help                  Displays this help section (default target)
 	make production-image      Creates docker image to be deployed
 	make server                Starts the development server (default)
