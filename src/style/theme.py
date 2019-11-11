@@ -38,6 +38,11 @@ colorscale = {
         [0, GREEN],
         [0.08333333, YELLOW],
         [1, RED],
+    ],
+    'WhiteIfNoData': [
+        [0, WHITE],
+        [0.00000001, TRANSPARENT],
+        [1, TRANSPARENT]
     ]
 }
 

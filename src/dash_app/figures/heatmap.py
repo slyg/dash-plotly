@@ -66,6 +66,7 @@ def get_fig():
         total = successes + failures + aborted
 
         return ({
+            "has_data": 0 if total == 0 else 1,
             "failure_ratio": status_ratio(failures + aborted, total),
             "date": last_hours[i]
         })
@@ -78,26 +79,42 @@ def get_fig():
     stuff_df['day'] = pd.to_datetime(
         stuff_df['date'], errors='coerce', infer_datetime_format=True).dt.weekday_name
 
-    pivot_stuff_df = pd.pivot_table(
+    failure_ratio_pivot_df = pd.pivot_table(
         stuff_df,
         values='failure_ratio',
         columns='hour',
         index=['day'],
         aggfunc=np.mean)
 
-    pivot_stuff_df.unstack(level=0)
+    failure_ratio_pivot_df.unstack(level=0)
+
+    pipeline_count_pivot_df = pd.pivot_table(
+        stuff_df,
+        values='has_data',
+        columns='hour',
+        index=['day'],
+        aggfunc=lambda x: 1 if x.min() > 0 else 0,
+        fill_value=0)
+
+    pipeline_count_pivot_df.unstack(level=0)
 
     # Make the days appear in the inverted week order
     days_of_the_week = ['Sunday', 'Saturday', 'Friday',
                         'Thursday', 'Wednesday', 'Tuesday', 'Monday']
-    pivot_stuff_df = pivot_stuff_df.reindex(days_of_the_week, axis=0)
+
+    failure_ratio_pivot_df = failure_ratio_pivot_df.reindex(
+        days_of_the_week, axis=0)
+
+    pipeline_count_pivot_df = pipeline_count_pivot_df.reindex(
+        days_of_the_week, axis=0)
 
     fig_title = "Heatmap of CI failures percentage average per hour per weekday over the last {0} days<br>(generated on {1})"\
                 .format(days_in_past, str(creation_time))
 
-    x_axis = pivot_stuff_df.columns.tolist()
-    y_axis = pivot_stuff_df.index.tolist()
-    z_axis = pivot_stuff_df.values.tolist()
+    x_axis = failure_ratio_pivot_df.columns.tolist()
+    y_axis = failure_ratio_pivot_df.index.tolist()
+    z_axis = failure_ratio_pivot_df.values.tolist()
+    has_data_axis = pipeline_count_pivot_df.values.tolist()
 
     dummy_x_axis = [x + 0.5 for x in x_axis]
 
@@ -107,7 +124,17 @@ def get_fig():
                       zhoverformat='.',
                       x=dummy_x_axis,
                       y=y_axis,
-                      z=z_axis)
+                      z=z_axis,
+                      showscale=True,)
+
+    raster = go.Heatmap(colorscale=colorscale['WhiteIfNoData'],
+                        hoverinfo='text',
+                        hovertext=has_data_axis,
+                        zhoverformat='.',
+                        x=dummy_x_axis,
+                        y=y_axis,
+                        z=has_data_axis,
+                        showscale=False,)
 
     layout = dict(
         title=go.layout.Title(text=fig_title, font=graph_title_font),
@@ -124,7 +151,7 @@ def get_fig():
         plot_bgcolor=TRANSPARENT
     )
 
-    figure = {'data': [data],
+    figure = {'data': [data, raster],
               'layout': layout
               }
 
