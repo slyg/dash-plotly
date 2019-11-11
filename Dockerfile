@@ -29,4 +29,4 @@ COPY src ./
 
 USER app
 EXPOSE 8050
-CMD ["/bin/bash", "./scripts/prod-start.sh"]
+CMD ["/bin/bash", "./scripts/start.sh"]
