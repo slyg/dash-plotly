@@ -1,11 +1,11 @@
+import dash_app.figures.build_status as build_status
+import dash_app.figures.duration as duration
+import dash_app.figures.heatmap as heatmap
+import dash_app.figures.most_failing as most_failing
+import dash_app.figures.timeline as timeline
+import dash_app.figures.timeline_short as timeline_short
 import dash_core_components as dcc
 import dash_html_components as html
-import views.build_status as build_status
-import views.duration as duration
-import views.heatmap as heatmap
-import views.most_failing as most_failing
-import views.timeline as timeline
-import views.timeline_short as timeline_short
 from dash.dependencies import Input, Output
 
 

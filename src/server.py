@@ -1,4 +1,4 @@
-from dash_server import server as dash_server
+from dash_app.server import server as dash_server
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple

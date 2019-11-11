@@ -1,5 +1,5 @@
 import dash
-import views.layout as layout
+import dash_app.layout as layout
 from flask import Flask
 
 server = Flask(__name__)

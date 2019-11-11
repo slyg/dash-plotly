@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
-from views.theme import colors_map, graph_title_font
+from style.theme import colors_map, graph_title_font
 
 data_set_file = 'data/events_180d.pkl'
 

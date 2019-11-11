@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from views.theme import colorscale, graph_title_font
+from style.theme import colorscale, graph_title_font
 
 data_set_file = 'data/events_28d.pkl'
 
