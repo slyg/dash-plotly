@@ -4,6 +4,7 @@ GREEN = 'rgb(124,206,119)'
 YELLOW = 'rgb(219,210,82)'
 GREY = 'rgb(204, 204, 204)'
 WHITE = 'rgb(255, 255, 255)'
+TRANSPARENT = 'rgba(0,0,0,0)'
 
 colors_map = {
     'SUCCESS': GREEN,

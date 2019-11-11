@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from style.theme import colorscale, graph_title_font
+from style.theme import TRANSPARENT, colorscale, graph_title_font
 
 data_set_file = 'data/events_28d.pkl'
 
@@ -120,8 +120,8 @@ def get_fig():
         margin=dict(
             pad=0
         ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
+        paper_bgcolor=TRANSPARENT,
+        plot_bgcolor=TRANSPARENT
     )
 
     figure = {'data': [data],

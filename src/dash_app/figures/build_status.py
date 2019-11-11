@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
-from style.theme import colors_map, graph_title_font
+from style.theme import TRANSPARENT, colors_map, graph_title_font
 
 data_set_file = 'data/events_28d.pkl'
 
@@ -55,8 +55,8 @@ def get_fig():
         title=go.layout.Title(text='Success Ratio for master CI pipelines initiated in the last {0} hours <br>(generated on {1})'.format(number_of_hours, creation_time),
                               font=graph_title_font
                               ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
+        paper_bgcolor=TRANSPARENT,
+        plot_bgcolor=TRANSPARENT
     )
 
     figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors))],

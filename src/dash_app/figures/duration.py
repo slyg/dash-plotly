@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
-from style.theme import colors_map, colorscale, graph_title_font
+from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
 data_set_file = 'data/events_28d.pkl'
 
@@ -43,8 +43,8 @@ def get_fig():
             font=graph_title_font
         ),
         autosize=True,
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=TRANSPARENT,
+        plot_bgcolor=TRANSPARENT,
         barmode='stack',
         xaxis=dict(title='Duration in minutes'),
         yaxis=dict(title='Number of pipelines'),

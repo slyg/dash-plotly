@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
-from style.theme import colors_map, graph_title_font
+from style.theme import TRANSPARENT, colors_map, graph_title_font
 
 data_set_file = 'data/events_180d.pkl'
 
@@ -89,8 +89,8 @@ def get_fig():
                               ),
         barmode='stack',
         bargap=0,
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=TRANSPARENT,
+        plot_bgcolor=TRANSPARENT,
         xaxis=dict(
             tickangle=-90,
             nticks=round(days_in_past/4),
