@@ -9,50 +9,44 @@ from style.theme import TRANSPARENT, colors_map, graph_title_font
 
 data_set_file = 'data/events_180d.pkl'
 
-df = pd.read_pickle(data_set_file)
-creation_time = time.ctime(os.path.getctime(data_set_file))
-
 
 def get_fig():
+
+    df = pd.DataFrame(
+        pd.read_pickle(data_set_file)
+        .sort_values(by='stage_timestamp')
+        .drop_duplicates('correlation_id', keep='last')
+    )
+
+    creation_time = time.ctime(os.path.getctime(data_set_file))
 
     with open('data/events_180d.json') as json_file:
         data = json.load(json_file)
         days_in_past = int(data['days_in_past'])
         last_days = data['last_days']
 
-    def day_builds(week_df):
-        return pd.DataFrame(
-            week_df
-            .sort_values(by='stage_timestamp')
-            .drop_duplicates('correlation_id', keep='last')
-        )
-
-    def day_df(frame, day_number):
-        return frame[
-            (frame['stage_timestamp'] > last_days[day_number])
-            & (frame['stage_timestamp'] < last_days[day_number + 1])
+    def day_stats(date_index):
+        day_frame = df[
+            (df['stage_timestamp'] >= last_days[date_index])
+            & (df['stage_timestamp'] < last_days[date_index+1])
         ]
-
-    builds = [day_builds(day_df(df, day_number))
-              for day_number in list(range(len(last_days) - 1))]
-
-    def day_stats(i, current_build):
-        total_rows = len(current_build)
+        total_rows = len(day_frame)
         SUCCESS = len(
-            current_build.loc[df['current_build_current_result'] == 'SUCCESS'])
+            day_frame.loc[df['current_build_current_result'] == 'SUCCESS'])
         FAILURE = len(
-            current_build.loc[df['current_build_current_result'] == 'FAILURE'])
+            day_frame.loc[df['current_build_current_result'] == 'FAILURE'])
         ABORTED = len(
-            current_build.loc[df['current_build_current_result'] == 'ABORTED'])
+            day_frame.loc[df['current_build_current_result'] == 'ABORTED'])
         UNKNOWN = total_rows - SUCCESS - FAILURE - ABORTED
 
         return ({
             "stats": [SUCCESS, FAILURE, ABORTED, UNKNOWN],
             "stats_labels": ['SUCCESS', 'FAILURE', 'ABORTED', 'UNKNOWN'],
-            "date": {"from": last_days[i], "to": last_days[i+1]}
+            "date": {"from": last_days[date_index], "to": last_days[date_index+1]}
         })
 
-    all_days_stats = [day_stats(i, x) for i, x in enumerate(builds)]
+    all_days_stats = [day_stats(date_index)
+                      for date_index in list(range(len(last_days) - 1))]
 
     def ratio_for_index(l, idx):
         return [0 if sum(item['stats']) == 0 else item['stats'][idx]/sum(item['stats'])*100 for item in l]
