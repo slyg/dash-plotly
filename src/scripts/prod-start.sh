@@ -2,4 +2,4 @@
 
 set -e;
 echo "Starting app";
-python app.py;
+python server.py;
