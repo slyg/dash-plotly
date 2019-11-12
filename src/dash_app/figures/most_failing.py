@@ -27,7 +27,7 @@ def get_fig():
                          failers['counts'].quantile(quantile)]
 
     layout = dict(
-        title=go.layout.Title(text='Top {0}% failing pipelines on {1} branch in the last {2} days<br>(generated on {3})'.format(
+        title=go.layout.Title(text='Top {0}% Failing pipelines on {1} branch in the last {2} days<br>(generated on {3})'.format(
             round((1 - quantile) * 100), branch, days_in_past, creation_time),
             font=graph_title_font
         ),
@@ -42,8 +42,7 @@ def get_fig():
         ),
         xaxis=dict(
             type='log',
-            title='Number of failed steps in the last {0} days (log axis)'.format(
-                days_in_past),
+            title='Number of failed (failure and aborted) pipelines (log axis)'
         )
     )
 

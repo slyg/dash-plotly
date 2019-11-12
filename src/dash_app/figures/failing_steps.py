@@ -30,7 +30,7 @@ def get_fig():
     values = list(data.values)
 
     layout = dict(
-        title=go.layout.Title(text='Failing steps on {0} branch in the last {1} days<br>(generated on {2})'.format(
+        title=go.layout.Title(text='Top failing steps on {0} branch in the last {1} days<br>(generated on {2})'.format(
             branch, days_in_past, creation_time),
             font=graph_title_font
         ),
@@ -45,8 +45,7 @@ def get_fig():
         ),
         xaxis=dict(
             type='log',
-            title='Number of failed (failure and aborted) pipelines in the last {0} days (log axis)'.format(
-                days_in_past),
+            title='Number of failed steps (log axis)'
         )
     )
 
