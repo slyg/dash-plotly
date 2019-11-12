@@ -21,9 +21,9 @@ def set_layout(app):
             className='container-fluid',
             children=[
                 html.Div(
-                    className='row my-4',
+                    className='row my-3',
                     children=[
-                        html.Div(className='col col-xl-12',
+                        html.Div(className='col col-12',
                                  children=[
                                      html.Nav(className='navbar navbar-light bg-light',
                                               children=[
@@ -43,59 +43,39 @@ def set_layout(app):
                                  ]),
                     ]),
                 html.Div(
-                    className='row mb-4',
+                    className='row',
                     children=[
-                        html.Div(className='col col-xl-4',
+                        html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='build-status'))])
                                  ]),
-                        html.Div(className='col col-xl-8',
+                        html.Div(className='col col-12 col-xl-8 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='heatmap'))])
-                                 ])
-                    ]),
-                html.Div(
-                    className='row mb-4',
-                    children=[
-                        html.Div(className='col col-xl-12',
+                                 ]),
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='timeline-short'))])
-                                 ])
-                    ]),
-                html.Div(
-                    className='row mb-4',
-                    children=[
-                        html.Div(className='col col-xl-12',
+                                 ]),
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='duration'))])
-                                 ])
-                    ]),
-                html.Div(
-                    className='row mb-4',
-                    children=[
-                        html.Div(className='col col-xl-12',
+                                 ]),
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='most-failing'))])
-                                 ])
-                    ]),
-                html.Div(
-                    className='row mb-4',
-                    children=[
-                        html.Div(className='col col-xl-12',
+                                 ]),
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
-                                 ])
-                    ]),
-                html.Div(
-                    className='row mb-4',
-                    children=[
-                        html.Div(className='col col-xl-12',
+                                 ]),
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(
