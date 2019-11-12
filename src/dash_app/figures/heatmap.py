@@ -93,7 +93,7 @@ def get_fig():
         values='has_data',
         columns='hour',
         index=['day'],
-        aggfunc=lambda x: 1 if x.min() > 0 else 0,
+        aggfunc=np.mean,
         fill_value=0)
 
     pipeline_count_pivot_df.unstack(level=0)
@@ -128,7 +128,7 @@ def get_fig():
                       showscale=True,)
 
     raster = go.Heatmap(colorscale=colorscale['WhiteIfNoData'],
-                        hoverinfo='text',
+                        hoverinfo='skip',
                         hovertext=has_data_axis,
                         zhoverformat='.',
                         x=dummy_x_axis,
