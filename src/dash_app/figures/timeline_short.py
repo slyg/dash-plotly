@@ -29,7 +29,7 @@ def get_fig():
     builds_df = pd.DataFrame(
         df
         .sort_values(by='stage_timestamp')
-        .drop_duplicates('correlation_id', keep='last')
+        .drop_duplicates('build_tag', keep='last')
     )
 
     def get_status_for(status, from_, to_):

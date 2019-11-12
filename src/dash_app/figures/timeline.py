@@ -15,7 +15,7 @@ def get_fig():
     df = pd.DataFrame(
         pd.read_pickle(data_set_file)
         .sort_values(by='stage_timestamp')
-        .drop_duplicates('correlation_id', keep='last')
+        .drop_duplicates('build_tag', keep='last')
     )
 
     creation_time = time.ctime(os.path.getctime(data_set_file))

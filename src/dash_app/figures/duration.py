@@ -23,7 +23,7 @@ def get_fig():
         df[df['current_build_scheduled_time'] > (
             creation_time_iso - time_interval).isoformat()]
         .sort_values(by='_ts')
-        .drop_duplicates('correlation_id', keep='last')
+        .drop_duplicates('build_tag', keep='last')
     )
 
     builds_df['Succeeding builds duration in minutes'] = builds_df['current_build_duration']/60000.0
