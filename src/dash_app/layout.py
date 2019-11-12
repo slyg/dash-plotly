@@ -71,6 +71,15 @@ def set_layout(app):
                         html.Div(className='col col-xl-12',
                                  children=[
                                      html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='duration'))])
+                                 ])
+                    ]),
+                html.Div(
+                    className='row mb-4',
+                    children=[
+                        html.Div(className='col col-xl-12',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='most-failing'))])
                                  ])
                     ]),
@@ -81,15 +90,6 @@ def set_layout(app):
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
-                                 ])
-                    ]),
-                html.Div(
-                    className='row mb-4',
-                    children=[
-                        html.Div(className='col col-xl-12',
-                                 children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(dcc.Graph(id='duration'))])
                                  ])
                     ]),
                 html.Div(
