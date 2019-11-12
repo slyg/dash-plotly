@@ -2,6 +2,7 @@ import dash_app.figures.build_status as build_status
 import dash_app.figures.duration as duration
 import dash_app.figures.failing_steps as failing_steps
 import dash_app.figures.heatmap as heatmap
+import dash_app.figures.lengthy_pipelines as lengthy_pipelines
 import dash_app.figures.most_failing as most_failing
 import dash_app.figures.timeline as timeline
 import dash_app.figures.timeline_short as timeline_short
@@ -73,6 +74,11 @@ def set_layout(app):
                         html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='lengthy-pipelines'))])
+                                 ]),
+                        html.Div(className='col col-12 my-3',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
                                  ]),
                         html.Div(className='col col-12 my-3',
@@ -113,3 +119,7 @@ def set_layout(app):
     @app.callback(Output('timeline-short', 'figure'), interval_inputs)
     def timeline_short_update(n):
         return timeline_short.get_fig()
+
+    @app.callback(Output('lengthy-pipelines', 'figure'), interval_inputs)
+    def lengthy_pipelines_update(n):
+        return lengthy_pipelines.get_fig()
