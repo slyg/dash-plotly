@@ -71,7 +71,7 @@ def get_fig():
                       width=1,
                       orientation='h',
                       marker={'color': data_frame['current_build_duration'],
-                              'colorscale': colorscale['YellowToRed']}
+                              'colorscale': colorscale['NegativelyOriented']}
                       )
 
     data = [get_bar(report)]
