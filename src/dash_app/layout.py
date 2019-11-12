@@ -1,5 +1,6 @@
 import dash_app.figures.build_status as build_status
 import dash_app.figures.duration as duration
+import dash_app.figures.failing_steps as failing_steps
 import dash_app.figures.heatmap as heatmap
 import dash_app.figures.most_failing as most_failing
 import dash_app.figures.timeline as timeline
@@ -79,6 +80,15 @@ def set_layout(app):
                         html.Div(className='col col-xl-12',
                                  children=[
                                      html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
+                                 ])
+                    ]),
+                html.Div(
+                    className='row mb-4',
+                    children=[
+                        html.Div(className='col col-xl-12',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='duration'))])
                                  ])
                     ]),
@@ -111,6 +121,10 @@ def set_layout(app):
     @app.callback(Output('duration', 'figure'), interval_inputs)
     def duration_update(n):
         return duration.get_fig()
+
+    @app.callback(Output('failing-steps', 'figure'), interval_inputs)
+    def failing_steps_update(n):
+        return failing_steps.get_fig()
 
     @app.callback(Output('most-failing', 'figure'), interval_inputs)
     def most_failing_update(n):

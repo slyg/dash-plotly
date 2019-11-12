@@ -15,25 +15,27 @@ def get_fig():
     df = pd.read_pickle(data_set_file)
     creation_time = time.ctime(os.path.getctime(data_set_file))
 
-    quantile = .75
-
     with open('data/events_28d.json') as json_file:
         data = json.load(json_file)
         branch = data['branch']
 
     days_in_past = 14
 
-    failers = df[
-        (df['current_build_current_result'] == 'FAILURE')
-        | (df['current_build_current_result'] == 'ABORTED')
-    ]['job_name'].value_counts().rename_axis('job_name').reset_index(name='counts')
+    last_failed_builds_penultimate_step = df[(df['current_build_current_result'] == 'FAILURE')
+                                             & (df['current_step_name'] != 'Pipeline Failed')]\
+        .sort_values('stage_timestamp')\
+        .drop_duplicates('build_tag', keep='last')
 
-    failers_qt = failers[failers['counts'] >
-                         failers['counts'].quantile(quantile)]
+    data = last_failed_builds_penultimate_step\
+        .sort_values(by='job_name')\
+        .current_step_name.value_counts()
+
+    labels = list(data.index[0:len(data.index)])
+    values = list(data.values)
 
     layout = dict(
-        title=go.layout.Title(text='Top {0}% failing pipelines on {1} branch in the last {2} days<br>(generated on {3})'.format(
-            round((1 - quantile) * 100), branch, days_in_past, creation_time),
+        title=go.layout.Title(text='Failing steps on {0} branch in the last {1} days<br>(generated on {2})'.format(
+            branch, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,
@@ -47,21 +49,21 @@ def get_fig():
         ),
         xaxis=dict(
             type='log',
-            title='Number of failed steps in the last {0} days (log axis)'.format(
+            title='Number of failed (failure and aborted) pipelines in the last {0} days (log axis)'.format(
                 days_in_past),
         )
     )
 
     def get_bar(data_frame):
-        return go.Bar(y=data_frame['job_name'],
-                      x=data_frame['counts'],
+        return go.Bar(y=labels,
+                      x=values,
                       width=1,
                       orientation='h',
-                      marker={'color': data_frame['counts'],
+                      marker={'color': values,
                               'colorscale': colorscale['YellowToRed']}
                       )
 
-    data = [get_bar(failers_qt)]
+    data = [get_bar(data)]
 
     figure = {
         'data': data,
