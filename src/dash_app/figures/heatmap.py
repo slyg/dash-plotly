@@ -7,25 +7,21 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from dash_app.lib.events_28d import events
 from style.theme import TRANSPARENT, colorscale, graph_title_font
 
-data_set_file = 'data/events_28d.pkl'
+days_in_past = 14
 
 
 def get_fig():
 
     # Load dataframe and contextual data
 
-    df = pd.read_pickle(data_set_file)
-    creation_time = time.ctime(os.path.getctime(data_set_file))
-    creation_time_iso = datetime.strptime(
-        creation_time, "%a %b %d %H:%M:%S %Y")
-
-    with open('data/events_28d.json') as json_file:
-        data = json.load(json_file)
+    df = events['df']
+    creation_time = events['creation_time']
+    creation_time_iso = events['creation_time_iso']
 
     # Number of hours we want to go back in
-    days_in_past = 14
     hours_in_past = days_in_past * 24
     one_hour = timedelta(hours=1)
 

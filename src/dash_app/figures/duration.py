@@ -5,19 +5,17 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
+from dash_app.lib.events_28d import events
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
-data_set_file = 'data/events_28d.pkl'
+days_in_past = 14
 
 
 def get_fig():
 
-    df = pd.read_pickle(data_set_file)
-    creation_time = time.ctime(os.path.getctime(data_set_file))
-    creation_time_iso = datetime.strptime(
-        creation_time, "%a %b %d %H:%M:%S %Y")
-
-    days_in_past = 14
+    df = events['df']
+    creation_time = events['creation_time']
+    creation_time_iso = events['creation_time_iso']
 
     time_interval = timedelta(days=days_in_past)
 

@@ -5,21 +5,17 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
+from dash_app.lib.events_28d import events
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
-data_set_file = 'data/events_28d.pkl'
+days_in_past = 14
 
 
 def get_fig():
 
-    df = pd.read_pickle(data_set_file)
-    creation_time = time.ctime(os.path.getctime(data_set_file))
-
-    with open('data/events_28d.json') as json_file:
-        data = json.load(json_file)
-        branch = data['branch']
-
-    days_in_past = 14
+    df = events['df']
+    creation_time = events['creation_time']
+    branch = events['branch']
 
     last_failed_builds_penultimate_step = df[(df['current_build_current_result'] == 'FAILURE')
                                              & (df['current_step_name'] != 'Pipeline Failed')]\

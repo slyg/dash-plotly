@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
+from dash_app.lib.events_28d import events
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
 data_set_file = 'data/events_28d.pkl'
@@ -12,14 +13,10 @@ data_set_file = 'data/events_28d.pkl'
 
 def get_fig():
 
-    df = pd.read_pickle(data_set_file)
-    creation_time = time.ctime(os.path.getctime(data_set_file))
-    creation_time_iso = datetime.strptime(
-        creation_time, "%a %b %d %H:%M:%S %Y")
-
-    with open('data/events_28d.json') as json_file:
-        data = json.load(json_file)
-        branch = data['branch']
+    df = events['df']
+    creation_time = events['creation_time']
+    creation_time_iso = events['creation_time_iso']
+    branch = events['branch']
 
     time_interval = timedelta(minutes=15)
     days_in_past = 14

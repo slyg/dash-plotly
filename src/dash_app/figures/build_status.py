@@ -4,19 +4,18 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
+from dash_app.lib.events_28d import events
 from style.theme import TRANSPARENT, colors_map, graph_title_font
-
-data_set_file = 'data/events_28d.pkl'
 
 number_of_hours = 24
 
 
 def get_fig():
 
-    df = pd.read_pickle(data_set_file)
-    creation_time = time.ctime(os.path.getctime(data_set_file))
-    creation_time_iso = datetime.strptime(
-        creation_time, "%a %b %d %H:%M:%S %Y")
+    df = events['df']
+    creation_time = events['creation_time']
+    creation_time_iso = events['creation_time_iso']
+
     one_hour = timedelta(hours=1)
     max_past_date = (creation_time_iso -
                      (number_of_hours * one_hour)).isoformat()
