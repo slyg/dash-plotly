@@ -17,7 +17,7 @@ def get_fig():
     creation_time_iso = datetime.strptime(
         creation_time, "%a %b %d %H:%M:%S %Y")
 
-    days_in_past = 7
+    days_in_past = 14
 
     time_interval = timedelta(days=days_in_past)
 
