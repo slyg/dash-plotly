@@ -38,7 +38,7 @@ def get_fig():
 
     layout = dict(
         title=go.layout.Title(
-            text='Pipelines duration distribution in minutes for last {0} days<br>(generated on {1})'.format(
+            text='Pipelines duration distribution in minutes over the last {0} days<br>(generated on {1})'.format(
                 days_in_past, creation_time),
             font=graph_title_font
         ),
