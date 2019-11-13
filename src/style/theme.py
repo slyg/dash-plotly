@@ -13,6 +13,24 @@ colors_map = {
     'UNKOWN':  GREY
 }
 
+colorway = {
+    'HueGradient': [
+        RED,
+        'rgb(227,58,83)',
+        'rgb(225,64,145)',
+        'rgb(223,70,201)',
+        'rgb(190,76,221)',
+        'rgb(141,82,219)',
+        'rgb(97,88,218)',
+        'rgb(93,127,216)',
+        'rgb(98,172,214)',
+        'rgb(104,211,212)',
+        'rgb(109,210,175)',
+        'rgb(114,208,142)',
+        GREEN
+    ]
+}
+
 colorscale = {
     'GreenToRed': [[0, GREEN], [1, RED]],
     'GreyToRed': [[0, GREY], [1, RED]],
