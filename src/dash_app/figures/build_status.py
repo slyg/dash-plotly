@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
-from style.theme import TRANSPARENT, colors_map, graph_title_font
+from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
 number_of_hours = 24
 
@@ -59,7 +59,7 @@ def get_fig():
         plot_bgcolor=TRANSPARENT
     )
 
-    figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors))],
+    figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors, line=dict(color=WHITE, width=1)))],
               'layout': layout
               }
 

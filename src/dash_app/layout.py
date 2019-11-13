@@ -5,6 +5,7 @@ import dash_app.figures.failing_steps_pie as failing_steps_pie
 import dash_app.figures.heatmap as heatmap
 import dash_app.figures.lengthy_pipelines as lengthy_pipelines
 import dash_app.figures.most_failing as most_failing
+import dash_app.figures.nightly_vs_daily as nightly_vs_daily
 import dash_app.figures.timeline as timeline
 import dash_app.figures.timeline_short as timeline_short
 import dash_core_components as dcc
@@ -62,25 +63,30 @@ def set_layout(app):
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='timeline-short'))])
                                  ]),
-                        html.Div(className='col col-12 my-3',
+                        html.Div(className='col col-12 col-xl-4 my-3',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='nightly-vs-daily'))])
+                                 ]),
+                        html.Div(className='col col-12 col-xl-8 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='most-failing'))])
+                                 ]),
+                        html.Div(className='col col-12 col-xl-6 my-3',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='failing-steps-pie'))])
+                                 ]),
+                        html.Div(className='col col-12 col-xl-6 my-3',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='lengthy-pipelines'))])
-                                 ]),
-                        html.Div(className='col col-6 my-3',
-                                 children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(dcc.Graph(id='failing-steps-pie'))])
-                                 ]),
-                        html.Div(className='col col-6 my-3',
-                                 children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
@@ -133,3 +139,7 @@ def set_layout(app):
     @app.callback(Output('lengthy-pipelines', 'figure'), interval_inputs)
     def lengthy_pipelines_update(n):
         return lengthy_pipelines.get_fig()
+
+    @app.callback(Output('nightly-vs-daily', 'figure'), interval_inputs)
+    def nigthly_vs_daily_update(n):
+        return nightly_vs_daily.get_fig()
