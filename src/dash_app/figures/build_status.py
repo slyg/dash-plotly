@@ -15,6 +15,7 @@ def get_fig():
     df = events['df']
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
+    branch = events['branch']
 
     one_hour = timedelta(hours=1)
     max_past_date = (creation_time_iso -
@@ -51,7 +52,7 @@ def get_fig():
     colors = [colors_map[label] for label in labels]
 
     layout = dict(
-        title=go.layout.Title(text='Success Ratio for master CI pipelines initiated in the last {0} hours <br>(generated on {1})'.format(number_of_hours, creation_time),
+        title=go.layout.Title(text='Success Ratio for {0} CI pipelines in the last {1} hours <br>(generated on {2})'.format(branch, number_of_hours, creation_time),
                               font=graph_title_font
                               ),
         paper_bgcolor=TRANSPARENT,

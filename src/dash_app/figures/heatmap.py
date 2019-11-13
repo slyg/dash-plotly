@@ -121,7 +121,8 @@ def get_fig():
                       x=dummy_x_axis,
                       y=y_axis,
                       z=z_axis,
-                      showscale=True,)
+                      showscale=True,
+                      colorbar={"title": 'Failure percentage', 'titleside': 'right'})
 
     raster = go.Heatmap(colorscale=colorscale['WhiteIfNoData'],
                         hoverinfo='skip',

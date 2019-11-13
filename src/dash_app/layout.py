@@ -34,10 +34,10 @@ def set_layout(app):
                                                               html.Img(className='d-inline-block align-top',
                                                                        src=app.get_asset_url(
                                                                            'RSE-community-logo.svg'),
-                                                                       width='30',
-                                                                       height='30'
+                                                                       width='45',
+                                                                       height='45'
                                                                        ),
-                                                              html.Span(className='pl-2',
+                                                              html.Span(className='d-inline-block pl-2 py-2',
                                                                         children='RSE Dashboard'
                                                                         )
                                                           ])
@@ -65,11 +65,6 @@ def set_layout(app):
                         html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(dcc.Graph(id='duration'))])
-                                 ]),
-                        html.Div(className='col col-12 my-3',
-                                 children=[
-                                     html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='most-failing'))])
                                  ]),
                         html.Div(className='col col-12 my-3',
@@ -86,6 +81,11 @@ def set_layout(app):
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
+                                 ]),
+                        html.Div(className='col col-12 my-3',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='duration'))])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[

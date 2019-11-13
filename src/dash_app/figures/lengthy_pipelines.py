@@ -37,12 +37,9 @@ def get_fig():
         .sort_values(by='current_build_duration')\
         .reset_index()
 
-    mean_duration = succeeding_pipelines_pivot['current_build_duration'].mean()
-
     report = succeeding_pipelines_pivot[
-        (succeeding_pipelines_pivot['current_build_duration']
-         > mean_duration)
-        & (succeeding_pipelines_pivot['job_name'].str.contains("HMCTS_Nightly") == False)
+        succeeding_pipelines_pivot['job_name'].str.contains(
+            "HMCTS_Nightly") == False
     ]
 
     layout = dict(
@@ -59,8 +56,7 @@ def get_fig():
             ticksuffix=' —',
         ),
         xaxis=dict(
-            title='Mean pipeline duration in minutes (log axis)',
-            type='log',
+            title='Mean pipeline duration in minutes',
         )
     )
 
@@ -71,7 +67,7 @@ def get_fig():
                       width=1,
                       orientation='h',
                       marker={'color': data_frame['current_build_duration'],
-                              'colorscale': colorscale['NegativelyOriented']}
+                              'colorscale': colorscale['HueGradientInverted']}
                       )
 
     data = [get_bar(report)]
