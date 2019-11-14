@@ -33,10 +33,10 @@ jobs:
           masterKey: $(masterKey)
           databaseId: $(databaseId)
           containerId: $(containerId)
-      - task: AzureCLI@1
-        displayName: 'ACR Build'
-        enabled: true
-        inputs:
-          azureSubscription: $(serviceConnection)
-          scriptLocation: 'inlineScript'
-          inlineScript: az acr build -r $(acrName) -t imageName -g $(acrResourceGroup) .
+      # - task: AzureCLI@1
+      #   displayName: 'ACR Build'
+      #   enabled: true
+      #   inputs:
+      #     azureSubscription: $(serviceConnection)
+      #     scriptLocation: 'inlineScript'
+      #     inlineScript: az acr build -r $(acrName) -t imageName -g $(acrResourceGroup) .
