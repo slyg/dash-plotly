@@ -41,8 +41,7 @@ def get_fig():
             ticksuffix=' —',
         ),
         xaxis=dict(
-            type='log',
-            title='Number of failed (failure and aborted) pipelines (log axis)'
+            title='Number of failed (failure and aborted) pipelines'
         )
     )
 

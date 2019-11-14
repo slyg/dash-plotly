@@ -45,8 +45,7 @@ def get_fig():
             ticksuffix=' —',
         ),
         xaxis=dict(
-            type='log',
-            title='Number of failed steps (log axis)'
+            title='Number of failed steps'
         ),
         colorway=colorway['HueGradient'],
     )
