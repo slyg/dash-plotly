@@ -11,6 +11,9 @@ trigger:
 variables:
   azureContainerRegistry: hmctssandbox.azurecr.io
   azureSubscriptionEndpoint: azurerm-sandbox
+  serviceConnection: azurerm-sandbox
+  acrName: hmctssandbox
+  acrResourceGroup: cnp-acr-rg
   vmImage: Ubuntu-16.04
   imageName: hmcts/rse-dashboard
 
@@ -30,24 +33,10 @@ jobs:
           masterKey: $(masterKey)
           databaseId: $(databaseId)
           containerId: $(containerId)
-      - task: Docker@1
-        displayName: Container registry login
+      - task: AzureCLI@1
+        displayName: 'ACR Build'
+        enabled: true
         inputs:
-          azureContainerRegistry: $(azureContainerRegistry)
-          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-          command: login
-      - task: Docker@1
-        displayName: Tag image
-        inputs:
-          azureContainerRegistry: $(azureContainerRegistry)
-          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-          imageName: $(imageName)
-          arguments: $(azureContainerRegistry)/$(imageName):latest
-          command: Tag image
-      - task: Docker@1
-        displayName: Push image
-        inputs:
-          azureContainerRegistry: $(azureContainerRegistry)
-          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-          command: Push an image
-          imageName: $(azureContainerRegistry)/$(imageName):latest
+          azureSubscription: $(serviceConnection)
+          scriptLocation: 'inlineScript'
+          inlineScript: az acr build -r $(acrName) -t imageName -g $(acrResourceGroup) .
