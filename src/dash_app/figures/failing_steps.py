@@ -42,10 +42,13 @@ def get_fig():
             automargin=True,
             autorange="reversed",
             ticksuffix=' —',
+            type='category',
+            size=10,
         ),
         xaxis=dict(
-            title='Number of failed steps'
-        )
+            title='Number of failed pipeline'
+        ),
+        height=600,
     )
 
     def get_bar(data_frame):

@@ -48,6 +48,7 @@ def get_fig():
             title='Number of failed steps'
         ),
         colorway=colorway['HueGradient'],
+        height=800,
     )
 
     pie = go.Pie(labels=labels,

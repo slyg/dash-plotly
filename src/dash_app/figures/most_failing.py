@@ -42,7 +42,8 @@ def get_fig():
         ),
         xaxis=dict(
             title='Number of failed (failure and aborted) pipelines'
-        )
+        ),
+        height=800,
     )
 
     def get_bar(data_frame):

@@ -9,6 +9,7 @@ from dash_app.lib.events_28d import events
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
 days_in_past = 14
+quantile = .75
 
 
 def get_fig():
@@ -38,13 +39,14 @@ def get_fig():
         .reset_index()
 
     report = succeeding_pipelines_pivot[
-        succeeding_pipelines_pivot['job_name'].str.contains(
-            "HMCTS_Nightly") == False
+        (succeeding_pipelines_pivot['job_name'].str.contains(
+            "HMCTS_Nightly") == False)
+        & (succeeding_pipelines_pivot['current_build_duration'] > succeeding_pipelines_pivot['current_build_duration'].quantile(quantile))
     ]
 
     layout = dict(
-        title=go.layout.Title(text='Lengthy succeeding pipelines (non-nightly) on {0} branch in the last {1} days<br>(generated on {2})'.format(
-            branch, days_in_past, creation_time),
+        title=go.layout.Title(text='Top {0}% lengthy succeeding pipelines (non-nightly) on {1} branch in the last {2} days<br>(generated on {3})'.format(
+            round((1 - quantile) * 100), branch, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,
@@ -57,7 +59,8 @@ def get_fig():
         ),
         xaxis=dict(
             title='Mean pipeline duration in minutes',
-        )
+        ),
+        height=600,
     )
 
     def get_bar(data_frame):

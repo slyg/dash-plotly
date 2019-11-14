@@ -50,7 +50,7 @@ def get_fig():
                               font=graph_title_font
                               ),
         paper_bgcolor=TRANSPARENT,
-        plot_bgcolor=TRANSPARENT
+        plot_bgcolor=TRANSPARENT,
     )
 
     pie = go.Pie(labels=labels,

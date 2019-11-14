@@ -63,22 +63,22 @@ def set_layout(app):
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='timeline-short'))])
                                  ]),
-                        html.Div(className='col col-12 col-xl-4 my-3',
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='nightly-vs-daily'))])
                                  ]),
-                        html.Div(className='col col-12 col-xl-8 my-3',
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='most-failing'))])
                                  ]),
-                        html.Div(className='col col-12 col-xl-6 my-3',
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='failing-steps-pie'))])
                                  ]),
-                        html.Div(className='col col-12 col-xl-6 my-3',
+                        html.Div(className='col col-12 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='failing-steps'))])
