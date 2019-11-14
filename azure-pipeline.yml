@@ -9,11 +9,6 @@ trigger:
       - README.md
 
 variables:
-  azureContainerRegistry: hmctssandbox.azurecr.io
-  azureSubscriptionEndpoint: azurerm-sandbox
-  serviceConnection: azurerm-sandbox
-  acrName: hmctssandbox
-  acrResourceGroup: cnp-acr-rg
   vmImage: Ubuntu-16.04
   imageName: hmcts/rse-dashboard
 
@@ -23,20 +18,24 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
-      - task: Bash@3
-        displayName: Build production image
-        inputs:
-          targetType: inline
-          script: make production-image
+      - task: AzureCLI@1
+        displayName: 'ACR Build'
+        enabled: true
         env:
           endpoint: $(endpoint)
           masterKey: $(masterKey)
           databaseId: $(databaseId)
           containerId: $(containerId)
-      # - task: AzureCLI@1
-      #   displayName: 'ACR Build'
-      #   enabled: true
-      #   inputs:
-      #     azureSubscription: $(serviceConnection)
-      #     scriptLocation: 'inlineScript'
-      #     inlineScript: az acr build -r $(acrName) -t imageName -g $(acrResourceGroup) .
+        inputs:
+          azureSubscription: $(serviceConnection)
+          scriptLocation: 'inlineScript'
+          inlineScript: >
+            az acr build \
+              --build-arg endpoint=$(endpoint) \
+              --build-arg masterKey=$(masterKey) \
+              --build-arg databaseId=$(databaseId) \
+              --build-arg containerId=$(containerId) \
+              -r $(acrName) \
+              --subscription $(subscription) \
+              -t $(imageName) \
+              .
