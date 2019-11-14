@@ -30,24 +30,24 @@ jobs:
           masterKey: $(masterKey)
           databaseId: $(databaseId)
           containerId: $(containerId)
-      # - task: Docker@1
-      #   displayName: Container registry login
-      #   inputs:
-      #     azureContainerRegistry: $(azureContainerRegistry)
-      #     azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-      #     command: login
-      # - task: Docker@1
-      #   displayName: Tag image
-      #   inputs:
-      #     azureContainerRegistry: $(azureContainerRegistry)
-      #     azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-      #     imageName: $(imageName)
-      #     arguments: $(azureContainerRegistry)/$(imageName):latest
-      #     command: Tag image
-      # - task: Docker@1
-      #   displayName: Push image
-      #   inputs:
-      #     azureContainerRegistry: $(azureContainerRegistry)
-      #     azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-      #     command: Push an image
-      #     imageName: $(azureContainerRegistry)/$(imageName):latest
+      - task: Docker@1
+        displayName: Container registry login
+        inputs:
+          azureContainerRegistry: $(azureContainerRegistry)
+          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+          command: login
+      - task: Docker@1
+        displayName: Tag image
+        inputs:
+          azureContainerRegistry: $(azureContainerRegistry)
+          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+          imageName: $(imageName)
+          arguments: $(azureContainerRegistry)/$(imageName):latest
+          command: Tag image
+      - task: Docker@1
+        displayName: Push image
+        inputs:
+          azureContainerRegistry: $(azureContainerRegistry)
+          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+          command: Push an image
+          imageName: $(azureContainerRegistry)/$(imageName):latest
