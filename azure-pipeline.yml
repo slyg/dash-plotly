@@ -10,7 +10,7 @@ trigger:
 
 variables:
   vmImage: Ubuntu-16.04
-  imageName: hmcts/rse-dashboard
+  imageTag: hmcts/rse-dashboard
 
 jobs:
 
@@ -18,24 +18,33 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
-      - task: AzureCLI@1
-        displayName: 'ACR Build'
-        enabled: true
+      
+      - task: Docker@1
+        displayName: 'Build'
         env:
           endpoint: $(endpoint)
           masterKey: $(masterKey)
           databaseId: $(databaseId)
           containerId: $(containerId)
+          acrName: $(acrName)
         inputs:
-          azureSubscription: $(serviceConnection)
-          scriptLocation: 'inlineScript'
-          inlineScript: >
-            az acr build \
-              --build-arg endpoint=$(endpoint) \
-              --build-arg masterKey=$(masterKey) \
-              --build-arg databaseId=$(databaseId) \
-              --build-arg containerId=$(containerId) \
-              -r $(acrName) \
-              --subscription $(subscription) \
-              -t $(imageName) \
-              .
+          command: "Build an image"
+          azureSubscriptionEndpoint: $(serviceConnection)
+          azureContainerRegistry: $(acrName).azurecr.io
+          imageName: '$(acrName).azurecr.io/$(imageTag):$(Build.BuildId)'
+          arguments: '--build-arg endpoint=$(endpoint) --build-arg masterKey=$(masterKey) --build-arg databaseId=$(databaseId) --build-arg containerId=$(containerId)'
+
+      - task: Docker@1
+        displayName: 'Login to ACR'
+        inputs:
+          command: "Login"
+          azureSubscriptionEndpoint: $(serviceConnection)
+          azureContainerRegistry: $(acrName).azurecr.io
+
+      - task: Docker@1
+        displayName: 'Push'
+        inputs:
+          command: "Push an image"
+          azureSubscriptionEndpoint: '$(serviceConnection)'
+          azureContainerRegistry: $(acrName).azurecr.io
+          imageName: '$(acrName).azurecr.io/$(imageTag):$(Build.BuildId)'

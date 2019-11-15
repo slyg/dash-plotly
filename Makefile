@@ -58,6 +58,18 @@ production-image:
 		-t $(.image_name_production) \
 		.
 
+.PHONY: acr-build
+acr-build:
+	@. .env; az acr build \
+		-t hmcts/rse-dashboard \
+		-r $$registry \
+		--build-arg endpoint=$$endpoint \
+        --build-arg masterKey=$$masterKey \
+        --build-arg databaseId=$$databaseId \
+        --build-arg containerId=$$containerId \
+		--subscription $$subscription \
+		.
+
 .PHONY: help ## Displays this help section (default target)
 help:
 	@echo ""
