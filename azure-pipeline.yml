@@ -19,19 +19,17 @@ jobs:
       vmImage: $(vmImage)
     steps:
       
-      - task: Docker@1
-        displayName: 'Build'
+      - task: Docker@2
+        displayName: "Build an image"
         env:
           endpoint: $(endpoint)
           masterKey: $(masterKey)
           databaseId: $(databaseId)
           containerId: $(containerId)
-          acrName: $(acrName)
         inputs:
-          command: "Build an image"
-          azureSubscriptionEndpoint: $(serviceConnection)
-          azureContainerRegistry: $(acrName).azurecr.io
-          imageName: '$(acrName).azurecr.io/$(imageTag):$(Build.BuildId)'
+          command: build
+          containerRegistry: $(acrName)
+          repository: $(imageTag):$(Build.BuildId)
           arguments: '--build-arg endpoint=$(endpoint) --build-arg masterKey=$(masterKey) --build-arg databaseId=$(databaseId) --build-arg containerId=$(containerId)'
 
       - task: Docker@2
@@ -40,10 +38,9 @@ jobs:
           command: login
           containerRegistry: $(acrName)
 
-      - task: Docker@1
-        displayName: 'Push'
+      - task: Docker@2
+        displayName: "Push to ACR"
         inputs:
-          command: "Push an image"
-          azureSubscriptionEndpoint: '$(serviceConnection)'
-          azureContainerRegistry: $(acrName).azurecr.io
-          imageName: '$(acrName).azurecr.io/$(imageTag):$(Build.BuildId)'
+          command: push
+          containerRegistry: $(acrName)
+          repository: $(imageTag):$(Build.BuildId)
