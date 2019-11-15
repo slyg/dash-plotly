@@ -34,12 +34,11 @@ jobs:
           imageName: '$(acrName).azurecr.io/$(imageTag):$(Build.BuildId)'
           arguments: '--build-arg endpoint=$(endpoint) --build-arg masterKey=$(masterKey) --build-arg databaseId=$(databaseId) --build-arg containerId=$(containerId)'
 
-      - task: Docker@1
-        displayName: 'Login to ACR'
+      - task: Docker@2
+        displayName: Login to ACR
         inputs:
-          command: "Login"
-          azureSubscriptionEndpoint: $(serviceConnection)
-          azureContainerRegistry: $(acrName).azurecr.io
+          command: login
+          containerRegistry: $(acrName)
 
       - task: Docker@1
         displayName: 'Push'
