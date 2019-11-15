@@ -28,19 +28,19 @@ jobs:
           containerId: $(containerId)
         inputs:
           command: build
-          containerRegistry: $(acrName)
-          repository: $(imageTag):$(Build.BuildId)
+          containerRegistry: $(serviceConnection)
+          repository: $(imageTag)
           arguments: '--build-arg endpoint=$(endpoint) --build-arg masterKey=$(masterKey) --build-arg databaseId=$(databaseId) --build-arg containerId=$(containerId)'
 
       - task: Docker@2
         displayName: Login to ACR
         inputs:
           command: login
-          containerRegistry: $(acrName)
+          containerRegistry: $(serviceConnection)
 
       - task: Docker@2
         displayName: "Push to ACR"
         inputs:
           command: push
-          containerRegistry: $(acrName)
-          repository: $(imageTag):$(Build.BuildId)
+          containerRegistry: $(serviceConnection)
+          repository: $(imageTag)
