@@ -7,6 +7,8 @@ WHITE = 'rgb(255, 255, 255)'
 BLACK = 'rgb(0, 0, 0)'
 TRANSPARENT = 'rgba(0,0,0,0)'
 
+BRAND = 'rgb(76, 44, 146)'
+
 colors_map = {
     'SUCCESS': GREEN,
     'ABORTED': ORANGE,
