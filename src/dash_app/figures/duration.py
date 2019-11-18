@@ -45,7 +45,7 @@ def get_fig(selection):
 
     layout = dict(
         title=go.layout.Title(
-            text='Duration distribution of master {0} pipelines over the last {1} days<br>(generated on {2})'.format(
+            text='Duration distribution of {0} master pipelines over the last {1} days<br>(generated on {2})'.format(
                 selection, days_in_past, creation_time),
             font=graph_title_font
         ),
