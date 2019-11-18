@@ -12,11 +12,20 @@ days_in_past = 14
 quantile = .75
 
 
-def get_fig():
+def get_fig(selection):
 
     df = events['df']
     creation_time = events['creation_time']
     branch = events['branch']
+
+    if selection == 'nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == True]
+    elif selection == 'non-nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == False]
+    else:
+        df = df
 
     failers = df[
         (df['current_build_current_result'] == 'FAILURE')
@@ -27,8 +36,8 @@ def get_fig():
                          failers['counts'].quantile(quantile)]
 
     layout = dict(
-        title=go.layout.Title(text='Top {0}% Failing pipelines on {1} branch in the last {2} days<br>(generated on {3})'.format(
-            round((1 - quantile) * 100), branch, days_in_past, creation_time),
+        title=go.layout.Title(text='Top {0}% Failing pipelines on {1} branch for {2} pipelines in the last {3} days<br>(generated on {3})'.format(
+            round((1 - quantile) * 100), branch, selection, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,

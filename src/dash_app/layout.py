@@ -11,6 +11,7 @@ import dash_app.figures.timeline_short as timeline_short
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+from style.theme import BRAND
 
 
 def set_layout(app):
@@ -24,17 +25,21 @@ def set_layout(app):
             className='container-fluid',
             children=[
                 html.Div(
-                    className='row my-3',
+                    className='row my-4',
                     children=[
                         html.Div(className='col col-12',
                                  children=[
-                                     html.Nav(className='navbar navbar-light bg-light',
+                                     html.Nav(className='navbar fixed-top navbar-dark',
+                                              style={
+                                                  'background-color': BRAND},
                                               children=[
-                                                  html.H1(className='navbar-brand',
+                                                  html.H1(className='navbar-brand my-0',
                                                           children=[
-                                                              html.Img(className='d-inline-block align-top',
+                                                              html.Img(className='d-inline-block align-middle',
                                                                        src=app.get_asset_url(
                                                                            'RSE-community-logo.svg'),
+                                                                       style={
+                                                                           'background-color': 'white', 'border-radius': 8, 'padding': 2},
                                                                        width='45',
                                                                        height='45'
                                                                        ),
@@ -44,8 +49,8 @@ def set_layout(app):
                                                           ]),
                                                   html.Div(className='form-inline my-2 my-lg-0',
                                                            children=[
-                                                               html.Span(className='d-inline-block pr-2 py-2',
-                                                                         children='Nightly/Non-nightly'
+                                                               html.Span(className='d-inline-block pr-2 py-2 text-light',
+                                                                         children='Nightly / Non-nightly'
                                                                          ),
                                                                dcc.Dropdown(
                                                                    id="nightly",
@@ -122,15 +127,11 @@ def set_layout(app):
             ])
     ])
 
-    # Compute short-term graphs updates
-
-    interval_inputs = [Input('short-term-interval', 'n_intervals')]
-
-    @app.callback(Output('build-status', 'figure'), interval_inputs)
+    @app.callback(Output('build-status', 'figure'), [Input('short-term-interval', 'n_intervals')])
     def build_status_update(n):
         return build_status.get_fig()
 
-    @app.callback(Output('heatmap', 'figure'), interval_inputs)
+    @app.callback(Output('heatmap', 'figure'), [Input('short-term-interval', 'n_intervals')])
     def heatmap_update(n):
         return heatmap.get_fig()
 
@@ -138,27 +139,27 @@ def set_layout(app):
     def duration_update(selection, n):
         return duration.get_fig(selection)
 
-    @app.callback(Output('failing-steps', 'figure'), interval_inputs)
-    def failing_steps_update(n):
-        return failing_steps.get_fig()
+    @app.callback(Output('failing-steps', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def failing_steps_update(selection, n):
+        return failing_steps.get_fig(selection)
 
-    @app.callback(Output('failing-steps-pie', 'figure'), interval_inputs)
-    def failing_steps_pie_update(n):
-        return failing_steps_pie.get_fig()
+    @app.callback(Output('failing-steps-pie', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def failing_steps_pie_update(selection, n):
+        return failing_steps_pie.get_fig(selection)
 
-    @app.callback(Output('most-failing', 'figure'), interval_inputs)
-    def most_failing_update(n):
-        return most_failing.get_fig()
+    @app.callback(Output('most-failing', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def most_failing_update(selection, n):
+        return most_failing.get_fig(selection)
 
-    @app.callback(Output('timeline-short', 'figure'), interval_inputs)
+    @app.callback(Output('timeline-short', 'figure'), [Input('short-term-interval', 'n_intervals')])
     def timeline_short_update(n):
         return timeline_short.get_fig()
 
-    @app.callback(Output('lengthy-pipelines', 'figure'), interval_inputs)
-    def lengthy_pipelines_update(n):
-        return lengthy_pipelines.get_fig()
+    @app.callback(Output('lengthy-pipelines', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def lengthy_pipelines_update(selection, n):
+        return lengthy_pipelines.get_fig(selection)
 
-    @app.callback(Output('nightly-vs-daily', 'figure'), interval_inputs)
+    @app.callback(Output('nightly-vs-daily', 'figure'), [Input('short-term-interval', 'n_intervals')])
     def nigthly_vs_daily_update(n):
         return nightly_vs_daily.get_fig()
 

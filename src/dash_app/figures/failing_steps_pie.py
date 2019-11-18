@@ -12,11 +12,20 @@ from style.theme import (TRANSPARENT, WHITE, colors_map, colorway,
 days_in_past = 14
 
 
-def get_fig():
+def get_fig(selection):
 
     df = events['df']
     creation_time = events['creation_time']
     branch = events['branch']
+
+    if selection == 'nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == True]
+    elif selection == 'non-nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == False]
+    else:
+        df = df
 
     last_failed_builds_penultimate_step = df[(df['current_build_current_result'] == 'FAILURE')
                                              & (df['current_step_name'] != 'Pipeline Failed')]\
@@ -31,8 +40,8 @@ def get_fig():
     values = list(data.values)
 
     layout = dict(
-        title=go.layout.Title(text='Top failing steps on {0} branch in the last {1} days<br>(generated on {2})'.format(
-            branch, days_in_past, creation_time),
+        title=go.layout.Title(text='Top failing steps on {0} branch for {1} pipelines in the last {2} days<br>(generated on {3})'.format(
+            branch, selection, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,
