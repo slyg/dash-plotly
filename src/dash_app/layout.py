@@ -71,7 +71,7 @@ def set_layout(app):
                                  ]),
                     ]),
                 html.Div(
-                    className='row',
+                    className='row mt-5',
                     children=[
                         html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
@@ -127,9 +127,9 @@ def set_layout(app):
             ])
     ])
 
-    @app.callback(Output('build-status', 'figure'), [Input('short-term-interval', 'n_intervals')])
-    def build_status_update(n):
-        return build_status.get_fig()
+    @app.callback(Output('build-status', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def build_status_update(selection, n):
+        return build_status.get_fig(selection)
 
     @app.callback(Output('heatmap', 'figure'), [Input('short-term-interval', 'n_intervals')])
     def heatmap_update(n):

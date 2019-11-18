@@ -10,12 +10,21 @@ from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 number_of_hours = 24
 
 
-def get_fig():
+def get_fig(selection):
 
     df = events['df']
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']
+
+    if selection == 'nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == True]
+    elif selection == 'non-nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == False]
+    else:
+        df = df
 
     one_hour = timedelta(hours=1)
     max_past_date = (creation_time_iso -
@@ -52,7 +61,7 @@ def get_fig():
     colors = [colors_map[label] for label in labels]
 
     layout = dict(
-        title=go.layout.Title(text='Success Ratio for {0} CI pipelines in the last {1} hours <br>(generated on {2})'.format(branch, number_of_hours, creation_time),
+        title=go.layout.Title(text='Success Ratio for {0} {1} pipelines in the last {2}h <br>(generated on {3})'.format(selection, branch, number_of_hours, creation_time),
                               font=graph_title_font
                               ),
         paper_bgcolor=TRANSPARENT,
