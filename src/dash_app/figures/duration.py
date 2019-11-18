@@ -20,13 +20,18 @@ def get_fig():
     time_interval = timedelta(days=days_in_past)
 
     builds_df = pd.DataFrame(
-        df[df['current_build_scheduled_time'] > (
-            creation_time_iso - time_interval).isoformat()]
+        df[
+            (
+                df['current_build_scheduled_time'] > (
+                    creation_time_iso - time_interval).isoformat()
+            )
+            & (df['job_name'].str.contains("HMCTS_Nightly") == False)
+        ]
         .sort_values(by='_ts')
         .drop_duplicates('build_tag', keep='last')
     )
 
-    builds_df['Succeeding builds duration in minutes'] = builds_df['current_build_duration']/60000.0
+    builds_df['Builds duration in minutes'] = builds_df['current_build_duration']/60000.0
 
     stats_dfs = {
         'SUCCESS': builds_df[builds_df['current_build_current_result'] == 'SUCCESS'],
@@ -36,7 +41,7 @@ def get_fig():
 
     layout = dict(
         title=go.layout.Title(
-            text='Pipelines duration distribution in minutes over the last {0} days<br>(generated on {1})'.format(
+            text='Non-nightly pipelines duration distribution over the last {0} days<br>(generated on {1})'.format(
                 days_in_past, creation_time),
             font=graph_title_font
         ),
@@ -51,8 +56,8 @@ def get_fig():
 
     data = [go.Histogram(
         name=status,
-        x=stats_dfs[status]['Succeeding builds duration in minutes'],
-        marker_color=colors_map[status], nbinsx=100) for status in ['SUCCESS', 'FAILURE', 'ABORTED']
+        x=stats_dfs[status]['Builds duration in minutes'],
+        marker_color=colors_map[status], nbinsx=120) for status in ['SUCCESS', 'FAILURE', 'ABORTED']
     ]
 
     figure = {
