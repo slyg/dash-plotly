@@ -10,13 +10,22 @@ from style.theme import TRANSPARENT, colors_map, graph_title_font
 data_set_file = 'data/events_180d.pkl'
 
 
-def get_fig():
+def get_fig(selection):
 
     df = pd.DataFrame(
         pd.read_pickle(data_set_file)
         .sort_values(by='stage_timestamp')
         .drop_duplicates('build_tag', keep='last')
     )
+
+    if selection == 'nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == True]
+    elif selection == 'non-nightly':
+        df = df[df['job_name'].str.contains(
+            "HMCTS_Nightly") == False]
+    else:
+        df = df
 
     creation_time = time.ctime(os.path.getctime(data_set_file))
 
@@ -30,6 +39,7 @@ def get_fig():
             (df['stage_timestamp'] >= last_days[date_index])
             & (df['stage_timestamp'] < last_days[date_index+1])
         ]
+
         total_rows = len(day_frame)
         SUCCESS = len(
             day_frame.loc[df['current_build_current_result'] == 'SUCCESS'])
@@ -78,7 +88,7 @@ def get_fig():
                       hoverinfo='text')
 
     layout = dict(
-        title=go.layout.Title(text='Failure percentage of CI master pipelines over the last {0} days<br>(generated on {1})'.format(days_in_past, creation_time),
+        title=go.layout.Title(text='Failure percentage of CI for {0} master pipelines over the last {1} days<br>(generated on {2})'.format(selection, days_in_past, creation_time),
                               font=graph_title_font
                               ),
         barmode='stack',
