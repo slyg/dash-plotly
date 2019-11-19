@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-.DEFAULT_GOAL := server
+.DEFAULT_GOAL := help
 .image_name = slyg/dash-local
 .image_name_production = hmcts/rse-dashboard
 .container_name = dashy
@@ -58,7 +58,7 @@ production-image:
 		-t $(.image_name_production) \
 		.
 
-.PHONY: acr-build
+.PHONY: acr-build ## Builds and deploys the image on ACR
 acr-build:
 	@. .env; az acr build \
 		-t hmcts/rse-dashboard \
