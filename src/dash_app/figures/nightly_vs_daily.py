@@ -35,9 +35,6 @@ def get_fig():
     failures_nightly = len(failures_nightly_df.index)
     failures_daily = len(failures_df.index) - failures_nightly
 
-    print(failures_nightly)
-    print(failures_daily)
-
     values = [failures_nightly, failures_daily]
 
     labels = ['Nightly',
