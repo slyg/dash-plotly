@@ -16,11 +16,6 @@ from style.theme import BRAND
 
 def set_layout(app):
     app.layout = html.Div(children=[
-        dcc.Interval(
-            id='short-term-interval',
-            interval=60*60*1000,  # 1 hour
-            n_intervals=0
-        ),
         html.Div(
             className='container-fluid',
             children=[
@@ -81,7 +76,7 @@ def set_layout(app):
                         html.Div(className='col col-12 col-xl-6 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(dcc.Graph(id='nightly-vs-daily'))])
+                                              children=[dcc.Loading(dcc.Graph(id='nightly-vs-daily', figure=nightly_vs_daily.get_fig()))])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
@@ -127,41 +122,37 @@ def set_layout(app):
             ])
     ])
 
-    @app.callback(Output('build-status', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def build_status_update(selection, n):
+    @app.callback(Output('build-status', 'figure'), [Input('nightly', 'value')])
+    def build_status_update(selection):
         return build_status.get_fig(selection)
 
-    @app.callback(Output('heatmap', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def heatmap_update(selection, n):
+    @app.callback(Output('heatmap', 'figure'), [Input('nightly', 'value')])
+    def heatmap_update(selection):
         return heatmap.get_fig(selection)
 
-    @app.callback(Output('duration', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def duration_update(selection, n):
+    @app.callback(Output('duration', 'figure'), [Input('nightly', 'value')])
+    def duration_update(selection):
         return duration.get_fig(selection)
 
-    @app.callback(Output('failing-steps', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def failing_steps_update(selection, n):
+    @app.callback(Output('failing-steps', 'figure'), [Input('nightly', 'value')])
+    def failing_steps_update(selection):
         return failing_steps.get_fig(selection)
 
-    @app.callback(Output('failing-steps-pie', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def failing_steps_pie_update(selection, n):
+    @app.callback(Output('failing-steps-pie', 'figure'), [Input('nightly', 'value')])
+    def failing_steps_pie_update(selection):
         return failing_steps_pie.get_fig(selection)
 
-    @app.callback(Output('most-failing', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def most_failing_update(selection, n):
+    @app.callback(Output('most-failing', 'figure'), [Input('nightly', 'value')])
+    def most_failing_update(selection):
         return most_failing.get_fig(selection)
 
-    @app.callback(Output('timeline-short', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def timeline_short_update(selection, n):
+    @app.callback(Output('timeline-short', 'figure'), [Input('nightly', 'value')])
+    def timeline_short_update(selection):
         return timeline_short.get_fig(selection)
 
-    @app.callback(Output('lengthy-pipelines', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
-    def lengthy_pipelines_update(selection, n):
+    @app.callback(Output('lengthy-pipelines', 'figure'), [Input('nightly', 'value')])
+    def lengthy_pipelines_update(selection):
         return lengthy_pipelines.get_fig(selection)
-
-    @app.callback(Output('nightly-vs-daily', 'figure'), [Input('short-term-interval', 'n_intervals')])
-    def nigthly_vs_daily_update(n):
-        return nightly_vs_daily.get_fig()
 
     @app.callback(Output('timeline', 'figure'), [Input('nightly', 'value')])
     def timeline_update(selection):

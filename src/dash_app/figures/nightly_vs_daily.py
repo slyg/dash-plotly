@@ -1,3 +1,4 @@
+import functools
 import os.path
 import time
 from datetime import datetime, timedelta
@@ -10,6 +11,7 @@ from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 days_in_the_past = 14
 
 
+@functools.lru_cache(maxsize=128)
 def get_fig():
 
     df = events['df']

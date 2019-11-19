@@ -1,3 +1,4 @@
+import functools
 import json
 import os.path
 import time
@@ -12,6 +13,7 @@ from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 days_in_past = 14
 
 
+@functools.lru_cache(maxsize=128)
 def get_fig(selection):
 
     df = select(selection, events['df'])

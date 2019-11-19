@@ -1,3 +1,4 @@
+import functools
 import json
 import os.path
 import time
@@ -11,6 +12,7 @@ from style.theme import TRANSPARENT, colors_map, graph_title_font
 data_set_file = 'data/events_180d.pkl'
 
 
+@functools.lru_cache(maxsize=128)
 def get_fig(selection):
 
     df = pd.DataFrame(
