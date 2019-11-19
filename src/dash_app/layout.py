@@ -24,7 +24,7 @@ def set_layout(app):
                     children=[
                         html.Div(className='col col-12',
                                  children=[
-                                     html.Nav(className='navbar fixed-top navbar-dark',
+                                     html.Nav(className='navbar fixed-top navbar-dark py-0',
                                               style={
                                                   'background-color': BRAND},
                                               children=[
@@ -35,20 +35,21 @@ def set_layout(app):
                                                                            'RSE-community-logo.svg'),
                                                                        style={
                                                                            'background-color': 'white', 'border-radius': 8, 'padding': 2},
-                                                                       width='45',
-                                                                       height='45'
+                                                                       width='40',
+                                                                       height='40'
                                                                        ),
-                                                              html.Span(className='d-inline-block pl-2 py-2',
+                                                              html.Span(className='d-inline-block pl-2 py-0',
                                                                         children='RSE Dashboard'
                                                                         ),
                                                           ]),
                                                   html.Div(className='form-inline my-2 my-lg-0',
                                                            children=[
-                                                               html.Span(className='d-inline-block pr-2 py-2 text-light',
+                                                               html.Span(className='d-inline-block pr-2 py-2 text-light small',
                                                                          children='Nightly / Non-nightly'
                                                                          ),
                                                                dcc.Dropdown(
                                                                    id="nightly",
+                                                                   className="small",
                                                                    clearable=False,
                                                                    style={
                                                                        'width': 200},
