@@ -8,11 +8,9 @@ from dash_app.lib.events_28d import events
 from dash_app.lib.nightly import select
 from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
-number_of_hours = 24
-
 
 @functools.lru_cache(maxsize=128)
-def get_fig(selection):
+def get_fig(selection, number_of_hours=24):
 
     df = select(selection, events['df'])
     creation_time = events['creation_time']

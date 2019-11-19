@@ -69,12 +69,17 @@ def set_layout(app):
                 html.Div(
                     className='row mt-5',
                     children=[
-                        html.Div(className='col col-12 col-xl-6 my-3',
+                        html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='build-status'))])
                                  ]),
-                        html.Div(className='col col-12 col-xl-6 my-3',
+                        html.Div(className='col col-12 col-xl-4 my-3',
+                                 children=[
+                                     html.Div(className='p-3 bg-light',
+                                              children=[dcc.Loading(dcc.Graph(id='build-status-72'))])
+                                 ]),
+                        html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
                                      html.Div(className='p-3 bg-light',
                                               children=[dcc.Loading(dcc.Graph(id='nightly-vs-daily', figure=nightly_vs_daily.get_fig()))])
@@ -126,6 +131,10 @@ def set_layout(app):
     @app.callback(Output('build-status', 'figure'), [Input('nightly', 'value')])
     def build_status_update(selection):
         return build_status.get_fig(selection)
+
+    @app.callback(Output('build-status-72', 'figure'), [Input('nightly', 'value')])
+    def build_status_update(selection):
+        return build_status.get_fig(selection, 72)
 
     @app.callback(Output('heatmap', 'figure'), [Input('nightly', 'value')])
     def heatmap_update(selection):
