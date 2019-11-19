@@ -131,9 +131,9 @@ def set_layout(app):
     def build_status_update(selection, n):
         return build_status.get_fig(selection)
 
-    @app.callback(Output('heatmap', 'figure'), [Input('short-term-interval', 'n_intervals')])
-    def heatmap_update(n):
-        return heatmap.get_fig()
+    @app.callback(Output('heatmap', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def heatmap_update(selection, n):
+        return heatmap.get_fig(selection)
 
     @app.callback(Output('duration', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
     def duration_update(selection, n):
@@ -151,9 +151,9 @@ def set_layout(app):
     def most_failing_update(selection, n):
         return most_failing.get_fig(selection)
 
-    @app.callback(Output('timeline-short', 'figure'), [Input('short-term-interval', 'n_intervals')])
-    def timeline_short_update(n):
-        return timeline_short.get_fig()
+    @app.callback(Output('timeline-short', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
+    def timeline_short_update(selection, n):
+        return timeline_short.get_fig(selection)
 
     @app.callback(Output('lengthy-pipelines', 'figure'), [Input('nightly', 'value'), Input('short-term-interval', 'n_intervals')])
     def lengthy_pipelines_update(selection, n):

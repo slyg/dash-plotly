@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
+from dash_app.lib.nightly import select
 from style.theme import TRANSPARENT, colors_map, graph_title_font
 
 data_set_file = 'data/events_180d.pkl'
@@ -18,14 +19,7 @@ def get_fig(selection):
         .drop_duplicates('build_tag', keep='last')
     )
 
-    if selection == 'nightly':
-        df = df[df['job_name'].str.contains(
-            "HMCTS_Nightly") == True]
-    elif selection == 'non-nightly':
-        df = df[df['job_name'].str.contains(
-            "HMCTS_Nightly") == False]
-    else:
-        df = df
+    df = select(selection, df)
 
     creation_time = time.ctime(os.path.getctime(data_set_file))
 

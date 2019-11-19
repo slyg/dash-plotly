@@ -6,14 +6,15 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
+from dash_app.lib.nightly import select
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
 data_set_file = 'data/events_28d.pkl'
 
 
-def get_fig():
+def get_fig(selection):
 
-    df = events['df']
+    df = select(selection, events['df'])
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']

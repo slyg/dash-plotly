@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
+from dash_app.lib.nightly import select
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
 days_in_past = 14
@@ -14,19 +15,10 @@ quantile = .75
 
 def get_fig(selection):
 
-    df = events['df']
+    df = select(selection, events['df'])
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']
-
-    if selection == 'nightly':
-        df = df[df['job_name'].str.contains(
-            "HMCTS_Nightly") == True]
-    elif selection == 'non-nightly':
-        df = df[df['job_name'].str.contains(
-            "HMCTS_Nightly") == False]
-    else:
-        df = df
 
     time_interval = timedelta(days=days_in_past)
 

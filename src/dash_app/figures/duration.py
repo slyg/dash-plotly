@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
+from dash_app.lib.nightly import select
 from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
 
 days_in_past = 14
@@ -13,7 +14,7 @@ days_in_past = 14
 
 def get_fig(selection):
 
-    df = events['df']
+    df = select(selection, events['df'])
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
 
@@ -25,15 +26,6 @@ def get_fig(selection):
         .sort_values(by='_ts')
         .drop_duplicates('build_tag', keep='last')
     )
-
-    if selection == 'nightly':
-        builds_df = builds_df[builds_df['job_name'].str.contains(
-            "HMCTS_Nightly") == True]
-    elif selection == 'non-nightly':
-        builds_df = builds_df[builds_df['job_name'].str.contains(
-            "HMCTS_Nightly") == False]
-    else:
-        builds_df = builds_df
 
     builds_df['Builds duration in minutes'] = builds_df['current_build_duration']/60000.0
 

@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
+from dash_app.lib.nightly import select
 from style.theme import (TRANSPARENT, WHITE, colors_map, colorway,
                          graph_title_font)
 
@@ -14,18 +15,9 @@ days_in_past = 14
 
 def get_fig(selection):
 
-    df = events['df']
+    df = select(selection, events['df'])
     creation_time = events['creation_time']
     branch = events['branch']
-
-    if selection == 'nightly':
-        df = df[df['job_name'].str.contains(
-            "HMCTS_Nightly") == True]
-    elif selection == 'non-nightly':
-        df = df[df['job_name'].str.contains(
-            "HMCTS_Nightly") == False]
-    else:
-        df = df
 
     last_failed_builds_penultimate_step = df[(df['current_build_current_result'] == 'FAILURE')
                                              & (df['current_step_name'] != 'Pipeline Failed')]\
