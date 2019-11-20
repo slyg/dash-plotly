@@ -19,16 +19,6 @@ jobs:
       vmImage: $(vmImage)
     steps:
 
-      # - task: Bash@3
-      #   displayName: ACR Login
-      #   inputs:
-      #     targetType: 'inline'
-      #     script: docker login -u $registryUsername -p $registryPwd $azureContainerRegistry
-      #   env:
-      #     azureContainerRegistry: $(azureContainerRegistry)
-      #     registryPwd: $(registryPwd)
-      #     registryUsername: $(registryUsername)
-
       - task: Docker@1
         displayName: Login
         inputs:
