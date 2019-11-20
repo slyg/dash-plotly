@@ -6,7 +6,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
 from dash_app.lib.nightly import select
-from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
+from style.theme import (TRANSPARENT, WHITE, colors_map, colorscale,
+                         graph_title_font)
 
 data_set_file = 'data/events_28d.pkl'
 
@@ -65,7 +66,7 @@ def get_fig(selection):
                               ),
         bargap=0,
         height=500,
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
         yaxis=dict(
             title='Count',

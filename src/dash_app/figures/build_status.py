@@ -55,7 +55,7 @@ def get_fig(selection, number_of_hours=24):
         title=go.layout.Title(text='Success Ratio for {0} {1} pipelines in the last {2}h <br>(generated on {3})'.format(selection, branch, number_of_hours, creation_time),
                               font=graph_title_font
                               ),
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT
     )
 

@@ -47,7 +47,7 @@ def get_fig():
         title=go.layout.Title(text='Nightly vs non-nightly failures for {0} CI pipelines <br>in the last {1} days<br>(generated on {2})'.format(branch, days_in_the_past, creation_time),
                               font=graph_title_font
                               ),
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
     )
 

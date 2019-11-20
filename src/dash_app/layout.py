@@ -11,13 +11,16 @@ import dash_app.figures.timeline_short as timeline_short
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from style.theme import BRAND
+from style.theme import BRAND, LIGHT_GREY, WHITE_ALPHA_8
 
 
 def set_layout(app):
     app.layout = html.Div(children=[
         html.Div(
             className='container-fluid',
+            style={
+                'background-color': LIGHT_GREY,
+            },
             children=[
                 html.Div(
                     className='row my-3',
@@ -26,7 +29,7 @@ def set_layout(app):
                                  children=[
                                      html.Nav(className='navbar fixed-top navbar-light py-0',
                                               style={
-                                                  'background-color': 'rgba(245, 245, 245, 0.8)',
+                                                  'background-color': WHITE_ALPHA_8,
                                                   'border-bottom': '2px solid {0}'.format(BRAND)
                                               },
                                               children=[
@@ -71,58 +74,58 @@ def set_layout(app):
                     children=[
                         html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='build-status')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='build-status')])])
                                  ]),
                         html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='build-status-72')])])
+                                     html.Div(children=[dcc.Loading(color=BRAND, children=[
+                                              dcc.Graph(id='build-status-72')])])
                                  ]),
                         html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='nightly-vs-daily', figure=nightly_vs_daily.get_fig())])])
+                                     html.Div(children=[dcc.Loading(color=BRAND, children=[dcc.Graph(
+                                         id='nightly-vs-daily', figure=nightly_vs_daily.get_fig())])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='heatmap')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='heatmap')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='timeline-short')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='timeline-short')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='most-failing')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='most-failing')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='failing-steps-pie')])])
+                                     html.Div(children=[dcc.Loading(color=BRAND, children=[
+                                              dcc.Graph(id='failing-steps-pie')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='failing-steps')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='failing-steps')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='lengthy-pipelines')])])
+                                     html.Div(children=[dcc.Loading(color=BRAND, children=[
+                                              dcc.Graph(id='lengthy-pipelines')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='duration')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='duration')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
-                                     html.Div(className='p-3 bg-light',
-                                              children=[dcc.Loading(color=BRAND, children=[dcc.Graph(id='timeline')])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='timeline')])])
                                  ])
                     ]),
             ])

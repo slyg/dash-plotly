@@ -37,7 +37,7 @@ def get_fig(selection):
             font=graph_title_font
         ),
         autosize=True,
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
         bargap=0,
         yaxis=dict(

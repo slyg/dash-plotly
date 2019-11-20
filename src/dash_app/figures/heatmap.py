@@ -8,7 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
 from dash_app.lib.nightly import select
-from style.theme import TRANSPARENT, colorscale, graph_title_font
+from style.theme import TRANSPARENT, WHITE, colorscale, graph_title_font
 
 days_in_past = 14
 
@@ -145,7 +145,7 @@ def get_fig(selection):
         margin=dict(
             pad=0
         ),
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT
     )
 

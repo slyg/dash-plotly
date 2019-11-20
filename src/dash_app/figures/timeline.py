@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.nightly import select
-from style.theme import TRANSPARENT, colors_map, graph_title_font
+from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
 data_set_file = 'data/events_180d.pkl'
 
@@ -89,7 +89,7 @@ def get_fig(selection):
                               ),
         barmode='stack',
         bargap=0,
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
         xaxis=dict(
             tickangle=-90,

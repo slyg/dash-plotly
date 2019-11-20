@@ -6,7 +6,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
 from dash_app.lib.nightly import select
-from style.theme import TRANSPARENT, colors_map, colorscale, graph_title_font
+from style.theme import (TRANSPARENT, WHITE, colors_map, colorscale,
+                         graph_title_font)
 
 days_in_past = 14
 quantile = .75
@@ -33,7 +34,7 @@ def get_fig(selection):
             font=graph_title_font
         ),
         autosize=True,
-        paper_bgcolor=TRANSPARENT,
+        paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
         bargap=0,
         yaxis=dict(
