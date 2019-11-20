@@ -57,12 +57,41 @@ def set_layout(app):
                                                                    style={
                                                                        'width': 200},
                                                                    options=[
-                                                                       {'label': 'SCSS',
-                                                                        'value': 'sscs'},
-                                                                       {'label': 'Probate',
-                                                                        'value': 'probate'},
                                                                        {'label': 'All',
                                                                         'value': 'all'},
+
+                                                                       {'label': 'Bulk Scanning',
+                                                                        'value': '_BSP'},
+
+                                                                       {'label': 'CCD',
+                                                                        'value': '_CDM'},
+
+                                                                       {'label': 'CMC',
+                                                                        'value': '_CMC'},
+
+                                                                       {'label': 'CTSC',
+                                                                        'value': '_CTSC'},
+
+                                                                       {'label': 'DIV',
+                                                                        'value': '_DIV'},
+
+                                                                       {'label': 'FeePay',
+                                                                        'value': '_FeePay'},
+
+                                                                       {'label': 'FinRem',
+                                                                        'value': '_FinRem'},
+
+                                                                       {'label': 'Platform',
+                                                                        'value': '_Platform'},
+
+                                                                       {'label': 'Probate',
+                                                                        'value': '_Probate'},
+
+                                                                       {'label': 'RPA',
+                                                                        'value': '_RPA'},
+
+                                                                       {'label': 'SCSS',
+                                                                        'value': '_SSCS'},
                                                                    ],
                                                                    value='all'),
                                                            ]),
@@ -78,12 +107,12 @@ def set_layout(app):
                                                                    style={
                                                                        'width': 200},
                                                                    options=[
+                                                                       {'label': 'All',
+                                                                        'value': 'all'},
                                                                        {'label': 'Nightly',
                                                                         'value': 'nightly'},
                                                                        {'label': 'Non-nightly',
                                                                         'value': 'non-nightly'},
-                                                                       {'label': 'All',
-                                                                        'value': 'all'},
                                                                    ],
                                                                    value='all'),
                                                            ])
