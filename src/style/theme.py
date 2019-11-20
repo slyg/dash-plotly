@@ -83,6 +83,7 @@ colorscale = {
 }
 
 graph_title_font = dict(
+    family='"Transport New Medium", Arial, Helvetica, sans-serif',
     size=12,
-    color=BLACK
+    color=BLACK,
 )

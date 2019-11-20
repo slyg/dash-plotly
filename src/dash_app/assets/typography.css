@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Transport New Medium";
+  src: url("./transport-new-medium.woff") format("woff");
+}
+
+body {
+  font-family: "Transport New Medium", Arial, Helvetica, sans-serif;
+}
