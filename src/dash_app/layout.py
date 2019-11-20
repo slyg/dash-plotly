@@ -48,10 +48,31 @@ def set_layout(app):
                                                   html.Div(className='form-inline my-2 my-lg-0',
                                                            children=[
                                                                html.Span(className='d-inline-block pr-2 py-2 text-dark small',
+                                                                         children='Project'
+                                                                         ),
+                                                               dcc.Dropdown(
+                                                                   id="project",
+                                                                   className="small",
+                                                                   clearable=False,
+                                                                   style={
+                                                                       'width': 200},
+                                                                   options=[
+                                                                       {'label': 'SCSS',
+                                                                        'value': 'sscs'},
+                                                                       {'label': 'Probate',
+                                                                        'value': 'probate'},
+                                                                       {'label': 'All',
+                                                                        'value': 'all'},
+                                                                   ],
+                                                                   value='all'),
+                                                           ]),
+                                                  html.Div(className='form-inline my-2 my-lg-0',
+                                                           children=[
+                                                               html.Span(className='d-inline-block pr-2 py-2 text-dark small',
                                                                          children='Nightly / Non-nightly'
                                                                          ),
                                                                dcc.Dropdown(
-                                                                   id="nightly",
+                                                                   id="pipeline-type",
                                                                    className="small",
                                                                    clearable=False,
                                                                    style={
@@ -131,42 +152,42 @@ def set_layout(app):
             ])
     ])
 
-    @app.callback(Output('build-status', 'figure'), [Input('nightly', 'value')])
-    def build_status_update(selection):
-        return build_status.get_fig(selection)
+    @app.callback(Output('build-status', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def build_status_update(pipeline_type, project):
+        return build_status.get_fig(pipeline_type, 24, project)
 
-    @app.callback(Output('build-status-72', 'figure'), [Input('nightly', 'value')])
-    def build_status_update(selection):
-        return build_status.get_fig(selection, 72)
+    @app.callback(Output('build-status-72', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def build_status_update_72(pipeline_type, project):
+        return build_status.get_fig(pipeline_type, 72, project)
 
-    @app.callback(Output('heatmap', 'figure'), [Input('nightly', 'value')])
-    def heatmap_update(selection):
-        return heatmap.get_fig(selection)
+    @app.callback(Output('heatmap', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def heatmap_update(pipeline_type, project):
+        return heatmap.get_fig(pipeline_type, project)
 
-    @app.callback(Output('duration', 'figure'), [Input('nightly', 'value')])
-    def duration_update(selection):
-        return duration.get_fig(selection)
+    @app.callback(Output('duration', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def duration_update(pipeline_type, project):
+        return duration.get_fig(pipeline_type, project)
 
-    @app.callback(Output('failing-steps', 'figure'), [Input('nightly', 'value')])
-    def failing_steps_update(selection):
-        return failing_steps.get_fig(selection)
+    @app.callback(Output('failing-steps', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def failing_steps_update(pipeline_type, project):
+        return failing_steps.get_fig(pipeline_type, project)
 
-    @app.callback(Output('failing-steps-pie', 'figure'), [Input('nightly', 'value')])
-    def failing_steps_pie_update(selection):
-        return failing_steps_pie.get_fig(selection)
+    @app.callback(Output('failing-steps-pie', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def failing_steps_pie_update(pipeline_type, project):
+        return failing_steps_pie.get_fig(pipeline_type, project)
 
-    @app.callback(Output('most-failing', 'figure'), [Input('nightly', 'value')])
-    def most_failing_update(selection):
-        return most_failing.get_fig(selection)
+    @app.callback(Output('most-failing', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def most_failing_update(pipeline_type, project):
+        return most_failing.get_fig(pipeline_type, project)
 
-    @app.callback(Output('timeline-short', 'figure'), [Input('nightly', 'value')])
-    def timeline_short_update(selection):
-        return timeline_short.get_fig(selection)
+    @app.callback(Output('timeline-short', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def timeline_short_update(pipeline_type, project):
+        return timeline_short.get_fig(pipeline_type, project)
 
-    @app.callback(Output('lengthy-pipelines', 'figure'), [Input('nightly', 'value')])
-    def lengthy_pipelines_update(selection):
-        return lengthy_pipelines.get_fig(selection)
+    @app.callback(Output('lengthy-pipelines', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def lengthy_pipelines_update(pipeline_type, project):
+        return lengthy_pipelines.get_fig(pipeline_type, project)
 
-    @app.callback(Output('timeline', 'figure'), [Input('nightly', 'value')])
-    def timeline_update(selection):
-        return timeline.get_fig(selection)
+    @app.callback(Output('timeline', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def timeline_update(pipeline_type, project):
+        return timeline.get_fig(pipeline_type, project)

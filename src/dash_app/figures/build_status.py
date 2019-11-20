@@ -5,14 +5,14 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
-from dash_app.lib.nightly import select
+from dash_app.lib.filters import select
 from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(selection, number_of_hours=24):
+def get_fig(pipeline_type, number_of_hours, project):
 
-    df = select(selection, events['df'])
+    df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']
@@ -52,7 +52,7 @@ def get_fig(selection, number_of_hours=24):
     colors = [colors_map[label] for label in labels]
 
     layout = dict(
-        title=go.layout.Title(text='Success Ratio for {0} {1} pipelines in the last {2}h <br>(generated on {3})'.format(selection, branch, number_of_hours, creation_time),
+        title=go.layout.Title(text='Success Ratio for {0} {1} pipelines in the last {2}h <br>(generated on {3})'.format(pipeline_type, branch, number_of_hours, creation_time),
                               font=graph_title_font
                               ),
         paper_bgcolor=WHITE,

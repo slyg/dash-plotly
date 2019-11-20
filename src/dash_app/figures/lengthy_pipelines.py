@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
-from dash_app.lib.nightly import select
+from dash_app.lib.filters import select
 from style.theme import (TRANSPARENT, WHITE, colors_map, colorscale,
                          graph_title_font)
 
@@ -14,9 +14,9 @@ quantile = .75
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(selection):
+def get_fig(pipeline_type, project):
 
-    df = select(selection, events['df'])
+    df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']
@@ -47,7 +47,7 @@ def get_fig(selection):
 
     layout = dict(
         title=go.layout.Title(text='Top {0}% lengthy succeeding pipelines ({1}) on {2} branch in the last {3} days<br>(generated on {4})'.format(
-            round((1 - quantile) * 100), selection, branch, days_in_past, creation_time),
+            round((1 - quantile) * 100), pipeline_type, branch, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,

@@ -6,14 +6,14 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
-from dash_app.lib.nightly import select
+from dash_app.lib.filters import select
 from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
 data_set_file = 'data/events_180d.pkl'
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(selection):
+def get_fig(pipeline_type, project):
 
     df = pd.DataFrame(
         pd.read_pickle(data_set_file)
@@ -21,7 +21,7 @@ def get_fig(selection):
         .drop_duplicates('build_tag', keep='last')
     )
 
-    df = select(selection, df)
+    df = select(df, pipeline_type, project)
 
     creation_time = time.ctime(os.path.getctime(data_set_file))
 
@@ -84,7 +84,7 @@ def get_fig(selection):
                       hoverinfo='text')
 
     layout = dict(
-        title=go.layout.Title(text='Failure percentage of CI for {0} master pipelines over the last {1} days<br>(generated on {2})'.format(selection, days_in_past, creation_time),
+        title=go.layout.Title(text='Failure percentage of CI for {0} master pipelines over the last {1} days<br>(generated on {2})'.format(pipeline_type, days_in_past, creation_time),
                               font=graph_title_font
                               ),
         barmode='stack',

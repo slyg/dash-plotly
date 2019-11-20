@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
-from dash_app.lib.nightly import select
+from dash_app.lib.filters import select
 from style.theme import (TRANSPARENT, WHITE, colors_map, colorscale,
                          graph_title_font)
 
@@ -13,9 +13,9 @@ data_set_file = 'data/events_28d.pkl'
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(selection):
+def get_fig(pipeline_type, project):
 
-    df = select(selection, events['df'])
+    df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']

@@ -7,18 +7,18 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
-from dash_app.lib.nightly import select
+from dash_app.lib.filters import select
 from style.theme import TRANSPARENT, WHITE, colorscale, graph_title_font
 
 days_in_past = 14
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(selection):
+def get_fig(pipeline_type, project):
 
     # Load dataframe and contextual data
 
-    df = select(selection, events['df'])
+    df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
 
