@@ -134,8 +134,8 @@ def set_layout(app):
                                  ]),
                         html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
-                                     html.Div(children=[dcc.Loading(color=BRAND, children=[dcc.Graph(
-                                         id='nightly-vs-daily', figure=nightly_vs_daily.get_fig())])])
+                                     html.Div(children=[dcc.Loading(
+                                         color=BRAND, children=[dcc.Graph(id='nightly-vs-daily')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
@@ -220,3 +220,7 @@ def set_layout(app):
     @app.callback(Output('timeline', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def timeline_update(pipeline_type, project):
         return timeline.get_fig(pipeline_type, project)
+
+    @app.callback(Output('nightly-vs-daily', 'figure'), [Input('project', 'value')])
+    def nightly_vs_daily_update(project):
+        return nightly_vs_daily.get_fig(project)

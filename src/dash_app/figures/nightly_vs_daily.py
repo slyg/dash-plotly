@@ -5,15 +5,16 @@ from datetime import datetime, timedelta
 import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
+from dash_app.lib.filters import select_project
 from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
 days_in_the_past = 14
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig():
+def get_fig(project):
 
-    df = events['df']
+    df = select_project(events['df'], project)
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']

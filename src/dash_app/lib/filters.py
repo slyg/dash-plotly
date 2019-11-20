@@ -13,3 +13,10 @@ def select(df, pipeline_type, project):
         return df
     else:
         return df[df['job_name'].str.contains(project) == True]
+
+
+def select_project(df, project):
+    if project == 'all':
+        return df
+    else:
+        return df[df['job_name'].str.contains(project) == True]
