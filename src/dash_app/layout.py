@@ -20,31 +20,31 @@ def set_layout(app):
             className='container-fluid',
             children=[
                 html.Div(
-                    className='row my-4',
+                    className='row my-3',
                     children=[
                         html.Div(className='col col-12',
                                  children=[
-                                     html.Nav(className='navbar fixed-top navbar-dark py-0',
+                                     html.Nav(className='navbar fixed-top navbar-light py-0',
                                               style={
-                                                  'background-color': BRAND},
+                                                  'background-color': 'rgba(245, 245, 245, 0.8)',
+                                                  'border-bottom': '2px solid {0}'.format(BRAND)
+                                              },
                                               children=[
                                                   html.H1(className='navbar-brand my-0',
                                                           children=[
-                                                              html.Img(className='d-inline-block align-middle',
+                                                              html.Img(className='d-inline-block align-middle pb-1',
                                                                        src=app.get_asset_url(
                                                                            'RSE-community-logo.svg'),
-                                                                       style={
-                                                                           'background-color': 'white', 'border-radius': 8, 'padding': 2},
                                                                        width='40',
                                                                        height='40'
                                                                        ),
-                                                              html.Span(className='d-inline-block pl-2 py-0',
+                                                              html.Span(className='d-inline-block pl-2 mt-2',
                                                                         children='RSE Dashboard'
                                                                         ),
                                                           ]),
                                                   html.Div(className='form-inline my-2 my-lg-0',
                                                            children=[
-                                                               html.Span(className='d-inline-block pr-2 py-2 text-light small',
+                                                               html.Span(className='d-inline-block pr-2 py-2 text-dark small',
                                                                          children='Nightly / Non-nightly'
                                                                          ),
                                                                dcc.Dropdown(

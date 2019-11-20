@@ -83,6 +83,6 @@ colorscale = {
 }
 
 graph_title_font = dict(
-    size=14,
+    size=12,
     color=BLACK
 )
