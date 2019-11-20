@@ -40,9 +40,8 @@ def get_fig(selection):
         .reset_index()
 
     report = succeeding_pipelines_pivot[
-        (succeeding_pipelines_pivot['job_name'].str.contains(
-            "HMCTS_Nightly") == False)
-        & (succeeding_pipelines_pivot['current_build_duration'] > succeeding_pipelines_pivot['current_build_duration'].quantile(quantile))
+        succeeding_pipelines_pivot['current_build_duration'] > succeeding_pipelines_pivot['current_build_duration'].quantile(
+            quantile)
     ]
 
     layout = dict(
