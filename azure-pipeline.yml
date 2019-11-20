@@ -8,6 +8,13 @@ trigger:
     exclude:
       - README.md
 
+schedules:
+  - cron: "0 * * * *"
+    displayName: Hourly build
+    branches:
+      include:
+        - master
+
 variables:
   vmImage: Ubuntu-16.04
   imageName: hmcts/rse-dashboard
@@ -20,7 +27,7 @@ jobs:
     steps:
 
       - task: Docker@1
-        displayName: Login
+        displayName: ACR Login
         inputs:
           azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
           azureContainerRegistry: $(azureContainerRegistry)
