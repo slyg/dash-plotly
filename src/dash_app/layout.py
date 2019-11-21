@@ -47,75 +47,85 @@ def set_layout(app):
                                                           ]),
                                                   html.Div(className='form-inline my-2 my-lg-0',
                                                            children=[
-                                                               html.Span(className='d-inline-block pr-2 py-2 text-dark small',
-                                                                         children='Project'
-                                                                         ),
-                                                               dcc.Dropdown(
-                                                                   id="project",
-                                                                   className="small",
-                                                                   clearable=False,
-                                                                   style={
-                                                                       'width': 200},
-                                                                   options=[
-                                                                       {'label': 'All',
-                                                                        'value': 'all'},
+                                                               html.Form(className="pl-5",
+                                                                        children=[
+                                                                            html.Span(className='d-inline-block pr-2 py-2 text-dark small',
+                                                                                        children='Project'
+                                                                                        ),
+                                                                            html.Div(className="d-inline-block align-middle",
+                                                                                        children=[
+                                                                                            dcc.Dropdown(
+                                                                                                id="project",
+                                                                                                className="small",
+                                                                                                clearable=False,
+                                                                                                style={
+                                                                                                    'width': 200},
+                                                                                                options=[
+                                                                                                    {'label': 'All',
+                                                                                                    'value': 'all'},
 
-                                                                       {'label': 'Bulk Scanning',
-                                                                        'value': '_BSP'},
+                                                                                                    {'label': 'Bulk Scanning',
+                                                                                                    'value': '_BSP'},
 
-                                                                       {'label': 'CCD',
-                                                                        'value': '_CDM'},
+                                                                                                    {'label': 'CCD',
+                                                                                                    'value': '_CDM'},
 
-                                                                       {'label': 'CMC',
-                                                                        'value': '_CMC'},
+                                                                                                    {'label': 'CMC',
+                                                                                                    'value': '_CMC'},
 
-                                                                       {'label': 'CTSC',
-                                                                        'value': '_CTSC'},
+                                                                                                    {'label': 'CTSC',
+                                                                                                    'value': '_CTSC'},
 
-                                                                       {'label': 'DIV',
-                                                                        'value': '_DIV'},
+                                                                                                    {'label': 'DIV',
+                                                                                                    'value': '_DIV'},
 
-                                                                       {'label': 'FeePay',
-                                                                        'value': '_FeePay'},
+                                                                                                    {'label': 'FeePay',
+                                                                                                    'value': '_FeePay'},
 
-                                                                       {'label': 'FinRem',
-                                                                        'value': '_FinRem'},
+                                                                                                    {'label': 'FinRem',
+                                                                                                    'value': '_FinRem'},
 
-                                                                       {'label': 'Platform',
-                                                                        'value': '_Platform'},
+                                                                                                    {'label': 'Platform',
+                                                                                                    'value': '_Platform'},
 
-                                                                       {'label': 'Probate',
-                                                                        'value': '_Probate'},
+                                                                                                    {'label': 'Probate',
+                                                                                                    'value': '_Probate'},
 
-                                                                       {'label': 'RPA',
-                                                                        'value': '_RPA'},
+                                                                                                    {'label': 'RPA',
+                                                                                                    'value': '_RPA'},
 
-                                                                       {'label': 'SCSS',
-                                                                        'value': '_SSCS'},
-                                                                   ],
-                                                                   value='all'),
+                                                                                                    {'label': 'SCSS',
+                                                                                                    'value': '_SSCS'},
+                                                                                                ],
+                                                                                                value='all'),
+                                                                                        ])
+                                                                        ]),
+                                                               html.Form(className="pl-5",
+                                                                        children=[
+                                                                            html.Span(className='d-inline-block pr-2 py-2 text-dark small',
+                                                                                        children='Nightly / Non-nightly'
+                                                                                        ),
+                                                                            html.Div(className="d-inline-block align-middle",
+                                                                                        children=[
+                                                                                            dcc.Dropdown(id="pipeline-type",
+                                                                                                        clearable=False,
+                                                                                                        className="small",
+                                                                                                        style={
+                                                                                                            'width': 200},
+                                                                                                        options=[
+                                                                                                            {'label': 'All',
+                                                                                                            'value': 'all'},
+                                                                                                            {'label': 'Nightly',
+                                                                                                            'value': 'nightly'},
+                                                                                                            {'label': 'Non-nightly',
+                                                                                                            'value': 'non-nightly'},
+                                                                                                        ],
+                                                                                                        value='all'),
+                                                                                        ])
+                                                                        ])
+
+
                                                            ]),
-                                                  html.Div(className='form-inline my-2 my-lg-0',
-                                                           children=[
-                                                               html.Span(className='d-inline-block pr-2 py-2 text-dark small',
-                                                                         children='Nightly / Non-nightly'
-                                                                         ),
-                                                               dcc.Dropdown(
-                                                                   id="pipeline-type",
-                                                                   className="small",
-                                                                   clearable=False,
-                                                                   style={
-                                                                       'width': 200},
-                                                                   options=[
-                                                                       {'label': 'All',
-                                                                        'value': 'all'},
-                                                                       {'label': 'Nightly',
-                                                                        'value': 'nightly'},
-                                                                       {'label': 'Non-nightly',
-                                                                        'value': 'non-nightly'},
-                                                                   ],
-                                                                   value='all'),
-                                                           ])
                                               ]),
                                  ]),
                     ]),
