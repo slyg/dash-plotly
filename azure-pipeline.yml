@@ -9,8 +9,8 @@ trigger:
       - README.md
 
 schedules:
-  - cron: "0 * * * *"
-    displayName: Hourly build
+  - cron: "0 9-17 * * *"
+    displayName: Workhours hourly build
     branches:
       include:
         - master
