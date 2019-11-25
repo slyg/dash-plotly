@@ -74,7 +74,7 @@ project_opts = [
 
 pipeline_type_default_value = 'all'
 pipeline_type_opts = [
-    
+
     {'label': 'All',
      'value': 'all'},
 
@@ -84,7 +84,6 @@ pipeline_type_opts = [
     {'label': 'Non-nightly',
      'value': 'non-nightly'},
 ]
-
 
 
 def getNavigation(app):
@@ -117,10 +116,8 @@ def getNavigation(app):
                                                             children=[
                                                                 dcc.Dropdown(
                                                                       id="project",
-                                                                      className="small",
+                                                                      className="small nav-form-width",
                                                                       clearable=False,
-                                                                      style={
-                                                                          'width': 200},
                                                                       options=project_opts,
                                                                       value=project_default_value),
                                                             ])
@@ -134,9 +131,7 @@ def getNavigation(app):
                                                             children=[
                                                                 dcc.Dropdown(id="pipeline-type",
                                                                              clearable=False,
-                                                                             className="small",
-                                                                             style={
-                                                                                 'width': 200},
+                                                                             className="small nav-form-width",
                                                                              options=pipeline_type_opts,
                                                                              value=pipeline_type_default_value),
                                                             ])
