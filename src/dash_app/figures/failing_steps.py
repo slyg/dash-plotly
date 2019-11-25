@@ -50,7 +50,6 @@ def get_fig(pipeline_type, project):
         xaxis=dict(
             title='Number of failed pipeline'
         ),
-        height=600,
     )
 
     def get_bar(data_frame):
