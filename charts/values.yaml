@@ -1,9 +1,0 @@
-nodejs:
-  image: ${IMAGE_NAME}
-  ingressHost: ${SERVICE_FQDN}
-  applicationPort: 8050
-  environment:
-    endpoint: ${endpoint}
-    masterKey: ${masterKey}
-    databaseId: ${databaseId}
-    containerId: ${containerId}
