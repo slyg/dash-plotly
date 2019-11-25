@@ -48,81 +48,111 @@ def set_layout(app):
                                                   html.Div(className='form-inline my-2 my-lg-0',
                                                            children=[
                                                                html.Form(className="pl-5",
-                                                                        children=[
-                                                                            html.Span(className='d-inline-block pr-2 py-2 text-dark small',
-                                                                                        children='Project'
-                                                                                        ),
-                                                                            html.Div(className="d-inline-block align-middle",
-                                                                                        children=[
-                                                                                            dcc.Dropdown(
-                                                                                                id="project",
-                                                                                                className="small",
-                                                                                                clearable=False,
-                                                                                                style={
-                                                                                                    'width': 200},
-                                                                                                options=[
-                                                                                                    {'label': 'All',
-                                                                                                    'value': 'all'},
+                                                                         children=[
+                                                                             html.Span(className='d-inline-block pr-2 py-2 text-dark small',
+                                                                                       children='Project'
+                                                                                       ),
+                                                                             html.Div(className="d-inline-block align-middle",
+                                                                                      children=[
+                                                                                          dcc.Dropdown(
+                                                                                              id="project",
+                                                                                              className="small",
+                                                                                              clearable=False,
+                                                                                              style={
+                                                                                                 'width': 200},
+                                                                                              options=[
+                                                                                                  {'label': 'All',
+                                                                                                   'value': 'all'},
 
-                                                                                                    {'label': 'Bulk Scanning',
-                                                                                                    'value': '_BSP'},
+                                                                                                  {'label': 'Bulk Scanning',
+                                                                                                   'value': '_BSP'},
 
-                                                                                                    {'label': 'CCD',
-                                                                                                    'value': '_CDM'},
+                                                                                                  {'label': 'CCD',
+                                                                                                   'value': '_CDM'},
 
-                                                                                                    {'label': 'CMC',
-                                                                                                    'value': '_CMC'},
+                                                                                                  {'label': 'CET',
+                                                                                                   'value': '_CET'},
 
-                                                                                                    {'label': 'CTSC',
-                                                                                                    'value': '_CTSC'},
+                                                                                                  {'label': 'CMC',
+                                                                                                   'value': '_CMC'},
 
-                                                                                                    {'label': 'DIV',
-                                                                                                    'value': '_DIV'},
+                                                                                                  {'label': 'CNP',
+                                                                                                   'value': '_CNP'},
 
-                                                                                                    {'label': 'FeePay',
-                                                                                                    'value': '_FeePay'},
+                                                                                                  {'label': 'CTSC',
+                                                                                                   'value': '_CTSC'},
 
-                                                                                                    {'label': 'FinRem',
-                                                                                                    'value': '_FinRem'},
+                                                                                                  {'label': 'DevOps',
+                                                                                                   'value': '_DevOps'},
 
-                                                                                                    {'label': 'Platform',
-                                                                                                    'value': '_Platform'},
+                                                                                                  {'label': 'DIV',
+                                                                                                   'value': '_DIV'},
 
-                                                                                                    {'label': 'Probate',
-                                                                                                    'value': '_Probate'},
+                                                                                                  {'label': 'Ethos replacement',
+                                                                                                   'value': '_ETHOS'},
 
-                                                                                                    {'label': 'RPA',
-                                                                                                    'value': '_RPA'},
+                                                                                                  {'label': 'Fees and Pay',
+                                                                                                   'value': '_FeePay'},
 
-                                                                                                    {'label': 'SCSS',
-                                                                                                    'value': '_SSCS'},
-                                                                                                ],
-                                                                                                value='all'),
-                                                                                        ])
-                                                                        ]),
+                                                                                                  {'label': 'Financial Remedy',
+                                                                                                   'value': '_FinRem'},
+
+                                                                                                  {'label': 'FPL',
+                                                                                                   'value': '_FPL'},
+
+                                                                                                  {'label': 'IAC',
+                                                                                                   'value': '_IAC'},
+
+                                                                                                  {'label': 'IDAM',
+                                                                                                   'value': '_IDAM'},
+
+                                                                                                  {'label': 'Management Information',
+                                                                                                   'value': '_MI'},
+
+                                                                                                  {'label': 'Platform',
+                                                                                                   'value': '_Platform'},
+
+                                                                                                  {'label': 'Probate',
+                                                                                                   'value': '_Probate'},
+
+                                                                                                  {'label': 'Reference Data',
+                                                                                                   'value': '_RD'},
+
+                                                                                                  {'label': 'RPA',
+                                                                                                   'value': '_RPA'},
+
+                                                                                                  {'label': 'SL',
+                                                                                                   'value': '_SL'},
+
+                                                                                                  {'label': 'SCSS',
+                                                                                                   'value': '_SSCS'},
+                                                                                              ],
+                                                                                              value='all'),
+                                                                                      ])
+                                                                         ]),
                                                                html.Form(className="pl-5",
-                                                                        children=[
-                                                                            html.Span(className='d-inline-block pr-2 py-2 text-dark small',
-                                                                                        children='Nightly / Non-nightly'
-                                                                                        ),
-                                                                            html.Div(className="d-inline-block align-middle",
-                                                                                        children=[
-                                                                                            dcc.Dropdown(id="pipeline-type",
-                                                                                                        clearable=False,
-                                                                                                        className="small",
-                                                                                                        style={
-                                                                                                            'width': 200},
-                                                                                                        options=[
-                                                                                                            {'label': 'All',
+                                                                         children=[
+                                                                             html.Span(className='d-inline-block pr-2 py-2 text-dark small',
+                                                                                       children='Nightly / Non-nightly'
+                                                                                       ),
+                                                                             html.Div(className="d-inline-block align-middle",
+                                                                                      children=[
+                                                                                          dcc.Dropdown(id="pipeline-type",
+                                                                                                       clearable=False,
+                                                                                                       className="small",
+                                                                                                       style={
+                                                                                                           'width': 200},
+                                                                                                       options=[
+                                                                                                           {'label': 'All',
                                                                                                             'value': 'all'},
-                                                                                                            {'label': 'Nightly',
+                                                                                                           {'label': 'Nightly',
                                                                                                             'value': 'nightly'},
-                                                                                                            {'label': 'Non-nightly',
+                                                                                                           {'label': 'Non-nightly',
                                                                                                             'value': 'non-nightly'},
-                                                                                                        ],
-                                                                                                        value='all'),
-                                                                                        ])
-                                                                        ])
+                                                                                                       ],
+                                                                                                       value='all'),
+                                                                                      ])
+                                                                         ])
 
 
                                                            ]),
