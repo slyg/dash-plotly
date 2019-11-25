@@ -1,6 +1,7 @@
 *.pyc
 .DS_Store
 .env
+.vscode
 __pycache__
 */data/*.json
 */data/*.pkl
