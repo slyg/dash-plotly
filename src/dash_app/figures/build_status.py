@@ -10,16 +10,16 @@ from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(pipeline_type, number_of_hours, project):
+def get_fig(pipeline_type, project, number_of_days=14):
 
     df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']
     creation_time_iso = events['creation_time_iso']
     branch = events['branch']
 
-    one_hour = timedelta(hours=1)
+    one_day = timedelta(hours=24)
     max_past_date = (creation_time_iso -
-                     (number_of_hours * one_hour)).isoformat()
+                     (number_of_days * one_day)).isoformat()
 
     last_builds = df[df['stage_timestamp'] > max_past_date]
     last_builds = last_builds.sort_values(
@@ -52,7 +52,7 @@ def get_fig(pipeline_type, number_of_hours, project):
     colors = [colors_map[label] for label in labels]
 
     layout = dict(
-        title=go.layout.Title(text='Success Ratio for {0} {1} pipelines in the last {2}h <br>(generated on {3})'.format(pipeline_type, branch, number_of_hours, creation_time),
+        title=go.layout.Title(text='Success Ratio for {0} {1} pipelines in the last {2} day(s) <br>(generated on {3})'.format(pipeline_type, branch, number_of_days, creation_time),
                               font=graph_title_font
                               ),
         paper_bgcolor=WHITE,

@@ -42,7 +42,7 @@ def set_layout(app):
                                  children=[
                                      html.Div(children=[
                                          dcc.Loading(color=BRAND, children=[
-                                             dcc.Graph(id='build-status-72')])])
+                                             dcc.Graph(id='build-status-14')])])
                                  ]),
                         html.Div(className='col col-12 col-xl-4 my-3',
                                  children=[
@@ -131,11 +131,11 @@ def set_layout(app):
 
     @app.callback(Output('build-status', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def build_status_update(pipeline_type, project):
-        return build_status.get_fig(pipeline_type, 24, project)
+        return build_status.get_fig(pipeline_type, project, 1)
 
-    @app.callback(Output('build-status-72', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
-    def build_status_update_72(pipeline_type, project):
-        return build_status.get_fig(pipeline_type, 72, project)
+    @app.callback(Output('build-status-14', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def build_status_update_14(pipeline_type, project):
+        return build_status.get_fig(pipeline_type, project)
 
     @app.callback(Output('heatmap', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def heatmap_update(pipeline_type, project):
