@@ -93,25 +93,29 @@ def getNavigation(app):
                         'border-bottom': '2px solid {0}'.format(BRAND)
                     },
                     children=[
-                        html.H1(className='navbar-brand my-0',
-                                children=[
-                                    html.Img(className='d-inline-block align-middle pb-1',
-                                             src=app.get_asset_url(
-                                                 'RSE-community-logo.svg'),
-                                             width='40',
-                                             height='40'
-                                             ),
-                                    html.Span(className='d-inline-block govuk-heading-s pl-2 mt-2 mb-0',
-                                              children='RSE Dashboard'
-                                              ),
-                                ]),
+                        html.A(href='#',
+                               children=[
+                                    html.H1(className='navbar-brand my-0',
+                                            children=[
+                                                html.Img(className='d-inline-block align-middle pb-1',
+                                                         src=app.get_asset_url(
+                                                             'RSE-community-logo.svg'),
+                                                         width='40',
+                                                         height='40'
+                                                         ),
+                                                html.Span(className='d-inline-block govuk-heading-s pl-2 mt-2 mb-0',
+                                                          children='RSE Dashboard'
+                                                          ),
+                                            ]),
+                               ]),
                         html.Div(className='form-inline my-2 my-lg-0 govuk-body-s',
                                  children=[
                                      html.Form(className="pl-5",
                                                children=[
-                                                   html.Span(className='d-inline-block pr-2 py-2 text-dark small',
-                                                             children='Project'
-                                                             ),
+                                                   html.Label(className='d-inline-block pr-2 py-2 text-dark small',
+                                                              htmlFor='project',
+                                                              children='Project'
+                                                              ),
                                                    html.Div(className="d-inline-block align-middle",
                                                             children=[
                                                                 dcc.Dropdown(
@@ -124,9 +128,10 @@ def getNavigation(app):
                                                ]),
                                      html.Form(className="pl-5",
                                                children=[
-                                                   html.Span(className='d-inline-block pr-2 py-2 text-dark small',
-                                                             children='Nightly / Non-nightly'
-                                                             ),
+                                                   html.Label(className='d-inline-block pr-2 py-2 text-dark small',
+                                                              htmlFor='pipeline-type',
+                                                              children='Nightly / Non-nightly'
+                                                              ),
                                                    html.Div(className="d-inline-block align-middle",
                                                             children=[
                                                                 dcc.Dropdown(id="pipeline-type",

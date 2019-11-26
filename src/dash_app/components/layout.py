@@ -15,7 +15,7 @@ from style.theme import BRAND, LIGHT_GREY, WHITE
 
 
 def set_layout(app):
-    app.layout = html.Div(children=[
+    app.layout = html.Div(id="top", children=[
         html.Div(
             className='container-fluid',
             style={
