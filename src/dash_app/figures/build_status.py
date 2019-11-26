@@ -57,10 +57,10 @@ def get_fig(pipeline_type, project, number_of_days=14):
                               font=graph_title_font
                               ),
         paper_bgcolor=WHITE,
-        plot_bgcolor=TRANSPARENT
+        plot_bgcolor=TRANSPARENT,
     )
 
-    figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors, line=pie_line_style))],
+    figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, sort=False, marker=dict(colors=colors, line=pie_line_style))],
               'layout': layout
               }
 
