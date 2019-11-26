@@ -67,7 +67,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
                       width=1,
                       orientation='h',
                       marker={'color': data_frame['current_build_duration'],
-                              'colorscale': colorscale['HueGradientInverted']}
+                              'colorscale': colorscale['HueGradient']}
                       )
 
     data = [get_bar(report)]

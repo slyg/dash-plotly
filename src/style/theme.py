@@ -71,15 +71,9 @@ colorscale = {
     'OrangeToRed': [[0, ORANGE], [1, RED]],
     'YellowToRed': [[0, YELLOW], [1, RED]],
     'HueGradient': [
-        [0, RED],
-        [0.5, ORANGE],
-        [0.75, YELLOW],
-        [1, GREEN],
-    ],
-    'HueGradientInverted': [
         [0, GREEN],
-        [0.25, YELLOW],
-        [0.5, ORANGE],
+        [0.7, YELLOW],
+        [0.85, ORANGE],
         [1, RED],
     ],
     'NegativelyOriented': [
