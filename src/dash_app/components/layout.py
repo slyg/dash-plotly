@@ -1,7 +1,6 @@
 import dash_app.figures.build_status as build_status
 import dash_app.figures.duration as duration
 import dash_app.figures.failing_steps as failing_steps
-import dash_app.figures.failing_steps_pie as failing_steps_pie
 import dash_app.figures.heatmap as heatmap
 import dash_app.figures.lengthy_pipelines as lengthy_pipelines
 import dash_app.figures.most_failing as most_failing
@@ -72,13 +71,7 @@ def set_layout(app):
                                  children=[
                                      html.Div(children=[
                                          dcc.Loading(color=BRAND, children=[
-                                             dcc.Graph(id='failing-steps-pie')])])
-                                 ]),
-                        html.Div(className='col col-12 my-3',
-                                 children=[
-                                     html.Div(children=[
-                                         dcc.Loading(
-                                             color=BRAND, children=[dcc.Graph(id='failing-steps')])])
+                                             dcc.Graph(id='failing-steps')])])
                                  ]),
                         html.Div(className='col col-12 my-3',
                                  children=[
@@ -148,10 +141,6 @@ def set_layout(app):
     @app.callback(Output('failing-steps', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def failing_steps_update(pipeline_type, project):
         return failing_steps.get_fig(pipeline_type, project)
-
-    @app.callback(Output('failing-steps-pie', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
-    def failing_steps_pie_update(pipeline_type, project):
-        return failing_steps_pie.get_fig(pipeline_type, project)
 
     @app.callback(Output('most-failing', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def most_failing_update(pipeline_type, project):

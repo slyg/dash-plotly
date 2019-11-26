@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
 from dash_app.lib.filters import select_project
 from style.theme import (BLUE, PURPLE, TRANSPARENT, WHITE, colors_map,
-                         graph_title_font)
+                         graph_title_font, pie_line_style)
 
 
 @functools.lru_cache(maxsize=128)
@@ -54,7 +54,7 @@ def get_fig(project, days_in_past=14):
     pie = go.Pie(labels=labels,
                  values=values,
                  marker=dict(colors=colors,
-                             line=dict(color=WHITE, width=1))
+                             line=pie_line_style)
                  )
 
     figure = {'data': [pie],

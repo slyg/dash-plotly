@@ -1,5 +1,3 @@
-from random import shuffle
-
 govuk_colour = {
     "red": 'rgb(212,53,28)',
     "yellow": 'rgb(255,221,0)',
@@ -49,9 +47,7 @@ colors_map = {
 }
 
 colorway = {
-    'GovUkColours': shuffle([
-        govuk_colour['red'],
-        govuk_colour['yellow'],
+    'GovUkColours': [
         govuk_colour['green'],
         govuk_colour['dark-blue'],
         govuk_colour['blue'],
@@ -65,7 +61,7 @@ colorway = {
         govuk_colour['brown'],
         govuk_colour['light-green'],
         govuk_colour['turquoise'],
-    ])
+    ][::-1]
 }
 
 colorscale = {
@@ -103,3 +99,5 @@ graph_title_font = dict(
     size=14,
     color=BLACK,
 )
+
+pie_line_style = dict(color=WHITE, width=2)

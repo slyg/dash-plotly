@@ -6,7 +6,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
 from dash_app.lib.filters import select
-from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
+from style.theme import (TRANSPARENT, WHITE, colors_map, graph_title_font,
+                         pie_line_style)
 
 
 @functools.lru_cache(maxsize=128)
@@ -59,7 +60,7 @@ def get_fig(pipeline_type, project, number_of_days=14):
         plot_bgcolor=TRANSPARENT
     )
 
-    figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors, line=dict(color=WHITE, width=1)))],
+    figure = {'data': [go.Pie(labels=labels_with_amounts, values=statuses, marker=dict(colors=colors, line=pie_line_style))],
               'layout': layout
               }
 
