@@ -28,7 +28,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
                          failers['counts'].quantile(quantile)]
 
     layout = dict(
-        title=go.layout.Title(text='Top {0}% Failing pipelines on {1} branch for {2} pipelines in the last {3} days<br>(generated on {3})'.format(
+        title=go.layout.Title(text='Top {0}% Failing pipelines on {1} branch for {2} pipelines in the last {3} days<br>(generated on {4})'.format(
             round((1 - quantile) * 100), branch, pipeline_type, days_in_past, creation_time),
             font=graph_title_font
         ),

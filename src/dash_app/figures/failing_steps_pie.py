@@ -46,7 +46,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
         xaxis=dict(
             title='Number of failed steps'
         ),
-        colorway=colorway['HueGradient'],
+        colorway=colorway['GovUkColours'],
         height=800,
     )
 

@@ -1,15 +1,45 @@
-RED = 'rgb(229,89,52)'
-ORANGE = 'rgb(255, 140, 17)'
-GREEN = 'rgb(124,206,119)'
-YELLOW = 'rgb(219,210,82)'
-GREY = 'rgb(204, 204, 204)'
-LIGHT_GREY = 'rgb(240, 240, 240)'
-WHITE = 'rgb(255, 255, 255)'
+from random import shuffle
+
+govuk_colour = {
+    "red": 'rgb(212,53,28)',
+    "yellow": 'rgb(255,221,0)',
+    "green": 'rgb(0,112,60)',
+    "light-green": 'rgb(133,153,75)',
+    "dark-blue": 'rgb(0,48,120)',
+    "blue": 'rgb(29,112,184)',
+    "light-blue": 'rgb(86,148,202)',
+    "purple": 'rgb(76,44,146)',
+    "light-purple": 'rgb(111,114,175)',
+    "bright-purple": 'rgb(145,43,136)',
+    "light-pink": 'rgb(244,153,190)',
+    "pink": 'rgb(213,56,128)',
+    "orange": 'rgb(244,119,56)',
+    "brown": 'rgb(181,136,64)',
+    "turquoise": 'rgb(40,161,151)',
+    "black": 'rgb(11,12,12)',
+    "dark-grey": 'rgb(98,106,110)',
+    "mid-grey": 'rgb(177,180,182)',
+    "light-grey": 'rgb(243,242,241)',
+    "white": 'rgb(255,255,255)',
+}
+
+# Commonly used colors
+
+RED = govuk_colour['red']
+ORANGE = govuk_colour['orange']
+GREEN = govuk_colour['light-green']
+YELLOW = govuk_colour['yellow']
+BLUE = govuk_colour['light-blue']
+PURPLE = govuk_colour['purple']
+GREY = govuk_colour['mid-grey']
+LIGHT_GREY = govuk_colour['light-grey']
+WHITE = govuk_colour['white']
 WHITE_ALPHA_8 = 'rgba(255, 255, 255, 0.8)'
-BLACK = 'rgb(0, 0, 0)'
+BLACK = govuk_colour['black']
 TRANSPARENT = 'rgba(0,0,0,0)'
 
-BRAND = 'rgb(76, 44, 146)'
+BRAND = 'rgb(76, 44, 146)'  # HMCTS primary color
+
 
 colors_map = {
     'SUCCESS': GREEN,
@@ -19,21 +49,23 @@ colors_map = {
 }
 
 colorway = {
-    'HueGradient': [
-        RED,
-        'rgb(227,58,83)',
-        'rgb(225,64,145)',
-        'rgb(223,70,201)',
-        'rgb(190,76,221)',
-        'rgb(141,82,219)',
-        'rgb(97,88,218)',
-        'rgb(93,127,216)',
-        'rgb(98,172,214)',
-        'rgb(104,211,212)',
-        'rgb(109,210,175)',
-        'rgb(114,208,142)',
-        GREEN
-    ]
+    'GovUkColours': shuffle([
+        govuk_colour['red'],
+        govuk_colour['yellow'],
+        govuk_colour['green'],
+        govuk_colour['dark-blue'],
+        govuk_colour['blue'],
+        govuk_colour['light-blue'],
+        govuk_colour['purple'],
+        govuk_colour['light-purple'],
+        govuk_colour['bright-purple'],
+        govuk_colour['pink'],
+        govuk_colour['light-pink'],
+        govuk_colour['orange'],
+        govuk_colour['brown'],
+        govuk_colour['light-green'],
+        govuk_colour['turquoise'],
+    ])
 }
 
 colorscale = {
@@ -44,33 +76,15 @@ colorscale = {
     'YellowToRed': [[0, YELLOW], [1, RED]],
     'HueGradient': [
         [0, RED],
-        [0.08333333, 'rgb(227,58,83)'],
-        [0.16666667, 'rgb(225,64,145)'],
-        [0.25, 'rgb(223,70,201)'],
-        [0.33333333, 'rgb(190,76,221)'],
-        [0.41666667, 'rgb(141,82,219)'],
-        [0.5, 'rgb(97,88,218)'],
-        [0.58333333, 'rgb(93,127,216)'],
-        [0.66666667, 'rgb(98,172,214)'],
-        [0.75, 'rgb(104,211,212)'],
-        [0.83333333, 'rgb(109,210,175)'],
-        [0.91666667, 'rgb(114,208,142)'],
-        [1, GREEN]
+        [0.5, ORANGE],
+        [0.75, YELLOW],
+        [1, GREEN],
     ],
     'HueGradientInverted': [
         [0, GREEN],
-        [0.08333333, 'rgb(114,208,142)'],
-        [0.16666667, 'rgb(109,210,175)'],
-        [0.25, 'rgb(104,211,212)'],
-        [0.33333333, 'rgb(98,172,214)'],
-        [0.41666667, 'rgb(93,127,216)'],
-        [0.5, 'rgb(97,88,218)'],
-        [0.58333333, 'rgb(141,82,219)'],
-        [0.66666667, 'rgb(190,76,221)'],
-        [0.75, 'rgb(223,70,201)'],
-        [0.83333333, 'rgb(225,64,145)'],
-        [0.91666667, 'rgb(227,58,83)'],
-        [1, RED]
+        [0.25, YELLOW],
+        [0.5, ORANGE],
+        [1, RED],
     ],
     'NegativelyOriented': [
         [0, GREEN],
@@ -85,7 +99,7 @@ colorscale = {
 }
 
 graph_title_font = dict(
-    family='"Transport New Medium", Arial, Helvetica, sans-serif',
-    size=12,
+    family='GDS Transport,Arial,sans-serif',
+    size=14,
     color=BLACK,
 )

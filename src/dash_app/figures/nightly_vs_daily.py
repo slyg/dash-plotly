@@ -6,7 +6,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash_app.lib.events_28d import events
 from dash_app.lib.filters import select_project
-from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
+from style.theme import (BLUE, PURPLE, TRANSPARENT, WHITE, colors_map,
+                         graph_title_font)
 
 
 @functools.lru_cache(maxsize=128)
@@ -40,7 +41,7 @@ def get_fig(project, days_in_past=14):
     labels = ['Nightly',
               'Non-nightly']
 
-    colors = ['rgb(97,88,218)', 'rgb(98,172,214)']
+    colors = [PURPLE, BLUE]
 
     layout = dict(
         title=go.layout.Title(text='Nightly vs non-nightly failures for {0} CI pipelines <br>in the last {1} days<br>(generated on {2})'.format(branch, days_in_past, creation_time),
