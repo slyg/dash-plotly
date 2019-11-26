@@ -9,7 +9,7 @@ from dash_app.lib.filters import select
 from style.theme import (TRANSPARENT, WHITE, colors_map, colorscale,
                          graph_title_font)
 
-quantile = .75
+max_results = 50
 
 
 @functools.lru_cache(maxsize=128)
@@ -24,12 +24,11 @@ def get_fig(pipeline_type, project, days_in_past=14):
         | (df['current_build_current_result'] == 'ABORTED')
     ]['job_name'].value_counts().rename_axis('job_name').reset_index(name='counts')
 
-    failers_qt = failers[failers['counts'] >
-                         failers['counts'].quantile(quantile)]
+    top_failers = failers.head(max_results)
 
     layout = dict(
-        title=go.layout.Title(text='Top {0}% Failing pipelines on {1} branch for {2} pipelines in the last {3} days<br>(generated on {4})'.format(
-            round((1 - quantile) * 100), branch, pipeline_type, days_in_past, creation_time),
+        title=go.layout.Title(text='Most frequent failing pipelines on {0} branch for {1} pipelines in the last {2} days<br>(generated on {3})'.format(
+            branch, pipeline_type, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,
@@ -44,7 +43,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
         xaxis=dict(
             title='Number of failed (failure and aborted) pipelines'
         ),
-        height=800,
+        height=(len(top_failers) + 5) * 20,
     )
 
     def get_bar(data_frame):
@@ -56,7 +55,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
                               'colorscale': colorscale['YellowToRed']}
                       )
 
-    data = [get_bar(failers_qt)]
+    data = [get_bar(top_failers)]
 
     figure = {
         'data': data,
