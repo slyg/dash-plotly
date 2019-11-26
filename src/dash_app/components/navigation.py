@@ -101,11 +101,11 @@ def getNavigation(app):
                                              width='40',
                                              height='40'
                                              ),
-                                    html.Span(className='d-inline-block pl-2 mt-2',
+                                    html.Span(className='d-inline-block govuk-heading-s pl-2 mt-2 mb-0',
                                               children='RSE Dashboard'
                                               ),
                                 ]),
-                        html.Div(className='form-inline my-2 my-lg-0',
+                        html.Div(className='form-inline my-2 my-lg-0 govuk-body-s',
                                  children=[
                                      html.Form(className="pl-5",
                                                children=[
