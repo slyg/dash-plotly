@@ -9,11 +9,9 @@ from dash_app.lib.filters import select
 from style.theme import (TRANSPARENT, WHITE, colors_map, colorway,
                          graph_title_font)
 
-days_in_past = 14
-
 
 @functools.lru_cache(maxsize=128)
-def get_fig(pipeline_type, project):
+def get_fig(pipeline_type, project, days_in_past=14):
 
     df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']

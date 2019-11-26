@@ -8,11 +8,9 @@ from dash_app.lib.events_28d import events
 from dash_app.lib.filters import select_project
 from style.theme import TRANSPARENT, WHITE, colors_map, graph_title_font
 
-days_in_the_past = 14
-
 
 @functools.lru_cache(maxsize=128)
-def get_fig(project):
+def get_fig(project, days_in_past=14):
 
     df = select_project(events['df'], project)
     creation_time = events['creation_time']
@@ -21,7 +19,7 @@ def get_fig(project):
 
     one_day = timedelta(days=1)
     max_past_date = (creation_time_iso -
-                     (days_in_the_past * one_day)).isoformat()
+                     (days_in_past * one_day)).isoformat()
 
     last_builds = df[df['stage_timestamp'] > max_past_date]
     last_builds = last_builds.sort_values(
@@ -45,7 +43,7 @@ def get_fig(project):
     colors = ['rgb(97,88,218)', 'rgb(98,172,214)']
 
     layout = dict(
-        title=go.layout.Title(text='Nightly vs non-nightly failures for {0} CI pipelines <br>in the last {1} days<br>(generated on {2})'.format(branch, days_in_the_past, creation_time),
+        title=go.layout.Title(text='Nightly vs non-nightly failures for {0} CI pipelines <br>in the last {1} days<br>(generated on {2})'.format(branch, days_in_past, creation_time),
                               font=graph_title_font
                               ),
         paper_bgcolor=WHITE,

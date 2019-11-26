@@ -13,7 +13,7 @@ data_set_file = 'data/events_28d.pkl'
 
 
 @functools.lru_cache(maxsize=128)
-def get_fig(pipeline_type, project):
+def get_fig(pipeline_type, project, days_in_past=14):
 
     df = select(events['df'], pipeline_type, project)
     creation_time = events['creation_time']
@@ -21,7 +21,6 @@ def get_fig(pipeline_type, project):
     branch = events['branch']
 
     time_interval = timedelta(minutes=15)
-    days_in_past = 14
     number_of_intervals = round(
         days_in_past * 24 * 4)  # 15 min slots over 24h
     reversed_intervals = [(creation_time_iso - (i * time_interval)).isoformat()
