@@ -9,7 +9,7 @@ from dash_app.lib.filters import select
 from style.theme import (TRANSPARENT, WHITE, colors_map, colorscale,
                          graph_title_font)
 
-quantile = .75
+max_results = 50
 
 
 @functools.lru_cache(maxsize=128)
@@ -39,14 +39,11 @@ def get_fig(pipeline_type, project, days_in_past=14):
         .sort_values(by='current_build_duration')\
         .reset_index()
 
-    report = succeeding_pipelines_pivot[
-        succeeding_pipelines_pivot['current_build_duration'] > succeeding_pipelines_pivot['current_build_duration'].quantile(
-            quantile)
-    ]
+    report = succeeding_pipelines_pivot.head(max_results)
 
     layout = dict(
-        title=go.layout.Title(text='Top {0}% lengthy succeeding pipelines ({1}) on {2} branch in the last {3} days<br>(generated on {4})'.format(
-            round((1 - quantile) * 100), pipeline_type, branch, days_in_past, creation_time),
+        title=go.layout.Title(text='Top lengthy succeeding pipelines ({0}) on {1} branch in the last {2} days<br>(generated on {3})'.format(
+            pipeline_type, branch, days_in_past, creation_time),
             font=graph_title_font
         ),
         autosize=True,
@@ -60,7 +57,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
         xaxis=dict(
             title='Mean pipeline duration in minutes',
         ),
-        height=600,
+        height=(len(report) + 10) * 20,
     )
 
     def get_bar(data_frame):

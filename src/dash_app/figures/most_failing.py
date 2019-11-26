@@ -43,7 +43,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
         xaxis=dict(
             title='Number of failed (failure and aborted) pipelines'
         ),
-        height=(len(top_failers) + 5) * 20,
+        height=(len(top_failers) + 10) * 20,
     )
 
     def get_bar(data_frame):
