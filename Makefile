@@ -9,6 +9,7 @@ SHELL := /bin/bash
         -e masterKey=$$masterKey \
         -e databaseId=$$databaseId \
         -e containerId=$$containerId \
+		-e PORT=8050 \
 		-v $(PWD)/src:/app \
 		$(.image_name)
 .dev_docker_image = ./local.Dockerfile

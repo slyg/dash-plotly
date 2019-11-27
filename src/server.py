@@ -1,4 +1,4 @@
-from os import path
+from os import environ, path
 
 from dash_app.server import server as dash_server
 from flask import (Flask, redirect, render_template, send_from_directory,
@@ -32,6 +32,6 @@ root_app = DispatcherMiddleware(root_server, {
 
 if __name__ == '__main__':
     run_simple(hostname="0.0.0.0",
-               port=8050,
+               port=int(environ['PORT']),
                application=root_app,
                use_reloader=False)
