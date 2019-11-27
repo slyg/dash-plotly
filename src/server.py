@@ -1,5 +1,8 @@
+from os import path
+
 from dash_app.server import server as dash_server
-from flask import Flask, redirect, render_template, url_for
+from flask import (Flask, redirect, render_template, send_from_directory,
+                   url_for)
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
 
@@ -14,6 +17,13 @@ def index():
 @root_server.route('/disclaimer')
 def disclaimer():
     return render_template('disclaimer.html', title='Disclaimer')
+
+
+@root_server.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        path.join(root_server.root_path, 'static/assets/images'), 'favicon.ico', mimetype='image/vnd.microsoft.icon'
+    )
 
 
 root_app = DispatcherMiddleware(root_server, {
