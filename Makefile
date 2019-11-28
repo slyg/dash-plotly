@@ -9,6 +9,7 @@ SHELL := /bin/bash
         -e masterKey=$$masterKey \
         -e databaseId=$$databaseId \
         -e containerId=$$containerId \
+		-e githubtoken=$$githubtoken \
 		-e PORT=8050 \
 		-v $(PWD)/src:/app \
 		$(.image_name)
@@ -56,6 +57,7 @@ production-image:
         --build-arg masterKey=$$masterKey \
         --build-arg databaseId=$$databaseId \
         --build-arg containerId=$$containerId \
+		--build-arg githubtoken=$$githubtoken \
 		-t $(.image_name_production) \
 		.
 
@@ -68,6 +70,7 @@ acr-build:
         --build-arg masterKey=$$masterKey \
         --build-arg databaseId=$$databaseId \
         --build-arg containerId=$$containerId \
+		--build-arg githubtoken=$$githubtoken \
 		--subscription $$subscription \
 		.
 

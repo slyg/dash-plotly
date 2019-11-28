@@ -14,7 +14,7 @@ from dash_app.components.navigation import getNavigation
 from style.theme import BRAND, LIGHT_GREY, WHITE
 
 
-def set_layout(app):
+def set_pipelines_layout(app):
     app.layout = html.Div(id="top", children=[
         html.Div(
             className='container-fluid',
@@ -161,3 +161,14 @@ def set_layout(app):
     @app.callback(Output('nightly-vs-daily', 'figure'), [Input('project', 'value')])
     def nightly_vs_daily_update(project):
         return nightly_vs_daily.get_fig(project)
+
+
+def set_security_layout(app):
+    app.layout = html.Div(id="top", children=[
+        html.Div(
+            className='container-fluid',
+            style={
+                'background-color': LIGHT_GREY,
+            },
+        )]
+    )

@@ -1,6 +1,7 @@
 from os import environ, path
 
-from dash_app.server import server as dash_server
+from dash_app.server_pipelines import server as server_pipelines
+from dash_app.server_security import server as server_security
 from flask import (Flask, redirect, render_template, send_from_directory,
                    url_for)
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
@@ -27,7 +28,8 @@ def favicon():
 
 
 root_app = DispatcherMiddleware(root_server, {
-    '/dash': dash_server,
+    '/dash': server_pipelines,
+    '/security': server_security
 })
 
 if __name__ == '__main__':

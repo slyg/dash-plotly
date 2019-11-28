@@ -37,7 +37,7 @@ jobs:
       - task: Docker@1
         displayName: Build image
         inputs:
-          arguments: --build-arg endpoint=$(endpoint) --build-arg masterKey=$(masterKey) --build-arg databaseId=$(databaseId) --build-arg containerId=$(containerId)
+          arguments: --build-arg endpoint=$(endpoint) --build-arg masterKey=$(masterKey) --build-arg databaseId=$(databaseId) --build-arg containerId=$(containerId) --build-arg githubtoken=$(githubtoken)
           command: Build an image
           imageName: $(imageName)
 
