@@ -48,7 +48,7 @@ shell:
 data: build
 	@. .env; docker run \
 		$(.docker_common_args) \
-		sh scripts/fetch-events.sh
+		sh scripts/fetch.sh
 
 .PHONY: production-image ## Creates docker image to be deployed
 production-image:

@@ -16,7 +16,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src ./
-RUN sh scripts/fetch-events.sh
+RUN sh scripts/fetch.sh
 
 
 FROM python:3.8.0
