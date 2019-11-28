@@ -4,11 +4,13 @@ ARG endpoint
 ARG masterKey
 ARG databaseId
 ARG containerId
+ARG githubtoken
 
 ENV endpoint=$endpoint
 ENV masterKey=$masterKey
 ENV databaseId=$databaseId
 ENV containerId=$containerId
+ENV githubtoken=$githubtoken
 
 USER root
 WORKDIR /app
