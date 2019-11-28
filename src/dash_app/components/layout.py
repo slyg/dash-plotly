@@ -1,4 +1,6 @@
 import dash_app.figures.build_status as build_status
+import dash_app.figures.cve_suppressions_most_frequent as cve_suppressions_most_frequent
+import dash_app.figures.cve_suppressions_per_team as cve_suppressions_per_team
 import dash_app.figures.duration as duration
 import dash_app.figures.failing_steps as failing_steps
 import dash_app.figures.heatmap as heatmap
@@ -10,7 +12,7 @@ import dash_app.figures.timeline_short as timeline_short
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from dash_app.components.navigation import getNavigation
+from dash_app.components.navigation import getHeader, getNavigation
 from style.theme import BRAND, LIGHT_GREY, WHITE
 
 
@@ -164,11 +166,47 @@ def set_pipelines_layout(app):
 
 
 def set_security_layout(app):
-    app.layout = html.Div(id="top", children=[
-        html.Div(
-            className='container-fluid',
-            style={
-                'background-color': LIGHT_GREY,
-            },
-        )]
-    )
+    app.layout = html.Div(
+        id="top",
+        children=[
+            html.Div(
+                className='container-fluid',
+                style={
+                    'background-color': LIGHT_GREY,
+                },
+                children=[
+                    html.Div(
+                        className='row my-3',
+                        children=[
+                            html.Div(className='col col-12',
+                                     children=[getHeader(app)]),
+                        ]),
+                    html.Div(
+                        className='row mt-5',
+                        children=[
+                            html.Div(className='col col-12 col-xl-6 my-3',
+                                     children=[
+                                         html.Div(children=[
+                                             dcc.Loading(color=BRAND, children=[
+                                                 dcc.Graph(
+                                                         id='cve_suppressions_most_frequent',
+                                                         figure=cve_suppressions_most_frequent.get_fig()
+                                                         )
+                                             ])
+                                         ]),
+                                     ]),
+                            html.Div(className='col col-12 col-xl-6 my-3',
+                                     children=[
+                                         html.Div(children=[
+                                             dcc.Loading(color=BRAND, children=[
+                                                 dcc.Graph(
+                                                         id='cve_suppressions_per_team',
+                                                         figure=cve_suppressions_per_team.get_fig()
+                                                         )
+                                             ])
+                                         ]),
+                                     ])
+                        ])
+                ])
+
+        ])
