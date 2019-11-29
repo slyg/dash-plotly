@@ -61,7 +61,7 @@ colorway = {
         govuk_colour['brown'],
         govuk_colour['light-green'],
         govuk_colour['turquoise'],
-    ][::-1]
+    ][::-1],
 }
 
 colorscale = {
@@ -85,7 +85,16 @@ colorscale = {
         [0, WHITE],
         [0.00000001, TRANSPARENT],
         [1, TRANSPARENT]
-    ]
+    ],
+    'Rainbow': [
+        [0, GREY],
+        [0.25, BLUE],
+        [0.33, GREEN],
+        [0.50, YELLOW],
+        [0.66, ORANGE],
+        [0.75, RED],
+        [1, govuk_colour["bright-purple"]],
+    ],
 }
 
 graph_title_font = dict(
