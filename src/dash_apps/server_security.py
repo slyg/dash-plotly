@@ -1,5 +1,5 @@
 import dash
-import dash_apps.components.layout as layout
+from dash_apps.components.layout_security import set_layout
 from flask import Flask
 
 server = Flask(__name__)
@@ -14,4 +14,4 @@ app = dash.Dash(__name__,
                 requests_pathname_prefix='/security/')
 
 app.title = "RSE Security Dashboard"
-layout.set_security_layout(app)
+set_layout(app)
