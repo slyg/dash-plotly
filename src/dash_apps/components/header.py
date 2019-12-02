@@ -42,6 +42,7 @@ def getHeader(app, filters=None):
                                  id='navbarNav',
                                  children=[
                                      html.Ul(className='navbar-nav mr-auto',
+                                             role='navigation',
                                              children=[
                                                  html.Li(className='nav-item',
                                                          children=[
