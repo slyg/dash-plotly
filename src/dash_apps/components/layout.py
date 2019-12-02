@@ -1,18 +1,18 @@
-import dash_app.figures.build_status as build_status
-import dash_app.figures.cve_suppressions_most_frequent as cve_suppressions_most_frequent
-import dash_app.figures.cve_suppressions_per_team as cve_suppressions_per_team
-import dash_app.figures.duration as duration
-import dash_app.figures.failing_steps as failing_steps
-import dash_app.figures.heatmap as heatmap
-import dash_app.figures.lengthy_pipelines as lengthy_pipelines
-import dash_app.figures.most_failing as most_failing
-import dash_app.figures.nightly_vs_daily as nightly_vs_daily
-import dash_app.figures.timeline as timeline
-import dash_app.figures.timeline_short as timeline_short
+import dash_apps.figures.build_status as build_status
+import dash_apps.figures.cve_suppressions_most_frequent as cve_suppressions_most_frequent
+import dash_apps.figures.cve_suppressions_per_team as cve_suppressions_per_team
+import dash_apps.figures.duration as duration
+import dash_apps.figures.failing_steps as failing_steps
+import dash_apps.figures.heatmap as heatmap
+import dash_apps.figures.lengthy_pipelines as lengthy_pipelines
+import dash_apps.figures.most_failing as most_failing
+import dash_apps.figures.nightly_vs_daily as nightly_vs_daily
+import dash_apps.figures.timeline as timeline
+import dash_apps.figures.timeline_short as timeline_short
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from dash_app.components.navigation import getHeader, getNavigation
+from dash_apps.components.navigation import getHeader, getNavigation
 from style.theme import BRAND, LIGHT_GREY, WHITE
 
 

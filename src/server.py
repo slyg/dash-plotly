@@ -1,7 +1,7 @@
 from os import environ, path
 
-from dash_app.server_pipelines import server as server_pipelines
-from dash_app.server_security import server as server_security
+from dash_apps.server_pipelines import server as server_pipelines
+from dash_apps.server_security import server as server_security
 from flask import (Flask, redirect, render_template, send_from_directory,
                    url_for)
 from werkzeug.middleware.dispatcher import DispatcherMiddleware

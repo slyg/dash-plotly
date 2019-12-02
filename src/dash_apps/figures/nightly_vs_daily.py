@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 import plotly.graph_objects as go
-from dash_app.lib.events_28d import events
-from dash_app.lib.filters import select_project
+from dash_apps.lib.events_28d import events
+from dash_apps.lib.filters import select_project
 from style.theme import (BLUE, PURPLE, TRANSPARENT, WHITE, colors_map,
                          graph_title_font, pie_line_style)
 
