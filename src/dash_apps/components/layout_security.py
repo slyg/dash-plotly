@@ -2,8 +2,8 @@ import dash_apps.figures.cve_suppressions_most_frequent as cve_suppressions_most
 import dash_apps.figures.cve_suppressions_per_team as cve_suppressions_per_team
 import dash_core_components as dcc
 import dash_html_components as html
+from dash_apps.components.header import getHeader
 from dash_apps.components.layout import layout
-from dash_apps.components.navigation import getHeader
 from style.theme import BRAND
 
 
