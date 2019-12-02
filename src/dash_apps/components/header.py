@@ -4,7 +4,7 @@ from style.theme import BRAND, WHITE_ALPHA_8
 
 
 def getHeader(app, filters=None):
-    return html.Nav(className='navbar fixed-top navbar-light py-0',
+    return html.Nav(className='navbar fixed-top navbar-light navbar-expand-lg py-0',
                     style={
                         'background-color': WHITE_ALPHA_8,
                         'border-bottom': '2px solid {0}'.format(BRAND)
@@ -25,5 +25,37 @@ def getHeader(app, filters=None):
                                                           ),
                                             ]),
                                ]),
-                        filters
+                        html.Button(className='navbar-toggler',
+                                    type='button',
+                                    **{
+                                        'data-toggle': 'collapse',
+                                        'data-target': '#navbarNav',
+                                        'aria-controls': 'navbarNav',
+                                        'aria-expanded': 'false',
+                                        'aria-label': 'Toggle navigation'
+                                    },
+                                    children=[
+                                        html.Span(
+                                            className='navbar-toggler-icon')
+                                    ]),
+                        html.Div(className='collapse navbar-collapse',
+                                 id='navbarNav',
+                                 children=[
+                                     html.Ul(className='navbar-nav mr-auto',
+                                             children=[
+                                                 html.Li(className='nav-item',
+                                                         children=[
+                                                             html.A(className='nav-link govuk-link',
+                                                                    href='/pipelines',
+                                                                    children='Pipelines')
+                                                         ]),
+                                                 html.Li(className='nav-item',
+                                                         children=[
+                                                             html.A(className='nav-link govuk-link',
+                                                                    href='/security',
+                                                                    children='Security')
+                                                         ]),
+                                             ]),
+                                     filters,
+                                 ]),
                     ])

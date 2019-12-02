@@ -11,11 +11,16 @@ root_server = Flask(__name__)
 
 
 @root_server.route('/')
-def index():
-    return redirect('/dash')
+def root():
+    return redirect('/pipelines')
 
 
-@root_server.route('/disclaimer')
+@root_server.route('/dash/')
+def dash():
+    return redirect('/pipelines')
+
+
+@root_server.route('/disclaimer/')
 def disclaimer():
     return render_template('disclaimer.html', title='Disclaimer')
 
@@ -28,7 +33,7 @@ def favicon():
 
 
 root_app = DispatcherMiddleware(root_server, {
-    '/dash': server_pipelines,
+    '/pipelines': server_pipelines,
     '/security': server_security
 })
 

@@ -11,7 +11,7 @@ external_stylesheets = [
 app = dash.Dash(__name__,
                 server=server,
                 external_stylesheets=external_stylesheets,
-                requests_pathname_prefix='/dash/')
+                requests_pathname_prefix='/pipelines/')
 
 app.title = "RSE Pipelines Dashboard"
 set_layout(app)
