@@ -3,7 +3,7 @@ import dash_html_components as html
 from style.theme import BRAND, LIGHT_GREY, WHITE
 
 
-def layout(app, header, body):
+def layout(header, body):
     return html.Div(
         id="top",
         children=[

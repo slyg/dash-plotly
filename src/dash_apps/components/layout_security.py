@@ -34,4 +34,4 @@ def set_layout(app):
                  ])
     ]
 
-    app.layout = layout(app, header, body)
+    app.layout = layout(header, body)

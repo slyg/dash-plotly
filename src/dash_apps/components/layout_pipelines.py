@@ -81,7 +81,7 @@ def set_layout(app):
                  ]),
     ]
 
-    app.layout = layout(app, header, body)
+    app.layout = layout(header, body)
 
     @app.callback(Output('build-status', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def build_status_update(pipeline_type, project):
