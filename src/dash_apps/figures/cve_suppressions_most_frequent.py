@@ -32,21 +32,22 @@ def get_fig():
         paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
         bargap=0,
-        yaxis=dict(
+        xaxis=dict(
             automargin=True,
             ticksuffix=' —',
             dtick=1,
+            tickangle=-90,
         ),
-        xaxis=dict(
+        yaxis=dict(
             title='Number of occurrence',
         ),
-        height=(len(report_df) + 10) * 12,
+        height=600,
     )
 
-    return {'data': [go.Bar(y=report_df['CVE'],
-                            x=report_df['Count'],
+    return {'data': [go.Bar(y=report_df['Count'],
+                            x=report_df['CVE'],
                             width=1,
-                            orientation='h',
+                            orientation='v',
                             marker={'color': report_df['Count'],
                                     'colorscale': colorscale['Rainbow']}
                             )],

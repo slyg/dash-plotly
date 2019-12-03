@@ -11,7 +11,7 @@ from style.theme import BRAND
 def set_layout(app):
     header = [getHeader(app)]
     body = [
-        html.Div(className='col col-12 col-xl-6 my-3',
+        html.Div(className='col col-12 my-3',
                  children=[
                      html.Div(children=[
                          dcc.Loading(color=BRAND, children=[
