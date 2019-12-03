@@ -23,7 +23,7 @@ def get_fig():
                               ),
         paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
-        colorway=colorway['GovUkColours'],
+        colorway=colorway['BadToGood'],
         height=600,
     )
 

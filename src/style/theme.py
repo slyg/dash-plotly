@@ -62,6 +62,11 @@ colorway = {
         govuk_colour['light-green'],
         govuk_colour['turquoise'],
     ][::-1],
+    'BadToGood': [
+        govuk_colour['red'],
+        govuk_colour['light-purple'],
+        govuk_colour['light-blue'],
+    ],
 }
 
 colorscale = {

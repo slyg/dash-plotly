@@ -60,9 +60,9 @@ all_projects_sorted = sorted([dict(t) for t in {tuple(d.items()) for d in all_co
 
 rows = list(map(lambda item: {
     'Reference': item['name'],
-    'Uses Snyk': 1 if (item in js_projects_with_snyk) else 0,
-    'Uses deprecated nsp': 1 if (item in js_projects_with_nsp) else 0,
-    'Uses dependabot': 1 if (item in js_projects_with_dependabot) else 0
+    'nsp (deprecated)': 1 if (item in js_projects_with_nsp) else 0,
+    'Dependabot': 1 if (item in js_projects_with_dependabot) else 0,
+    'Snyk': 1 if (item in js_projects_with_snyk) else 0
 }, all_projects_sorted))
 
 df = pd.DataFrame.from_records(rows)
