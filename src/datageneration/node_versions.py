@@ -1,0 +1,40 @@
+import json
+import re
+import urllib
+import xml.etree.ElementTree as et
+from csv import DictWriter
+from os import environ
+
+import numpy as np
+import pandas as pd
+from requests import get
+
+GITHUB_TOKEN = environ['githubtoken']
+API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
+QUERY_DOCKER_BASE_IMAGES = "org:hmcts+path:/+filename:Dockerfile+hmctspublic.azurecr.io/base/node/"
+
+
+def get_repos_for_code_search(query):
+    url = "{}?q={}".format(API_CODE_SEARCH_BASE, query)
+    data = get(url, headers={
+               "Authorization": "token {}".format(GITHUB_TOKEN)}).json()
+    def lens(item): return {'name': item['repository']['name'], 'raw_url': item['html_url'].replace(
+        'github.com', 'raw.githubusercontent.com').replace('/blob', '')}
+    return map(lens, data['items'])
+
+
+def extract_node_version(project):
+    response = get(project['raw_url'])
+    return {'name': project['name'], 'version': re.findall("hmctspublic.azurecr.io/base/node/(.*?):", response.text)[0]}
+
+
+def infer_simple_version(raw_version):
+    return re.findall(r'\d+', raw_version)[0]
+
+
+js_projects = list(get_repos_for_code_search(QUERY_DOCKER_BASE_IMAGES))
+results = list(map(extract_node_version, js_projects))
+df = pd.DataFrame.from_records(results).sort_values(by='version')
+df['simple version'] = df['version'].apply(infer_simple_version)
+
+df.to_csv('data/node-versions.csv', sep=',', encoding='utf-8', index=False)
