@@ -67,6 +67,10 @@ colorway = {
         govuk_colour['light-purple'],
         govuk_colour['light-blue'],
     ],
+    'CurrentToDeprecated': [
+        govuk_colour['light-blue'],
+        govuk_colour['red'],
+    ],
 }
 
 colorscale = {
