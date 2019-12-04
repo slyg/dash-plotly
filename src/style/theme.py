@@ -68,8 +68,8 @@ colorway = {
         govuk_colour['light-blue'],
     ],
     'CurrentToDeprecated': [
-        govuk_colour['light-blue'],
-        govuk_colour['red'],
+        govuk_colour['light-green'],
+        govuk_colour['orange'],
     ],
 }
 

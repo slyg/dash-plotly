@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 from style.theme import (TRANSPARENT, WHITE, colorway, graph_title_font,
                          pie_line_style)
 
-data_src_file = 'data/node-versions.csv'
+data_src_file = 'data/java-versions.csv'
 df = pd.read_csv(data_src_file)
 creation_time = time.ctime(path.getctime(data_src_file))
 
@@ -20,7 +20,7 @@ def get_fig():
     unique_versions.sort()
 
     unique_simple_versions = list(
-        ["v." + re.findall(r'\d+', v)[0] for v in unique_versions])
+        ["java " + re.findall(r'\d+', v)[0] for v in unique_versions])
 
     unique_simple_versions_parents = list(
         ["All versions" for _ in dict.fromkeys(unique_simple_versions)])
@@ -33,12 +33,12 @@ def get_fig():
     parents = unique_simple_versions_parents + unique_simple_versions + versions
 
     layout = dict(
-        title=go.layout.Title(text='NodeJS versions in use<br>(Generated on {})'.format(creation_time),
+        title=go.layout.Title(text='Java versions in use<br>(Generated on {})'.format(creation_time),
                               font=graph_title_font
                               ),
         paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
-        colorway=colorway['CurrentToDeprecated'],
+        treemapcolorway=colorway['CurrentToDeprecated'][::-1],
         height=600,
     )
 
@@ -50,6 +50,7 @@ def get_fig():
                 textposition="middle center",
                 tiling=dict(
                     packing="slice",
+                    flip="y"
                 ),
                 marker=dict(
                     line=dict(width=0),
