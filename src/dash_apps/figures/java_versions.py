@@ -38,7 +38,7 @@ def get_fig():
                               ),
         paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
-        treemapcolorway=colorway['CurrentToDeprecated'][::-1],
+        treemapcolorway=colorway['GovUkColours'],
         height=600,
     )
 
@@ -50,7 +50,6 @@ def get_fig():
                 textposition="middle center",
                 tiling=dict(
                     packing="slice",
-                    flip="y"
                 ),
                 marker=dict(
                     line=dict(width=0),

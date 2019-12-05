@@ -5,12 +5,19 @@ import time
 
 import pandas as pd
 import plotly.graph_objects as go
-from style.theme import (TRANSPARENT, WHITE, colorway, graph_title_font,
-                         pie_line_style)
+from style.theme import (TRANSPARENT, WHITE, colorscale, colorway,
+                         graph_title_font, pie_line_style)
 
 data_src_file = 'data/node-versions.csv'
 df = pd.read_csv(data_src_file)
 creation_time = time.ctime(path.getctime(data_src_file))
+
+
+def infer_node_version(raw_version):
+    try:
+        return "v." + re.findall(r'\d+', raw_version)[0]
+    except:
+        return "v. is undefined"
 
 
 @functools.lru_cache(maxsize=128)
@@ -20,7 +27,7 @@ def get_fig():
     unique_versions.sort()
 
     unique_simple_versions = list(
-        ["v." + re.findall(r'\d+', v)[0] for v in unique_versions])
+        [infer_node_version(v) for v in unique_versions])
 
     unique_simple_versions_parents = list(
         ["All versions" for _ in dict.fromkeys(unique_simple_versions)])
@@ -38,7 +45,7 @@ def get_fig():
                               ),
         paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT,
-        colorway=colorway['CurrentToDeprecated'],
+        treemapcolorway=colorway['GovUkColours'],
         height=600,
     )
 

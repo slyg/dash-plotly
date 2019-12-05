@@ -12,7 +12,7 @@ from requests import get
 
 GITHUB_TOKEN = environ['githubtoken']
 API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
-QUERY_DOCKER_BASE_IMAGES = "org:hmcts+path:/+filename:Dockerfile+hmctspublic.azurecr.io/base/node/"
+QUERY_DOCKER_BASE_IMAGES = "org:hmcts+path:/+filename:Dockerfile+FROM+node"
 THROTTLING_DELAY = 1  # seconds
 
 print("🐶 nodeJS apps versions search")
@@ -31,16 +31,23 @@ def get_repos_for_code_search(query):
 def extract_node_version(project):
     sleep(THROTTLING_DELAY)
     response = get(project['raw_url'])
-    return {'name': project['name'], 'version': re.findall(r"hmctspublic.azurecr.io/base/node[/:](.*?)[:\s]", response.text)[0]}
+    name = project['name']
+    regex = r"hmctspublic.azurecr.io/base/node[/:](.*?)[:\s]|node[/:](.*?)[:\s]"
+    search_result = re.findall(regex, response.text)
+    try:
+        version = next(v for v in list(search_result[0]) if v)
+        return {'name': name, 'version': version}
+    except:
+        return None
 
 
-def infer_simple_version(raw_version):
-    return re.findall(r'\d+', raw_version)[0]
+def remove_none_elements(list):
+    return [e for e in list if e != None]
 
 
 js_projects = list(get_repos_for_code_search(QUERY_DOCKER_BASE_IMAGES))
-results = list(map(extract_node_version, js_projects))
+results = remove_none_elements(list(map(extract_node_version, js_projects)))
 df = pd.DataFrame.from_records(results).sort_values(by='version')
-df['simple version'] = df['version'].apply(infer_simple_version)
 
-df.to_csv('data/node-versions.csv', sep=',', encoding='utf-8', index=False)
+df.to_csv('data/node-versions.csv', sep=',',
+          encoding='utf-8', index=False)
