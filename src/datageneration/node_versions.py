@@ -4,6 +4,7 @@ import urllib
 import xml.etree.ElementTree as et
 from csv import DictWriter
 from os import environ
+from time import sleep
 
 import numpy as np
 import pandas as pd
@@ -12,9 +13,13 @@ from requests import get
 GITHUB_TOKEN = environ['githubtoken']
 API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
 QUERY_DOCKER_BASE_IMAGES = "org:hmcts+path:/+filename:Dockerfile+hmctspublic.azurecr.io/base/node/"
+THROTTLING_DELAY = 1  # seconds
+
+print("🐶 nodeJS apps versions search")
 
 
 def get_repos_for_code_search(query):
+    sleep(THROTTLING_DELAY)
     url = "{}?q={}".format(API_CODE_SEARCH_BASE, query)
     data = get(url, headers={
                "Authorization": "token {}".format(GITHUB_TOKEN)}).json()
@@ -24,8 +29,9 @@ def get_repos_for_code_search(query):
 
 
 def extract_node_version(project):
+    sleep(THROTTLING_DELAY)
     response = get(project['raw_url'])
-    return {'name': project['name'], 'version': re.findall("hmctspublic.azurecr.io/base/node/(.*?):", response.text)[0]}
+    return {'name': project['name'], 'version': re.findall(r"hmctspublic.azurecr.io/base/node[/:](.*?)[:\s]", response.text)[0]}
 
 
 def infer_simple_version(raw_version):

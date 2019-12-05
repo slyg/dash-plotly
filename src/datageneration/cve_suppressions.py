@@ -13,6 +13,8 @@ GITHUB_TOKEN = environ['githubtoken']
 API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
 SUPPRESSIONS_QUERY = "org:hmcts+path:/+filename:dependency-check-suppressions.xml"
 
+print("🐶 CVE suppressions versions search")
+
 
 def get_repos_for_code_search(query):
     url = "{}?q={}".format(API_CODE_SEARCH_BASE, query)

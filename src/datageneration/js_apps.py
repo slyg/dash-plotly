@@ -4,6 +4,7 @@ import urllib
 import xml.etree.ElementTree as et
 from csv import DictWriter
 from os import environ
+from time import sleep
 
 import numpy as np
 import pandas as pd
@@ -18,6 +19,9 @@ QUERY_ALL_JS = "org:hmcts+path:/+filename:package.json"
 QUERY_WITH_SNYK = "org:hmcts+path:/+filename:package.json+snyk"
 QUERY_WITH_NSP = "org:hmcts+path:/+filename:package.json+nsp"
 QUERY_DEPENDABOT = "org:hmcts+dependabot"
+THROTTLING_DELAY = 1  # seconds
+
+print("🐶 JS apps security search")
 
 
 def get_repos_for_code_search(query):
@@ -40,10 +44,13 @@ def get_repos_for_issues_search(query):
 
 js_projects = np.array(
     list(get_repos_for_code_search(QUERY_ALL_JS)))
+sleep(THROTTLING_DELAY)
 js_projects_with_snyk = np.array(
     list(get_repos_for_code_search(QUERY_WITH_SNYK)))
+sleep(THROTTLING_DELAY)
 js_projects_with_nsp = np.array(
     list(get_repos_for_code_search(QUERY_WITH_NSP)))
+sleep(THROTTLING_DELAY)
 js_projects_with_dependabot = np.array(
     list(get_repos_for_issues_search(QUERY_DEPENDABOT)))
 
