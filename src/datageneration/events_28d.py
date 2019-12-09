@@ -6,6 +6,8 @@ import azure.cosmos.cosmos_client as cosmos_client
 import pandas as pd
 from cosmos_client import client, collection_link
 
+print("🐶 28 days CI events fetch")
+
 today = datetime.date.today()
 one_day = datetime.timedelta(days=1)
 

@@ -9,6 +9,7 @@ from time import sleep
 import numpy as np
 import pandas as pd
 from requests import get
+from utils import THROTTLING_DELAY
 
 GITHUB_TOKEN = environ['githubtoken']
 API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
@@ -19,7 +20,6 @@ QUERY_ALL_JS = "org:hmcts+path:/+filename:package.json"
 QUERY_WITH_SNYK = "org:hmcts+path:/+filename:package.json+snyk"
 QUERY_WITH_NSP = "org:hmcts+path:/+filename:package.json+nsp"
 QUERY_DEPENDABOT = "org:hmcts+dependabot"
-THROTTLING_DELAY = 1  # seconds
 
 print("🐶 JS apps security search")
 

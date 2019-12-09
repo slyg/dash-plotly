@@ -9,11 +9,11 @@ from time import sleep
 import numpy as np
 import pandas as pd
 from requests import get
+from utils import THROTTLING_DELAY
 
 GITHUB_TOKEN = environ['githubtoken']
 API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
 QUERY_DOCKER_BASE_IMAGES = "org:hmcts+path:/+filename:Dockerfile+FROM+node"
-THROTTLING_DELAY = 1  # seconds
 
 print("🐶 nodeJS apps versions search")
 
@@ -21,11 +21,17 @@ print("🐶 nodeJS apps versions search")
 def get_repos_for_code_search(query):
     sleep(THROTTLING_DELAY)
     url = "{}?q={}".format(API_CODE_SEARCH_BASE, query)
-    data = get(url, headers={
-               "Authorization": "token {}".format(GITHUB_TOKEN)}).json()
+    response = get(url, headers={
+        "Authorization": "token {}".format(GITHUB_TOKEN)})
     def lens(item): return {'name': item['repository']['name'], 'raw_url': item['html_url'].replace(
         'github.com', 'raw.githubusercontent.com').replace('/blob', '')}
-    return map(lens, data['items'])
+    if response.status_code == 200:
+        data = response.json()
+        return map(lens, data['items'])
+    else:
+        print("received {0} response from {1}".format(
+            response.status_code, url))
+        return []
 
 
 def extract_node_version(project):

@@ -6,6 +6,8 @@ import azure.cosmos.cosmos_client as cosmos_client
 import pandas as pd
 from cosmos_client import client, collection_link
 
+print("🐶 180 days CI events fetch")
+
 today = datetime.date.today()
 one_day = datetime.timedelta(days=1)
 one_week = datetime.timedelta(days=7)
