@@ -25,6 +25,7 @@ print("🐶 JS apps security search")
 
 
 def get_repos_for_code_search(query):
+    sleep(THROTTLING_DELAY)
     url = "{}?q={}".format(API_CODE_SEARCH_BASE, query)
     data = get(url, headers={
                "Authorization": "token {}".format(GITHUB_TOKEN)}).json()
@@ -34,6 +35,7 @@ def get_repos_for_code_search(query):
 
 
 def get_repos_for_issues_search(query):
+    sleep(THROTTLING_DELAY)
     url = "{}?q={}".format(API_ISSUES_SEARCH_BASE, query)
     data = get(url, headers={
                "Authorization": "token {}".format(GITHUB_TOKEN)}).json()
@@ -44,13 +46,10 @@ def get_repos_for_issues_search(query):
 
 js_projects = np.array(
     list(get_repos_for_code_search(QUERY_ALL_JS)))
-sleep(THROTTLING_DELAY)
 js_projects_with_snyk = np.array(
     list(get_repos_for_code_search(QUERY_WITH_SNYK)))
-sleep(THROTTLING_DELAY)
 js_projects_with_nsp = np.array(
     list(get_repos_for_code_search(QUERY_WITH_NSP)))
-sleep(THROTTLING_DELAY)
 js_projects_with_dependabot = np.array(
     list(get_repos_for_issues_search(QUERY_DEPENDABOT)))
 

@@ -4,10 +4,12 @@ import urllib
 import xml.etree.ElementTree as et
 from csv import DictWriter
 from os import environ
+from time import sleep
 
 import numpy as np
 import pandas as pd
 from requests import get
+from utils import THROTTLING_DELAY
 
 GITHUB_TOKEN = environ['githubtoken']
 API_CODE_SEARCH_BASE = "https://api.github.com/search/code"
@@ -17,11 +19,13 @@ print("🐶 CVE suppressions versions search")
 
 
 def get_repos_for_code_search(query):
+    sleep(THROTTLING_DELAY)
     url = "{}?q={}".format(API_CODE_SEARCH_BASE, query)
     return get(url, headers={"Authorization": "token {}".format(GITHUB_TOKEN)}).json()
 
 
 def get_cves_from_url(url):
+    sleep(THROTTLING_DELAY)
     response = urllib.request.urlopen(url).read()
     xtree = et.ElementTree(et.fromstring(response))
     cve_nodes = xtree.findall(
