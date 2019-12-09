@@ -9,6 +9,12 @@ from werkzeug.serving import run_simple
 
 root_server = Flask(__name__)
 
+"""
+This is the root server and acts as a dispatcher to 
+whether flask simpla apps or plotly dash apps
+(themselves flask apps).
+"""
+
 
 @root_server.route('/')
 def root():
@@ -31,7 +37,9 @@ def favicon():
         path.join(root_server.root_path, 'static/assets/images'), 'favicon.ico', mimetype='image/vnd.microsoft.icon'
     )
 
-
+"""
+This dispatcher MW reroutes requests to plotly dash apps
+"""
 root_app = DispatcherMiddleware(root_server, {
     '/pipelines': server_pipelines,
     '/security': server_security

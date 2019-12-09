@@ -20,3 +20,17 @@ Available commands:
 	make shell                 Opens a shell session on the development container
 
 ```
+
+## CI
+
+Here are the expected environment variables to expose in the CI:
+
+| Name                        | Comment                                              |
+| --------------------------- | ---------------------------------------------------- |
+| `azureContainerRegistry`    | E.g.: my-registry.azurecr.io                         |
+| `azureSubscriptionEndpoint` | Service connection to azure container registry (ACR) |
+| `masterKey`                 | CosmosDB masterKey                                   |
+| `containerId`               | CosmosDB container ID                                |
+| `databaseId`                | CosmosDB database ID                                 |
+| `endpoint`                  | Endpoint of the DB                                   |
+| `githubtoken`               | Github Access token used to query the Github API     |
