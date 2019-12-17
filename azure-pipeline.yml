@@ -9,7 +9,7 @@ trigger:
       - README.md
 
 schedules:
-  - cron: 58 9-17/2 * * 1-5
+  - cron: 52 9-17/2 * * 1-5
     displayName: Workhours hourly build
     branches:
       include:
