@@ -121,7 +121,7 @@ def get_fig(pipeline_type, project, days_in_past=14):
                       y=y_axis,
                       z=z_axis,
                       showscale=True,
-                      colorbar={"title": 'Failure percentage', 'titleside': 'right'})
+                      colorbar={"title": 'Failure percentage', 'titleside': 'right'},)
 
     raster = go.Heatmap(colorscale=colorscale['WhiteIfNoData'],
                         hoverinfo='skip',
@@ -141,7 +141,8 @@ def get_fig(pipeline_type, project, days_in_past=14):
             ticktext=['{0}:00'.format(x) for x in x_axis]
         ),
         margin=dict(
-            pad=0
+            pad=0,
+            l=100,
         ),
         paper_bgcolor=WHITE,
         plot_bgcolor=TRANSPARENT
