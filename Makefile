@@ -22,7 +22,7 @@ build:
 		-t $(.image_name) \
 		.
 
-.PHONY: server ## Starts the development server (default)
+.PHONY: server ## Starts the development server
 server: build
 	@. .env; docker run \
 		--name $(.container_name) \

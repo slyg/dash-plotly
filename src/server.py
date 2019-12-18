@@ -11,7 +11,7 @@ root_server = Flask(__name__)
 
 """
 This is the root server and acts as a dispatcher to 
-whether flask simpla apps or plotly dash apps
+whether flask simple apps or plotly dash apps
 (themselves flask apps).
 """
 
