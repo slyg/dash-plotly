@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
-.image_name = slyg/dash-local
+.image_name = hmcts/rse-dashboard-local
 .image_name_production = hmcts/rse-dashboard
 .container_name = dashy
 .docker_common_args = --rm \
