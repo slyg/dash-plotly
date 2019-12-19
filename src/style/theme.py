@@ -104,6 +104,15 @@ colorscale = {
         [0.75, RED],
         [1, govuk_colour["bright-purple"]],
     ],
+    'InvertedRainbow': [
+        [0, govuk_colour["bright-purple"]],
+        [0.25, RED],
+        [0.33, ORANGE],
+        [0.50, YELLOW],
+        [0.66, GREEN],
+        [0.75, BLUE],
+        [1, GREY],
+    ],
 }
 
 graph_title_font = dict(

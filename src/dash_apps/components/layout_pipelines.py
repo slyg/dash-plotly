@@ -5,6 +5,7 @@ import dash_apps.figures.heatmap as heatmap
 import dash_apps.figures.lengthy_pipelines as lengthy_pipelines
 import dash_apps.figures.most_failing as most_failing
 import dash_apps.figures.nightly_vs_daily as nightly_vs_daily
+import dash_apps.figures.shortest_functional_tests as shortest_functional_tests
 import dash_apps.figures.timeline as timeline
 import dash_apps.figures.timeline_short as timeline_short
 import dash_core_components as dcc
@@ -189,6 +190,12 @@ def set_layout(app):
         html.Div(className='col col-12 my-3',
                  children=[
                      html.Div(children=[
+                         dcc.Loading(color=BRAND, children=[
+                             dcc.Graph(id='shortest-functional-tests')])])
+                 ]),
+        html.Div(className='col col-12 my-3',
+                 children=[
+                     html.Div(children=[
                          dcc.Loading(
                              color=BRAND, children=[dcc.Graph(id='duration')])])
                  ]),
@@ -233,6 +240,10 @@ def set_layout(app):
     @app.callback(Output('lengthy-pipelines', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def lengthy_pipelines_update(pipeline_type, project):
         return lengthy_pipelines.get_fig(pipeline_type, project)
+
+    @app.callback(Output('shortest-functional-tests', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
+    def shortest_functional_tests_update(pipeline_type, project):
+        return shortest_functional_tests.get_fig(pipeline_type, project)
 
     @app.callback(Output('timeline', 'figure'), [Input('pipeline-type', 'value'), Input('project', 'value')])
     def timeline_update(pipeline_type, project):
