@@ -82,10 +82,12 @@ def get_fig(pipeline_type, project, days_in_past=14):
     df5 = (df4[
         (df4['time_diff_in_s'] > 0)
         & (df4['time_diff_in_s'] < 500)
-    ]).head(10)
+    ])
 
-    report = df5[['job_name', 'time_diff_in_s']].sort_values(
-        by='time_diff_in_s', ascending=False).reset_index(drop=True)
+    report = df5[['job_name', 'time_diff_in_s']]\
+        .sort_values(by='time_diff_in_s', ascending=False)\
+        .reset_index(drop=True)\
+        .tail(10)
 
     layout = dict(
         title=go.layout.Title(text='Shortest latest AAT functional tests duration in {0} pipelines on {1} branch<br>(generated on {2})'.format(
