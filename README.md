@@ -39,6 +39,25 @@ The dashboard pages are added via a middleware to a root Flask application (`src
 
 The figures are exposed as memoized functions via a decorator, hence a first rendering taking quite some time to format the raw data in a shape that can be graphed. Further calls are much quicker.
 
+```bash
+src
+├── dash_apps 			# Dash applications (Main exposed pages)
+│   ├── assets 			# Static assets that cannot be picked up from the parent /style folder
+│   ├── components		# Common UI component used in Dash applications (layout, etvc.)
+│   ├── figures 		# Figures displayed in the Dash apps (exposed as functions)
+│   ├── lib 			# Shared data transformation libraries
+│   ├── server_pipelines.py 	# Pipeline Dash app/page
+│   └── server_security.py 	# Security Dash app/page
+├── data 			# Folder containing pulled data
+├── datageneration 		# Scripts used to pull data
+├── scripts 			# Shortcuts for data generation scripts
+├── server.py 			# Root web server app (Flask)
+├── static 			# Static assets (images, css, etc.)
+├── style 			# Styles used by the dash applications (gradients, colors, etc.)
+└── templates 			# Auxiliary pages templates (disclaimer, etc.)
+
+```
+
 ## CD
 
 Here are the expected environment variables to expose to the azure devops pipeline (link on the badge):
@@ -75,3 +94,14 @@ Here are the details you may need to track these processes:
 | App Service  | `rse-dashboard`                                                                       |
 | Exposed port | Passed via the `--env PORT` argument (the App Service picks a random port by default) |
 | VNet         | `rse-dashboard-vnet`                                                                  |
+
+### Project deletion
+
+In the case you want to cleanly remove this project and its related CI and runtime, here is a checklist of the resources you may remove:
+
+- VNet `rse-dashboard-vnet`
+- App Service `rse-dashboard`
+- ACR registry `hmcts/rse-dashboard` (sandbox)
+- Azure devops pipeline ([link](https://dev.azure.com/hmcts/Software%20Engineering/_build/latest?definitionId=273&branchName=master))
+- Remove the github token used in the CI (depending on who is the owner of it)
+- Archive or delete this repo
