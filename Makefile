@@ -22,6 +22,13 @@ build:
 		-t $(.image_name) \
 		.
 
+.PHONY: tests ## Runs unit tests
+tests: build
+	@. .env; docker run \
+		--name $(.container_name) \
+		$(.docker_common_args) \
+		python -m unittest discover tests
+
 .PHONY: server ## Starts the development server
 server: build
 	@. .env; docker run \

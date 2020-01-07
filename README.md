@@ -26,6 +26,7 @@ Available commands:
 	make server                Starts the development server
 	make session               Starts a new interactive development container
 	make shell                 Opens a shell session on the development container
+	make tests                 Runs unit tests
 
 ```
 
