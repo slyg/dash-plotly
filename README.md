@@ -44,9 +44,9 @@ The local app is exposed at `http://localhost:8050`
 
 ## Application structure
 
-The dashboard pages are added via a middleware to a root Flask application (`src/server.py`). They are themselves fully-fledged Flask applications using the plotly/dash utility library. It is a bit convoluted, however dash applications do not allow multiple pages at the moment, unfortunately.
+The dashboard pages are added via a middleware to a root Flask application (`src/server.py`). They are themselves fully-fledged Flask applications using plotly and dash libraries. It is a bit convoluted; however, dash applications do not allow multiple pages at the moment, unfortunately.
 
-The figures are exposed as memoized functions via a decorator, hence a first rendering taking quite some time to format the raw data in a shape that can be graphed. Further calls are much quicker.
+The figures are exposed as memoized functions via a decorator, hence a first rendering taking quite some time to format the raw data in a shape that can be rendered by the plotly library. Further calls are much quicker.
 
 ```bash
 src
@@ -106,7 +106,7 @@ Here are the details you may need to track these processes:
 
 ### Project deletion
 
-In the case you want to cleanly remove this project and its related CI and runtime, here is a checklist of the resources you may remove:
+To delete this project as well as its related CI and runtime counterparts cleanly, here is a checklist of the resources you may remove:
 
 - VNet `rse-dashboard-vnet`
 - App Service `rse-dashboard`
