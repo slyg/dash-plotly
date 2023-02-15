@@ -2,4 +2,4 @@ dash==1.4.1
 dash-daq==0.2.2
 azure-cosmos==3.1.2
 pandas==0.25.2
-Werkzeug==0.16.0
+Werkzeug==2.2.3
